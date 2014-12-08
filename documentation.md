@@ -26,7 +26,7 @@ You can insert breakpoints, but this is a little hard to understand and not usef
 
 ### 2.2. Alert
 Simple usage and multidevice, but very limited. Just call the next function:
-```
+```php
 ShowMessage("some text");
 ```
 
