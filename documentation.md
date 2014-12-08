@@ -39,8 +39,8 @@ The best solution for me is this one. You can do it following these steps:
   
   ![Log Viewer](img_docs/02__log_viewer.jpg)
 
-**Important note:** if you want to use the function `__android_log_print(...)` it expects as a parameter a `char*`, but RAD Studio uses the `String` or `System::UnicodeString`. To do the conversion:
-```
+**Important note:** if you want to use the function `__android_log_print(...)` using the `%s` alias in the last parameter, it expects that as a `char*`, but RAD Studio uses the `String` or `System::UnicodeString`. To do the conversion:
+```c++
 	String text = "Hello world";
 	char *txt = AnsiString(text).c_str();
 ```
