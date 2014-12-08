@@ -5,7 +5,11 @@ In order to gather together some tips that I'm learning on the way coding with R
 ## App crashes on Android devices
 Somehow, with RAD Studio XE6 C++, in my case (the same for others friends) when deploying the app to an Android device it crashes. 
 
+![App crashes](img_docs/00__app_crashes.jpg)
+
 To solve that, first you must update the sdk and the build tools. To do that, open the Android Tools of RAD Studio, and install/update them:
+
+![SDK updates](img_docs/01__sdk_updates.jpg)
 
 Next, update in RAD Studio the path to **zipalign.exe**. To do so, in RAD Studio, go to *Tools > Options > SDK Manager* and you'll see and exclamation. The path should be in a similar path like the next:
 ```
@@ -24,10 +28,12 @@ ShowMessage("some text");
 ```
 
 The best solution for me, is to have a console debug message system. You can do it with this steps:
-    * Include `#include <android/log.h>`
-    * Use the function `__android_log_print(ANDROID_LOG_VERBOSE, "AppName", "Custom %s", text);`
-    * You need a program to catch the message. I use
-    https://bitbucket.org/mlopatkin/android-log-viewer/downloads
+  - Include `#include <android/log.h>`
+  - Use the function `__android_log_print(ANDROID_LOG_VERBOSE, "AppName", "Custom %s", text);`
+  - You need a program to catch the message. I use [Log Viewer](https://bitbucket.org/mlopatkin/android-log-viewer/downloads) which is simple. Download it, run `logview.bat`. When it is launched, you must tell where the `adb.exe` path is. It should be similar to `C:\Users\Public\Documents\Embarcadero\Studio\14.0\PlatformSDKs\adt-bundle-windows-x86-20131030\sdk\platform-tools\adb.exe`
+  - To filter the messages, you can do it by the tag that you provide in the code ("Myapp" in my case) and with the process name (you can see it in View > Show processes)
+  
+  ![Log Viewer](img_docs/02__log_viewer.jpg)
 
 
 
