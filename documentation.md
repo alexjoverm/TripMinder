@@ -15,7 +15,19 @@ Then you'll be able to deploy it well-working.
 
 ## How to debug on Android devices
 
+You can do it inserting breakpoints, but this is a little hard to understand and not useful when you want to know some kick property like TText1->Text. 
 
+The first "multidevice solution" is to use an alert dialog box, with the function:
+
+```
+ShowMessage("some text");
+```
+
+The best solution for me, is to have a console debug message system. You can do it with this steps:
+    * Include `#include <android/log.h>`
+    * Use the function `__android_log_print(ANDROID_LOG_VERBOSE, "AppName", "Custom %s", text);`
+    * You need a program to catch the message. I use
+    https://bitbucket.org/mlopatkin/android-log-viewer/downloads
 
 
 
