@@ -2,7 +2,7 @@
 
 In order to gather together some tips that I'm learning on the way coding with RAD STUDIO XE6 C++ version, I create this documentation. It includes the problems which I run into, and their respective solution I find out.
 
-## App crashes on Android devices
+## 1. App crashes on Android devices
 Somehow, with RAD Studio XE6 C++, in my case (the same for others friends) when deploying the app to an Android device it crashes. 
 
 ![App crashes](img_docs/00__app_crashes.jpg)
@@ -17,17 +17,22 @@ C:\Users\Public\Documents\Embarcadero\Studio\14.0\PlatformSDKs\adt-bundle-window
 ```
 Then you'll be able to deploy it well-working.
 
-## How to debug on Android devices
+## 2. How to debug on Android devices
 
-You can do it inserting breakpoints, but this is a little hard to understand and not useful when you want to know some kick property like TText1->Text. 
+You can accomplish that with the next 3 ways:
 
-The first "multidevice solution" is to use an alert dialog box, with the function:
+### 2.1. Breakpoints
+You can insert breakpoints, but this is a little hard to understand and not useful when you want to know some kick property like `TText1->Text`. 
 
+### 2.2. Alert
+Simple usage and multidevice, but very limited. Just call the next function:
 ```
 ShowMessage("some text");
 ```
 
-The best solution for me, is to have a console debug message system. You can do it with this steps:
+### 2.3. Logging system (for Android)
+
+The best solution for me is this one. You can do it following these steps:
   - Include `#include <android/log.h>`
   - Use the function `__android_log_print(ANDROID_LOG_VERBOSE, "AppName", "Custom %s", text);`
   - You need a program to catch the message. I use [Log Viewer](https://bitbucket.org/mlopatkin/android-log-viewer/downloads) which is simple. Download it, run `logview.bat`. When it is launched, you must tell where the `adb.exe` path is. It should be similar to `C:\Users\Public\Documents\Embarcadero\Studio\14.0\PlatformSDKs\adt-bundle-windows-x86-20131030\sdk\platform-tools\adb.exe`
