@@ -11,6 +11,18 @@
 #include <FMX.StdCtrls.hpp>
 #include <FMX.ActnList.hpp>
 #include <System.Actions.hpp>
+#include <Data.Bind.Components.hpp>
+#include <Data.Bind.EngExt.hpp>
+#include <Data.Bind.ObjectScope.hpp>
+#include <Fmx.Bind.DBEngExt.hpp>
+#include <Fmx.Bind.Editors.hpp>
+#include <FMX.Edit.hpp>
+#include <IPPeerClient.hpp>
+#include <REST.Client.hpp>
+#include <System.Bindings.Outputs.hpp>
+#include <System.Rtti.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.Memo.hpp>
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
@@ -28,8 +40,20 @@ __published:	// IDE-managed Components
 	TChangeTabAction *ChangeTabAction1;
 	TChangeTabAction *ChangeTabAction2;
 	TSpeedButton *SpeedButton1;
+	TRESTClient *RESTClient1;
+	TRESTRequest *RESTRequest1;
+	TRESTResponse *RESTResponse1;
+	TBindingsList *BindingsList1;
+	TClearingEdit *ClearingEditParamsinput;
+	TLabel *LabelParamsinput;
+	TLinkControlToField *LinkControlToFieldParamsinput;
+	TMemo *MemoContent;
+	TLinkControlToField *LinkControlToFieldContent;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormKeyUp(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
+		  TShiftState Shift);
+	void __fastcall TabControl1Change(TObject *Sender);
+	void __fastcall ClearingEditParamsinputKeyUp(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
 		  TShiftState Shift);
 
 private:	// User declarations

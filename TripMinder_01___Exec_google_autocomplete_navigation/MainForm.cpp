@@ -40,3 +40,18 @@ void __fastcall TMainForm::FormKeyUp(TObject *Sender, WORD &Key,
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TMainForm::TabControl1Change(TObject *Sender)
+{
+	TTabControl *tabCtrl = (TTabControl*) Sender;
+	if(tabCtrl->ActiveTab == TabItem2){
+		ShowMessage("Cambiado a 2");
+	}
+}
+
+void __fastcall TMainForm::ClearingEditParamsinputKeyUp(TObject *Sender, WORD &Key,
+          System::WideChar &KeyChar, TShiftState Shift)
+{
+	 RESTRequest1->Execute();
+}
+//---------------------------------------------------------------------------
+
