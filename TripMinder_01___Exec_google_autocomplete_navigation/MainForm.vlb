@@ -1,63 +1,92 @@
-﻿[TopToolBar1]
-Coordinates=387,342,89,36
-
-[ChangeTabAction1]
-Coordinates=331,1,124,36
-
-[TabControl1]
-Coordinates=260,410,85,36
-
-[ToolBarLabel]
-Coordinates=462,10,91,58
-
-[SpeedButton1]
-Coordinates=118,342,96,58
-
-[TopToolBar]
-Coordinates=168,410,82,36
-
-[TabItem1]
-Coordinates=89,410,69,36
-
-[ChangeTabAction2]
-Coordinates=331,166,124,36
-
-[TabItem2]
-Coordinates=10,410,69,36
+﻿[ToolBarLabel1]
+Coordinates=125,358,98,58
 
 [ActionList1]
-Coordinates=97,152,78,36
+Coordinates=29,99,78,36
 
-[ToolBarLabel1]
-Coordinates=10,342,98,58
+[ChangeTabAction2]
+Coordinates=396,232,124,36
 
-[BottomToolBar]
-Coordinates=486,342,100,36
+[TabItem1]
+Coordinates=355,464,69,36
 
-[btnBack]
-Coordinates=316,342,61,58
+[TabItem2]
+Coordinates=450,464,69,36
 
-[RESTClient1]
-Coordinates=363,10,89,80
+[ChangeTabAction1]
+Coordinates=267,361,124,36
 
 [RESTResponse1]
 Coordinates=10,10,113,322
 
-[RESTRequest1]
-Coordinates=250,10,103,146
+[btnBack]
+Coordinates=371,358,61,58
+
+[RESTClient1]
+Coordinates=10,358,89,80
 
 [BindingsList1]
-Coordinates=344,175,91,36
+Coordinates=168,361,91,36
 
-[ClearingEditParamsinput]
-Coordinates=344,252,157,58
+[TopToolBar1]
+Coordinates=545,464,89,36
 
-[LabelParamsinput]
-Coordinates=490,87,118,58
+[ToolBarLabel]
+Coordinates=458,358,91,58
+
+[RESTRequest1]
+Coordinates=324,10,103,146
+
+[SpeedButton1]
+Coordinates=249,358,96,58
+
+[TopToolBar]
+Coordinates=247,464,82,36
+
+[BottomToolBar]
+Coordinates=121,464,100,36
+
+[TabControl1]
+Coordinates=10,464,85,36
 
 []
-Coordinates=142,1,57,58
+Coordinates=507,54,157,58
 
-[MemoContent]
-Coordinates=142,1,95,58
+[ListBox1]
+Coordinates=190,140,107,234
+
+[RESTResponseDataSetAdapter1]
+Coordinates=268,175,174,33
+Visible=False
+
+[FDMemTable1]
+Coordinates=420,140,117,248
+Visible=False
+
+[FDMemTable1place_id]
+Coordinates=558,1,147,36
+
+[FDMemTable1id]
+Coordinates=383,287,109,36
+
+[FDMemTable1reference]
+Coordinates=558,131,153,36
+
+[FDMemTable1terms]
+Coordinates=749,1,131,36
+
+[FDMemTable1matched_substrings]
+Coordinates=587,186,214,36
+
+[FDMemTable1description]
+Coordinates=558,241,162,36
+
+[FDMemTable1types]
+Coordinates=758,56,130,36
+
+[BindSourceDB1]
+Coordinates=420,140,117,248
+
+[Edit1]
+Coordinates=510,40,44,58
 

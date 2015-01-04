@@ -1,10 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-	<Transactions>
-    <Transaction>2014/12/08 18:19:28.000.866,C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\HeaderFooterNavigation.cbproj=C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\TripMinder01.cbproj</Transaction>
-    <Transaction>2014/12/08 18:29:00.000.887,C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\HeaderFooterNavigationPCH.h=C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\TripMinder01PCH.h</Transaction>
-    <Transaction>2014/12/08 18:29:16.000.872,C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\HeaderFooterFormwithNavigation.h=C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\MainForm.h</Transaction>
-    <Transaction>2014/12/08 18:29:16.000.872,C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\HeaderFooterFormwithNavigation.fmx=C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\MainForm.fmx</Transaction>
-    <Transaction>2014/12/08 18:29:16.000.872,C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\HeaderFooterFormwithNavigation.cpp=C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\MainForm.cpp</Transaction>
-  </Transactions>
+	<MobileDevice>0123456789ABCDEF</MobileDevice>
 </BorlandProject>

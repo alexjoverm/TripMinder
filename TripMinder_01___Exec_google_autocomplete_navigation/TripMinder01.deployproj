@@ -13,6 +13,14 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>TripMinder01\library\lib\mips\</RemoteDir>
+            <RemoteName>libHeaderFooterNavigation.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include=".\Android\Debug\libTripMinder01.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TripMinder01\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>libTripMinder01.so</RemoteName>
@@ -21,14 +29,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
             <Required>True</Required>
-        </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>TripMinder01\library\lib\mips\</RemoteDir>
-            <RemoteName>libHeaderFooterNavigation.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TripMinder01\res\drawable-hdpi\</RemoteDir>

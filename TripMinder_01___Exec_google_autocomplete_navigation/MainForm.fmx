@@ -35,7 +35,7 @@ object MainForm: TMainForm
       Text = 'TabItem1'
       Width = 8.000000000000000000
       object TopToolBar: TToolBar
-        Anchors = []
+        Align = MostTop
         Height = 48.000000000000000000
         TabOrder = 0
         Width = 384.000000000000000000
@@ -46,6 +46,53 @@ object MainForm: TMainForm
           TextSettings.HorzAlign = Center
           Text = 'TripMinder'
           Width = 384.000000000000000000
+        end
+        object AniIndicator1: TAniIndicator
+          Align = Right
+          Enabled = True
+          Height = 50.000000000000000000
+          Position.X = 334.000000000000000000
+          Visible = False
+          Width = 50.000000000000000000
+        end
+      end
+      object Edit1: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        Position.X = 10.000000000000000000
+        Position.Y = 88.000000000000000000
+        Width = 364.000000000000000000
+        Height = 32.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 40.000000000000000000
+        Margins.Right = 10.000000000000000000
+        OnChange = ClearingEditParamsinputChange
+      end
+      object ListBox1: TListBox
+        Align = Client
+        Height = 399.000000000000000000
+        Padding.Top = 100.000000000000000000
+        Padding.Bottom = 10.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        TabOrder = 2
+        Width = 364.000000000000000000
+        ItemHeight = 40.000000000000000000
+        DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        object FloatAnimation1: TFloatAnimation
+          AnimationType = InOut
+          AutoReverse = True
+          Enabled = True
+          Delay = 0.200000002980232200
+          Duration = 0.500000000000000000
+          Loop = True
+          PropertyName = 'ItemHeight'
+          StartValue = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue = 40.000000000000000000
         end
       end
     end
@@ -100,208 +147,6 @@ object MainForm: TMainForm
       Width = 384.000000000000000000
     end
   end
-  object ClearingEditParamsinput: TClearingEdit
-    Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 13
-    Position.X = 16.000000000000000000
-    Position.Y = 104.000000000000000000
-    Width = 345.000000000000000000
-    Height = 32.000000000000000000
-    OnKeyUp = ClearingEditParamsinputKeyUp
-    object LabelParamsinput: TLabel
-      Height = 23.000000000000000000
-      Position.Y = -22.000000000000000000
-      TextSettings.WordWrap = False
-      Text = 'Origen'
-      Width = 82.000000000000000000
-    end
-  end
-  object MemoContent: TMemo
-    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-    Height = 313.000000000000000000
-    Position.X = 16.000000000000000000
-    Position.Y = 160.000000000000000000
-    TabOrder = 14
-    Width = 345.000000000000000000
-    Lines.Strings = (
-      '{'
-      '   "predictions" : ['
-      '      {'
-      
-        '         "description" : "Distribucion Congelados Rosa de Los Vi' +
-        'entos SL, Alicante, Spain",'
-      '         "id" : "108b4336d38eae2844c79567400fa1b7894833d6",'
-      '         "matched_substrings" : ['
-      '            {'
-      '               "length" : 2,'
-      '               "offset" : 24'
-      '            }'
-      '         ],'
-      '         "place_id" : "ChIJCxP3dnM2Yg0RBJbReIKyn1o",'
-      
-        '         "reference" : "ClRNAAAArbCyWQrIKFRUSqAgAnFqeA_JG-ejltzW' +
-        'pdQ_DH6y4i8Eo3AXnDCwBI92Py7RHvte5nEmMIEPDYYi22xJi9-RNUvtMLuxQstq' +
-        '_PT59gyJF-ISEMWq99PFVLhXU7GesVmaAV4aFCG6tD-hA8aEJgQB_k3xhdhJRYRW' +
-        '",'
-      '         "terms" : ['
-      '            {'
-      '               "offset" : 0,'
-      
-        '               "value" : "Distribucion Congelados Rosa de Los Vi' +
-        'entos SL"'
-      '            },'
-      '            {'
-      '               "offset" : 48,'
-      '               "value" : "Alicante"'
-      '            },'
-      '            {'
-      '               "offset" : 58,'
-      '               "value" : "Spain"'
-      '            }'
-      '         ],'
-      '         "types" : [ "establishment" ]'
-      '      },'
-      '      {'
-      '         "description" : "Rotonda, Alicante, Spain",'
-      '         "id" : "bedd10a5ae3d6a4f28a9756c2acc0ff5a1e538a0",'
-      '         "matched_substrings" : ['
-      '            {'
-      '               "length" : 2,'
-      '               "offset" : 0'
-      '            }'
-      '         ],'
-      '         "place_id" : "ChIJDRwjEq03Yg0RJ0oDhPoLKVQ",'
-      
-        '         "reference" : "CjQmAAAA3zpDRQI_3dmJ96hio6s56MLMmRnClEzV' +
-        'E25L6HZblJt2cMn9wzqwwpRoYXryILbREhBy27d3I5HJysBJOEuuK4LCGhQZuwLa' +
-        'vhCjga0Oot3CbOGg5MTKaA",'
-      '         "terms" : ['
-      '            {'
-      '               "offset" : 0,'
-      '               "value" : "Rotonda"'
-      '            },'
-      '            {'
-      '               "offset" : 9,'
-      '               "value" : "Alicante"'
-      '            },'
-      '            {'
-      '               "offset" : 19,'
-      '               "value" : "Spain"'
-      '            }'
-      '         ],'
-      '         "types" : [ "establishment" ]'
-      '      },'
-      '      {'
-      
-        '         "description" : "Rojales Ciudad Quesada Consultorio, Av' +
-        'enida de la Costa Azul, Ciudad Quesada, Spain",'
-      '         "id" : "ae6585b80d99223ae7f681cbd73a6868c5ccaaa5",'
-      '         "matched_substrings" : ['
-      '            {'
-      '               "length" : 2,'
-      '               "offset" : 0'
-      '            }'
-      '         ],'
-      '         "place_id" : "ChIJj6KhZTKvYw0RMn6Rt93EReQ",'
-      
-        '         "reference" : "CnRiAAAAkCN4hrDZUCDeYT21MlK3M02WcP-NnLsG' +
-        'NUNY6GGrqfayxQtz_0AYzg3LPuolm5arlKLXG8jGUETAwzqAQl_CKjVHW6O2Pxry' +
-        'fPXGFXS-qJWeEkan8aWsnGhOkjP_trVMFn9mX5RRtp8H-cvUba6YrRIQwE6iJmBs' +
-        'LUIBK6ReiWG5PBoUgrntzyc75aNYLT0oxuZrgzOGx0w",'
-      '         "terms" : ['
-      '            {'
-      '               "offset" : 0,'
-      '               "value" : "Rojales Ciudad Quesada Consultorio"'
-      '            },'
-      '            {'
-      '               "offset" : 36,'
-      '               "value" : "Avenida de la Costa Azul"'
-      '            },'
-      '            {'
-      '               "offset" : 62,'
-      '               "value" : "Ciudad Quesada"'
-      '            },'
-      '            {'
-      '               "offset" : 78,'
-      '               "value" : "Spain"'
-      '            }'
-      '         ],'
-      '         "types" : [ "establishment" ]'
-      '      },'
-      '      {'
-      
-        '         "description" : "Restaurante Rosa de los Vientos, Calle' +
-        ' Rosa de los Vientos, Alicante, Spain",'
-      '         "id" : "61fa4e1b4ef04e6e58d577ecd972c48d77040d1a",'
-      '         "matched_substrings" : ['
-      '            {'
-      '               "length" : 2,'
-      '               "offset" : 12'
-      '            }'
-      '         ],'
-      '         "place_id" : "ChIJwQKoqXM2Yg0RZVPxSKa1v5A",'
-      
-        '         "reference" : "CmRaAAAAXXcryucSC1cqEvYng9D3sBQ55ViE4Mw-' +
-        'TCSnbHVfmFQAHzn_mPk1gJ94tSILPjrvoJWiolDxYqgeQSYvIvVp3pLK6MUPb8MC' +
-        'BFZB15uPVflWv5ysfdMmkdGEcb5A0qunEhCSIGmZq7jQGuXIaGlJbDU5GhTZU4zs' +
-        'g9sggzdducpnQiApofQtgQ",'
-      '         "terms" : ['
-      '            {'
-      '               "offset" : 0,'
-      '               "value" : "Restaurante Rosa de los Vientos"'
-      '            },'
-      '            {'
-      '               "offset" : 33,'
-      '               "value" : "Calle Rosa de los Vientos"'
-      '            },'
-      '            {'
-      '               "offset" : 60,'
-      '               "value" : "Alicante"'
-      '            },'
-      '            {'
-      '               "offset" : 70,'
-      '               "value" : "Spain"'
-      '            }'
-      '         ],'
-      '         "types" : [ "establishment" ]'
-      '      },'
-      '      {'
-      '         "description" : "Rosamar, Benidorm, Spain",'
-      '         "id" : "91a3fbc2fda5b843b37974be6fbbc785a30694a2",'
-      '         "matched_substrings" : ['
-      '            {'
-      '               "length" : 2,'
-      '               "offset" : 0'
-      '            }'
-      '         ],'
-      '         "place_id" : "ChIJeYYoA1gEYg0RFyx39ReRPLU",'
-      
-        '         "reference" : "CjQnAAAABFuII0Kj3FpI7hB6-bJtSsSDBqIC8uhq' +
-        'lYKVZvAdo5khlqHTWge43DNbZvGSRdyTEhCalxC5CQtIBt5kuJCKaZ0TGhRBnqJF' +
-        '8YwU9FPDDO-lq7wlSLA9GQ",'
-      '         "terms" : ['
-      '            {'
-      '               "offset" : 0,'
-      '               "value" : "Rosamar"'
-      '            },'
-      '            {'
-      '               "offset" : 9,'
-      '               "value" : "Benidorm"'
-      '            },'
-      '            {'
-      '               "offset" : 19,'
-      '               "value" : "Spain"'
-      '            }'
-      '         ],'
-      '         "types" : [ "establishment" ]'
-      '      }'
-      '   ],'
-      '   "status" : "OK"'
-      '}')
-    TextSettings.Font.Size = 10.000000000000000000
-    TextSettings.WordWrap = True
-    StyledSettings = [Family, Style, FontColor]
-  end
   object ActionList1: TActionList
     Left = 344
     Top = 512
@@ -318,9 +163,10 @@ object MainForm: TMainForm
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'UTF-8, *;q=0.8'
     AcceptEncoding = 'identity'
+    AllowCookies = False
     BaseURL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
     Params = <>
-    HandleRedirects = True
+    HandleRedirects = False
     Left = 16
     Top = 440
   end
@@ -353,19 +199,116 @@ object MainForm: TMainForm
     OutputConverters = <>
     Left = 20
     Top = 5
-    object LinkControlToFieldParamsinput: TLinkControlToField
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListBox1
+      Track = True
+      FillDataSource = BindSourceDB1
+      FillValueFieldName = 'description'
+      FillDisplayFieldName = 'description'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = RESTRequest1
       FieldName = 'Params.input'
-      Control = ClearingEditParamsinput
+      Control = Edit1
       Track = False
     end
-    object LinkControlToFieldContent: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = RESTResponse1
-      FieldName = 'Content'
-      Control = MemoContent
-      Track = False
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTable1
+    FieldDefs = <>
+    Response = RESTResponse1
+    RootElement = 'predictions'
+    Left = 72
+    Top = 456
+  end
+  object FDMemTable1: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'description'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'id'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'matched_substrings'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'place_id'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'reference'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'terms'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'types'
+        DataType = ftString
+        Size = 255
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired]
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 48
+    Top = 424
+    object FDMemTable1description: TStringField
+      FieldName = 'description'
+      Size = 255
     end
+    object FDMemTable1id: TStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object FDMemTable1matched_substrings: TStringField
+      FieldName = 'matched_substrings'
+      Size = 255
+    end
+    object FDMemTable1place_id: TStringField
+      FieldName = 'place_id'
+      Size = 255
+    end
+    object FDMemTable1reference: TStringField
+      FieldName = 'reference'
+      Size = 255
+    end
+    object FDMemTable1terms: TStringField
+      FieldName = 'terms'
+      Size = 255
+    end
+    object FDMemTable1types: TStringField
+      FieldName = 'types'
+      Size = 255
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDMemTable1
+    ScopeMappings = <>
+    Left = 176
+    Top = 272
   end
 end
