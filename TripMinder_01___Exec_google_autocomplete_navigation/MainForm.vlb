@@ -35,7 +35,7 @@ Coordinates=545,464,89,36
 Coordinates=458,358,91,58
 
 [RESTRequest1]
-Coordinates=324,10,103,146
+Coordinates=320,0,103,146
 
 [SpeedButton1]
 Coordinates=249,358,96,58
@@ -50,7 +50,7 @@ Coordinates=121,464,100,36
 Coordinates=10,464,85,36
 
 []
-Coordinates=507,54,157,58
+Coordinates=510,40,44,58
 
 [ListBox1]
 Coordinates=190,140,107,234
@@ -60,7 +60,7 @@ Coordinates=268,175,174,33
 Visible=False
 
 [FDMemTable1]
-Coordinates=420,140,117,248
+Coordinates=420,140,117,284
 Visible=False
 
 [FDMemTable1place_id]
@@ -85,8 +85,20 @@ Coordinates=558,241,162,36
 Coordinates=758,56,130,36
 
 [BindSourceDB1]
-Coordinates=420,140,117,248
+Coordinates=420,140,117,284
 
-[Edit1]
-Coordinates=510,40,44,58
+[AniIndicator1]
+Coordinates=142,1,90,36
+
+[AnimHeight]
+Coordinates=142,56,81,36
+
+[ClearingEdit2]
+Coordinates=540,70,92,58
+
+[ListBox2]
+Coordinates=570,150,107,234
+
+[ClearingEdit1]
+Coordinates=540,0,92,58
 

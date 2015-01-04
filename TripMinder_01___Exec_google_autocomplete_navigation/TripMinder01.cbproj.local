@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-	<MobileDevice>0123456789ABCDEF</MobileDevice>
+	<MobileDevice>0123456789ABCDEF</MobileDevice>  <Transactions>
+    <Transaction>2015/01/04 14:32:37.874,C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\MainForm.cpp=</Transaction>
+    <Transaction>2015/01/04 14:32:42.608,=C:\Users\Alex\Documents\Embarcadero\Studio\Projects\TripMinder_01___Exec_google_autocomplete\MainForm.cpp</Transaction>
+  </Transactions>
 </BorlandProject>

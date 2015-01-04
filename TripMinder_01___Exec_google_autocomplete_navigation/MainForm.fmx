@@ -56,44 +56,99 @@ object MainForm: TMainForm
           Width = 50.000000000000000000
         end
       end
-      object Edit1: TEdit
+      object Label1: TLabel
+        Align = Top
+        Height = 23.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 110.000000000000000000
+        Text = 'Origen'
+        Width = 364.000000000000000000
+      end
+      object ClearingEdit1: TClearingEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Top
-        TabOrder = 1
+        TabOrder = 4
         Position.X = 10.000000000000000000
-        Position.Y = 88.000000000000000000
+        Position.Y = 150.000000000000000000
         Width = 364.000000000000000000
         Height = 32.000000000000000000
+        HelpContext = 1
+        HelpKeyword = 'Origen'
         Margins.Left = 10.000000000000000000
-        Margins.Top = 40.000000000000000000
+        Margins.Top = 15.000000000000000000
         Margins.Right = 10.000000000000000000
-        OnChange = ClearingEditParamsinputChange
+        OnChange = InputChange
+        OnChangeTracking = InputChangeTracking
       end
       object ListBox1: TListBox
-        Align = Client
-        Height = 399.000000000000000000
+        Align = Top
+        Height = 168.000000000000000000
         Padding.Top = 100.000000000000000000
         Padding.Bottom = 10.000000000000000000
         Margins.Left = 10.000000000000000000
         Margins.Right = 10.000000000000000000
-        TabOrder = 2
+        Position.X = 40.000000000000000000
+        Position.Y = 182.000000000000000000
+        TabOrder = 1
+        Visible = False
         Width = 364.000000000000000000
-        ItemHeight = 40.000000000000000000
+        ItemHeight = 34.000000000000000000
         DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
-        object FloatAnimation1: TFloatAnimation
-          AnimationType = InOut
-          AutoReverse = True
+        object AnimHeight: TFloatAnimation
           Enabled = True
-          Delay = 0.200000002980232200
-          Duration = 0.500000000000000000
-          Loop = True
-          PropertyName = 'ItemHeight'
+          Duration = 0.400000005960464500
+          PropertyName = 'Height'
           StartValue = 0.000000000000000000
           StartFromCurrent = True
-          StopValue = 40.000000000000000000
+          StopValue = 168.000000000000000000
+          Trigger = 'IsVisible=true'
         end
+      end
+      object Label2: TLabel
+        Align = Top
+        Height = 23.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 220.000000000000000000
+        Text = 'Origen'
+        Width = 364.000000000000000000
+      end
+      object ClearingEdit2: TClearingEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 5
+        Position.X = 10.000000000000000000
+        Position.Y = 250.000000000000000000
+        Width = 364.000000000000000000
+        Height = 32.000000000000000000
+        HelpType = htKeyword
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 50.000000000000000000
+        Margins.Right = 10.000000000000000000
+        OnChange = InputChange
+        OnChangeTracking = InputChangeTracking
+      end
+      object ListBox2: TListBox
+        Align = Top
+        Height = 200.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 282.000000000000000000
+        TabOrder = 3
+        Visible = False
+        Width = 364.000000000000000000
+        ItemHeight = 34.000000000000000000
+        DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
       end
     end
     object TabItem2: TTabItem
@@ -215,8 +270,20 @@ object MainForm: TMainForm
       Category = 'Quick Bindings'
       DataSource = RESTRequest1
       FieldName = 'Params.input'
-      Control = Edit1
+      Control = ClearingEdit1
       Track = False
+    end
+    object LinkFillControlToField2: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListBox2
+      Track = True
+      FillDataSource = BindSourceDB1
+      FillValueFieldName = 'description'
+      FillDisplayFieldName = 'description'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
     end
   end
   object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
@@ -308,7 +375,7 @@ object MainForm: TMainForm
   object BindSourceDB1: TBindSourceDB
     DataSet = FDMemTable1
     ScopeMappings = <>
-    Left = 176
-    Top = 272
+    Left = 104
+    Top = 456
   end
 end

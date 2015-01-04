@@ -23,8 +23,6 @@
 #include <System.Rtti.hpp>
 #include <FMX.Layouts.hpp>
 #include <FMX.Memo.hpp>
-
-//#include "TMyThread.h"
 #include <FMX.Objects.hpp>
 #include <FMX.ListView.hpp>
 #include <FMX.ListView.Types.hpp>
@@ -76,18 +74,23 @@ __published:	// IDE-managed Components
 	TStringField *FDMemTable1types;
 	TBindSourceDB *BindSourceDB1;
 	TLinkFillControlToField *LinkFillControlToField1;
-	TEdit *Edit1;
-	TLinkControlToField *LinkControlToField1;
 	TAniIndicator *AniIndicator1;
-	TFloatAnimation *FloatAnimation1;
+	TFloatAnimation *AnimHeight;
+	TClearingEdit *ClearingEdit1;
+	TClearingEdit *ClearingEdit2;
+	TListBox *ListBox2;
+	TLinkControlToField *LinkControlToField1;
+	TLinkFillControlToField *LinkFillControlToField2;
+	TLabel *Label1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormKeyUp(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
 		  TShiftState Shift);
 	void __fastcall TabControl1Change(TObject *Sender);
-	void __fastcall ClearingEditParamsinputChange(TObject *Sender);
+	void __fastcall InputChange(TObject *Sender);
+	void __fastcall InputChangeTracking(TObject *Sender);
 
 private:	// User declarations
-	TRESTExecutionThread* restThread;
+	TRESTExecutionThread *originThread, *destinationThread;
 	void __fastcall RestThreadTerminated(TObject *Sender);
 
 public:		// User declarations

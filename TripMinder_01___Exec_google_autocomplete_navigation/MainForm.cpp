@@ -51,21 +51,53 @@ void __fastcall TMainForm::TabControl1Change(TObject *Sender)
 
 //---------------------------------------------------------------------------
 
-void __fastcall TMainForm::ClearingEditParamsinputChange(TObject *Sender)
+void __fastcall TMainForm::InputChange(TObject *Sender)
 {
-	AniIndicator1->Visible = true;
-	AniIndicator1->Visible = true;
+	TClearingEdit* aux = (TClearingEdit*)Sender;
+	if(aux->Text != "")
+	{
+		AniIndicator1->Visible = true;
+		AniIndicator1->Visible = true;
 
-	//restThread->Terminate();
-	restThread = RESTRequest1->ExecuteAsync();
-	restThread->OnTerminate = RestThreadTerminated;
-	 //thread->Free();
-	 //thread = new MyThread(false);
+		RESTRequest1->ClearBody();
+
+		if(aux == ClearingEdit1){
+			originThread = RESTRequest1->ExecuteAsync();
+			originThread->OnTerminate = RestThreadTerminated;
+		}
+		else{
+			destinationThread = RESTRequest1->ExecuteAsync();
+			destinationThread->OnTerminate = RestThreadTerminated;
+        }
+	}
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TMainForm::InputChangeTracking(TObject *Sender)
+{
+	ListBox1->Visible = false;
+	ListBox2->Visible = false;
 }
 //---------------------------------------------------------------------------
 
 
 void __fastcall TMainForm::RestThreadTerminated(TObject *Sender){
+
+	if((TRESTExecutionThread*)Sender == originThread){
+		ListBox1->Visible = true;
+		if(ListBox1->Items->Count == 0)
+			ListBox1->Items->Append("No hay resultados...");
+	}
+	else{
+		ListBox2->Visible = true;
+		if(ListBox2->Items->Count == 0)
+			ListBox2->Items->Append("No hay resultados...");
+    }
+
 	AniIndicator1->Visible = false;
 	AniIndicator1->Visible = false;
+
 }
+//---------------------------------------------------------------------------
+

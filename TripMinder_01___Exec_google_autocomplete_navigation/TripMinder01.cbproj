@@ -197,14 +197,10 @@
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="MainForm.cpp">
-            <Form>HeaderFooterwithNavigation</Form>
+            <Form>MainForm</Form>
             <FormType>fmx</FormType>
             <DependentOn>MainForm.h</DependentOn>
             <BuildOrder>2</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="TMyThread.cpp">
-            <DependentOn>TMyThread.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
         </CppCompile>
         <CppCompile Include="TripMinder01.cpp">
             <BuildOrder>1</BuildOrder>
