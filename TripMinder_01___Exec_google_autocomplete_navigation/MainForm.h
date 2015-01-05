@@ -82,15 +82,26 @@ __published:	// IDE-managed Components
 	TLinkControlToField *LinkControlToField1;
 	TLinkFillControlToField *LinkFillControlToField2;
 	TLabel *Label1;
+	TLayout *LayOrig;
+	TLayout *LayDest;
+	TRESTRequest *RESTRequest2;
+	TLinkControlToField *LinkControlToField2;
+	TFloatAnimation *AnimHeight2;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormKeyUp(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
 		  TShiftState Shift);
 	void __fastcall TabControl1Change(TObject *Sender);
 	void __fastcall InputChange(TObject *Sender);
 	void __fastcall InputChangeTracking(TObject *Sender);
+	void __fastcall ListBoxItemClick(const TCustomListBox *Sender, const TListBoxItem *Item);
+
+
 
 private:	// User declarations
 	TRESTExecutionThread *originThread, *destinationThread;
+	std::pair<String, String> originData, destinationData;
+	bool fromCode;
+
 	void __fastcall RestThreadTerminated(TObject *Sender);
 
 public:		// User declarations

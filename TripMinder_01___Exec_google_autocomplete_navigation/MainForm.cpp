@@ -17,6 +17,7 @@ TMainForm *MainForm;
 __fastcall TMainForm::TMainForm(TComponent* Owner)
 	: TForm(Owner)
 {
+	fromCode = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCreate(TObject *Sender)
@@ -53,23 +54,28 @@ void __fastcall TMainForm::TabControl1Change(TObject *Sender)
 
 void __fastcall TMainForm::InputChange(TObject *Sender)
 {
-	TClearingEdit* aux = (TClearingEdit*)Sender;
-	if(aux->Text != "")
+	if(!fromCode)
 	{
-		AniIndicator1->Visible = true;
-		AniIndicator1->Visible = true;
+		TClearingEdit* aux = (TClearingEdit*)Sender;
+		if(aux->Text != "")
+		{
+			AniIndicator1->Visible = true;
+			AniIndicator1->Visible = true;
 
-		RESTRequest1->ClearBody();
-
-		if(aux == ClearingEdit1){
-			originThread = RESTRequest1->ExecuteAsync();
-			originThread->OnTerminate = RestThreadTerminated;
+			if(aux == ClearingEdit1){
+				RESTRequest1->ClearBody();
+				originThread = RESTRequest1->ExecuteAsync();
+				originThread->OnTerminate = RestThreadTerminated;
+			}
+			else{
+				RESTRequest2->ClearBody();
+				destinationThread = RESTRequest2->ExecuteAsync();
+				destinationThread->OnTerminate = RestThreadTerminated;
+			}
 		}
-		else{
-			destinationThread = RESTRequest1->ExecuteAsync();
-			destinationThread->OnTerminate = RestThreadTerminated;
-        }
 	}
+	else
+		fromCode = false;
 }
 //---------------------------------------------------------------------------
 
@@ -101,3 +107,30 @@ void __fastcall TMainForm::RestThreadTerminated(TObject *Sender){
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TMainForm::ListBoxItemClick(const TCustomListBox *Sender, const TListBoxItem *Item)
+{
+	 fromCode = true; // impedimos otra llamada al API de Google
+
+	// Calculamos distancia a la que se encuentra el active record, y seleccionamos la row correspondiente
+	 int i = ((TListBoxItem*)Item)->Index;
+	 int moveby = i - (BindSourceDB1->DataSet->RecNo - 1);
+	 BindSourceDB1->DataSet->MoveBy(moveby);
+	 BindSourceDB1->DataSet->UpdateCursorPos();
+
+	 std::pair<String, String> id_desc;
+	 id_desc.first = BindSourceDB1->DataSet->FieldByName("id")->AsString;
+	 id_desc.second = BindSourceDB1->DataSet->FieldByName("description")->AsString;
+
+	 if(Sender == ListBox1){
+		 ClearingEdit1->Text = id_desc.second;
+		 originData = id_desc;
+		 ListBox1->Visible = false;
+	 }
+	 else{
+		 ClearingEdit2->Text = id_desc.second;
+		 destinationData = id_desc;
+		 ListBox2->Visible = false;
+	 }
+
+	 ShowMessage(id_desc.first);
+}
