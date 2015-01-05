@@ -4,9 +4,9 @@ In order to gather together some tips that I'm learning on the way coding with R
 
 ## Index
 
-- [1. App crashes on Android devices](#app-crashes-on-android-devices) 
-- [2. How to debug on Android devices](#how-to-debug-on-android-devices) 
-- [3. Bindings on RAD Studio and REST API's](#bindings-on-rad-studio-and-rest-api) 
+- [1. App crashes on Android devices](#1-app-crashes-on-android-devices) 
+- [2. How to debug on Android devices](#2-how-to-debug-on-android-devices) 
+- [3. Bindings on RAD Studio and REST API's](#3-bindings-on-rad-studio-and-rest-apis) 
 
 
 
