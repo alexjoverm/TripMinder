@@ -6,6 +6,7 @@
 //#include <android/log.h>
 #include <string>
 #include "MainForm.h"
+#include "RESTMaker.h"
 
 
 //---------------------------------------------------------------------------
@@ -24,7 +25,6 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
 	// This define the default active tab at runtime
 	TabControl1->ActiveTab = TabItem1;
-	//thread = new MyThread(True);
 }
 //---------------------------------------------------------------------------
 
@@ -46,38 +46,102 @@ void __fastcall TMainForm::TabControl1Change(TObject *Sender)
 {
 	TTabControl *tabCtrl = (TTabControl*) Sender;
 	if(tabCtrl->ActiveTab == TabItem2){
-		ShowMessage("Cambiado a 2");
+		//ShowMessage("Cambiado a 2");
 	}
 }
 
 //---------------------------------------------------------------------------
+//********************** DIALOG *****************************
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::ButtonCancelClick(TObject *Sender)
+{
+	// Cancelar petición
+
+	LayoutLoading->Visible = false;
+   //	BlurScreen->Enabled = false;
+}
+
+
+void __fastcall TMainForm::ButtonSearchClick(TObject *Sender)
+{
+
+	TRESTMaker *aux = new TRESTMaker(); // De momento, al crearse se ejecuta
+	ShowMessage(aux->RESTResponseDriving->Content);
+
+	//LayoutLoading->Visible = true;
+
+	// Activar efecto Blur, con su animación
+	//BlurScreen->Enabled = true;
+
+	//ShowMessage("Comprobando campos...");
+	/*if(originData.second == ""){
+		ShowMessage("Tiene que haber un origen");
+		return;
+	}
+
+
+	if(originData.second == destinationData.second){
+		ShowMessage("El origen y el destino deben ser diferentes");
+		return;
+	}              */
+
+	//ShowMessage("Recogiendo detalles de origen y destino...");
+	//TFormDialogModal *dlg = new TFormDialogModal(this);
+	//dlg->ShowModal();
+
+
+	/*if (dlg->ShowModal() == mrOk) {
+
+		dlg->Free();
+		// Cambiamos pestaña
+		ChangeTabAction2->Tab = TabItem2;
+		ChangeTabAction2->ExecuteTarget(this);
+		ChangeTabAction2->Tab = TabItem1;
+	}  */
+
+
+
+	//ShowMessage("Haciendo petición a google...");
+
+
+}
+
+
+
+
+
+//---------------------------------------------------------------------------
+//********************** ORIGIN Y DEST CONTROLS *****************************
+//---------------------------------------------------------------------------
 
 void __fastcall TMainForm::InputChange(TObject *Sender)
 {
-	if(!fromCode)
+	if(!fromCode)  // solo cambios hechos desde la interfaz
 	{
 		TClearingEdit* aux = (TClearingEdit*)Sender;
 		if(aux->Text != "")
 		{
 			AniIndicator1->Visible = true;
-			AniIndicator1->Visible = true;
+			// Binding no funcionaba bien, se hace asi
+			RESTRequest1->Params->ParameterByName("input")->Value = aux->Text;
 
+			// En cada Edit, ejecuta y crea su respectivo hilo
 			if(aux == ClearingEdit1){
-				RESTRequest1->ClearBody();
 				originThread = RESTRequest1->ExecuteAsync();
-				originThread->OnTerminate = RestThreadTerminated;
+				originThread->OnTerminate = OriginThreadTerminated;
 			}
 			else{
-				RESTRequest2->ClearBody();
-				destinationThread = RESTRequest2->ExecuteAsync();
-				destinationThread->OnTerminate = RestThreadTerminated;
+				destinationThread = RESTRequest1->ExecuteAsync();
+				destinationThread->OnTerminate = DestinationThreadTerminated;
 			}
 		}
 	}
 	else
-		fromCode = false;
+		fromCode = false; // Para que la próxima se active
 }
 //---------------------------------------------------------------------------
+
 
 
 void __fastcall TMainForm::InputChangeTracking(TObject *Sender)
@@ -85,27 +149,8 @@ void __fastcall TMainForm::InputChangeTracking(TObject *Sender)
 	ListBox1->Visible = false;
 	ListBox2->Visible = false;
 }
-//---------------------------------------------------------------------------
 
 
-void __fastcall TMainForm::RestThreadTerminated(TObject *Sender){
-
-	if((TRESTExecutionThread*)Sender == originThread){
-		ListBox1->Visible = true;
-		if(ListBox1->Items->Count == 0)
-			ListBox1->Items->Append("No hay resultados...");
-	}
-	else{
-		ListBox2->Visible = true;
-		if(ListBox2->Items->Count == 0)
-			ListBox2->Items->Append("No hay resultados...");
-    }
-
-	AniIndicator1->Visible = false;
-	AniIndicator1->Visible = false;
-
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TMainForm::ListBoxItemClick(const TCustomListBox *Sender, const TListBoxItem *Item)
 {
@@ -117,6 +162,7 @@ void __fastcall TMainForm::ListBoxItemClick(const TCustomListBox *Sender, const 
 	 BindSourceDB1->DataSet->MoveBy(moveby);
 	 BindSourceDB1->DataSet->UpdateCursorPos();
 
+	 // Guardamos par de id - description
 	 std::pair<String, String> id_desc;
 	 id_desc.first = BindSourceDB1->DataSet->FieldByName("id")->AsString;
 	 id_desc.second = BindSourceDB1->DataSet->FieldByName("description")->AsString;
@@ -131,6 +177,28 @@ void __fastcall TMainForm::ListBoxItemClick(const TCustomListBox *Sender, const 
 		 destinationData = id_desc;
 		 ListBox2->Visible = false;
 	 }
-
-	 ShowMessage(id_desc.first);
 }
+//---------------------------------------------------------------------------
+
+
+
+//** Se han separado los callbacks, ya que daban problemas
+
+void __fastcall TMainForm::OriginThreadTerminated(TObject *Sender){
+
+	ListBox1->Visible = true;
+	if(ListBox1->Items->Count == 0)
+		ListBox1->Items->Append("No hay resultados...");
+
+	AniIndicator1->Visible = false;
+}
+
+void __fastcall TMainForm::DestinationThreadTerminated(TObject *Sender){
+
+	ListBox2->Visible = true;
+	if(ListBox2->Items->Count == 0)
+		ListBox2->Items->Append("No hay resultados...");
+
+	AniIndicator1->Visible = false;
+}
+

@@ -1,0 +1,38 @@
+object FormDialogModal: TFormDialogModal
+  Left = 0
+  Top = 0
+  Caption = 'FormDialogModal'
+  ClientHeight = 567
+  ClientWidth = 384
+  Visible = True
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMobile = True
+  DesignerWidth = 384
+  DesignerHeight = 592
+  DesignerDeviceName = 'Google Nexus 4'
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object Layout1: TLayout
+    Align = Center
+    Height = 180.000000000000000000
+    Width = 300.000000000000000000
+    TabOrder = 1
+    object Label1: TLabel
+      Align = Center
+      AutoSize = True
+      Height = 22.000000000000000000
+      Margins.Top = 50.000000000000000000
+      TextSettings.WordWrap = False
+      Text = 'Descargando...'
+      Width = 122.000000000000000000
+    end
+    object AniIndicator1: TAniIndicator
+      Align = Center
+      Height = 50.000000000000000000
+      Margins.Top = -50.000000000000000000
+      Width = 50.000000000000000000
+    end
+  end
+end

@@ -1,17 +1,16 @@
 //---------------------------------------------------------------------------
 
-#ifndef TMyThreadH
-#define TMyThreadH
+#include <fmx.h>
+#pragma hdrstop
+
+#include "DialogModal.h"
 //---------------------------------------------------------------------------
-#include <System.Classes.hpp>
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TFormDialogModal *FormDialogModal;
 //---------------------------------------------------------------------------
-class MyThread : public TThread
+__fastcall TFormDialogModal::TFormDialogModal(TComponent* Owner)
+	: TForm(Owner)
 {
-private:
-protected:
-	void __fastcall Execute();
-public:
-	__fastcall MyThread(bool CreateSuspended);
-};
+}
 //---------------------------------------------------------------------------
-#endif

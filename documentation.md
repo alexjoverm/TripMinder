@@ -96,4 +96,7 @@ Here, It shows up a *BindSourceDB* object in the LiveBindings Designer, which co
     RESTRequest1->Params->ParameterByName("input")->Value = aux->Text;
 
 
-l
+
+## 4. Other strange errors
+
+**Invalid floating pointer**: I've got this only on Android platform. It was something related to the float numbers in the `.fmx` file. I've solved rounding these floats numbers.

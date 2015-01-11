@@ -40,6 +40,9 @@
 #include <REST.Response.Adapter.hpp>
 #include <Data.Bind.DBScope.hpp>
 #include <FMX.Ani.hpp>
+#include <FMX.ExtCtrls.hpp>
+#include <FMX.Effects.hpp>
+#include <Datasnap.DBClient.hpp>
 
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
@@ -57,7 +60,7 @@ __published:	// IDE-managed Components
 	TLabel *ToolBarLabel1;
 	TChangeTabAction *ChangeTabAction1;
 	TChangeTabAction *ChangeTabAction2;
-	TSpeedButton *SpeedButton1;
+	TSpeedButton *ButtonSearch;
 	TRESTClient *RESTClient1;
 	TRESTRequest *RESTRequest1;
 	TRESTResponse *RESTResponse1;
@@ -79,14 +82,18 @@ __published:	// IDE-managed Components
 	TClearingEdit *ClearingEdit1;
 	TClearingEdit *ClearingEdit2;
 	TListBox *ListBox2;
-	TLinkControlToField *LinkControlToField1;
 	TLinkFillControlToField *LinkFillControlToField2;
 	TLabel *Label1;
 	TLayout *LayOrig;
 	TLayout *LayDest;
-	TRESTRequest *RESTRequest2;
-	TLinkControlToField *LinkControlToField2;
 	TFloatAnimation *AnimHeight2;
+	TLayout *LayoutLoading;
+	TAniIndicator *AniIndicator2;
+	TLabel *LabelLoading;
+	TShadowEffect *ShadowEffect1;
+	TRectangle *RectContainer;
+	TButton *Button1;
+	TRectangle *RectBackground;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormKeyUp(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
 		  TShiftState Shift);
@@ -94,15 +101,16 @@ __published:	// IDE-managed Components
 	void __fastcall InputChange(TObject *Sender);
 	void __fastcall InputChangeTracking(TObject *Sender);
 	void __fastcall ListBoxItemClick(const TCustomListBox *Sender, const TListBoxItem *Item);
-
-
+	void __fastcall ButtonSearchClick(TObject *Sender);
+	void __fastcall ButtonCancelClick(TObject *Sender);
 
 private:	// User declarations
 	TRESTExecutionThread *originThread, *destinationThread;
 	std::pair<String, String> originData, destinationData;
 	bool fromCode;
 
-	void __fastcall RestThreadTerminated(TObject *Sender);
+	void __fastcall OriginThreadTerminated(TObject *Sender);
+	void __fastcall DestinationThreadTerminated(TObject *Sender);
 
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
