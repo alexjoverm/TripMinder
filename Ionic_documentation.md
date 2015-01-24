@@ -100,6 +100,10 @@ Chrome has its own emulation tool, and work very well!
 
 ## 3. Issues
 
+#### 01. Ionicons and its names
+When you create a ionic project using the cli command line `ionic start projectname type`, an older versión of ***ionicons*** is installed. 
 
+To update them, download them and place them on its `www/lib/...` *scss* and *fonts* folder.
 
+If you're using the version 1.5.x of Ionicons, **ion-ios-...** prefix is **ion-ios7-...** instead.
 
