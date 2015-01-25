@@ -1,7 +1,8 @@
 
 
 angular.module('tripminder', 
-  ['ionic'
+  ['ionic',
+   'ngResource'
   ]
 )
 

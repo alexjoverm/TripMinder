@@ -1,5 +1,23 @@
 <ion-view view-title="Buscar rutas">
-  <ion-content>
-    <h1>Buscar rutas</h1>
+  <ion-content> 
+
+  	<p class="row">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  	tempor incididunt ut labore et dolore magna aliqua. </p>
+
+    <div class="list">
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">Origen</span>
+	    <input type="text" placeholder="Ej: Alicante..." ng-model="inputs.origin" ng-change="GetOrigins()">
+	  </label>
+
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">Destino</span>
+	    <input type="text" placeholder="Ej: Valencia..." ng-model="inputs.dest" ng-change="GetDests()">
+	  </label>
+	</div>
+
+	<div class="padding">
+		<button class="button button-block button-positive">Buscar</button>
+	</div>
   </ion-content>
 </ion-view>
