@@ -23,7 +23,7 @@ angular.module('tripminder')
     	if($scope.inputs.origin)
 	    	$scope.timerPromise = $timeout(function() {
 	    		Resources.GoAutocomplete.get( { input: $scope.inputs.origin, types: '(regions)' } ).$promise.then(function(data){
-	    			console.log(data);
+	    			$scope.origins = data.predictions;
 	    		});
 	    	}, 500);
     };
@@ -36,9 +36,19 @@ angular.module('tripminder')
     	if($scope.inputs.dest)
 	    	$scope.timerPromise = $timeout(function() {
 	    		Resources.GoAutocomplete.get( { input: $scope.inputs.dest, types: '(regions)' } ).$promise.then(function(data){
-	    			console.log(data);
+	    			$scope.dests = data.predictions;
 	    		});
 	    	}, 500);
+    };
+
+    $scope.SelectOrigin = function(i){ 
+        $scope.inputs.origin = $scope.origins[i].description;
+        $scope.origins = null;
+    };
+
+    $scope.SelectDest = function(i){
+        $scope.inputs.dest = $scope.dests[i].description;
+        $scope.dests = null;
     };
 
 }]);

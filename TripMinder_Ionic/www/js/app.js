@@ -2,7 +2,8 @@
 
 angular.module('tripminder', 
   ['ionic',
-   'ngResource'
+   'ngResource',
+   'angular-loading-bar'
   ]
 )
 
@@ -45,4 +46,29 @@ angular.module('tripminder',
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/search');
-});
+})
+
+
+
+/*****************  CONFIG  ********************/
+/*.config(function($httpProvider){
+    $httpProvider.interceptors.push(function($q, $timeout) {
+        return {
+            'response': function(response) {
+                var defer = $q.defer();
+                $timeout(function() {
+                            defer.resolve(response);
+                    }, 1000);
+                return defer.promise;
+            }
+        };
+    });
+});*/
+
+
+
+
+
+
+
+

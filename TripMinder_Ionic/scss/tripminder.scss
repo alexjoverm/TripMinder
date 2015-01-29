@@ -15,9 +15,50 @@ $royal:          #886aea !default;   lila
 $dark:           #444 !default;
 */
 
+/*export ANDROID_HOME="/Applications/android-sdk-macosx/"
+export ANDROID_TOOLS="/Applications/android-sdk-macosx/tools/"
+export ANDROID_PLATFORM_TOOLS="/Applications/android-sdk-macosx/platform-tools/"
+PATH=$PATH:$ANDROID_HOME:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS*/
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic 
 @import "www/lib/ionic/scss/ionic";
+
+@import "other/_variables.scss";
+
+@import "other/_loading-bar.scss"; 
+
+
+
+.tm-spandable-list{
+	& > .item{
+		border-left: 4px solid $cl-main;
+		& span{ font-weight: bold; }
+		& input{ font-size: 1.05em; margin-top: 6px; }
+	}
+	& > ul{
+		border-top: 2px solid #ccc;
+	}
+
+	.tm-item-clickeable{
+		cursor: pointer;
+		font-size: 1.1em;
+
+		&:hover{ background: #eee; }
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
