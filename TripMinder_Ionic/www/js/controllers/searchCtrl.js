@@ -1,8 +1,9 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', 'Resources',
-  function($scope, $timeout, Resources) {
+.controller('SearchCtrl', ['$scope', '$timeout', 'Resources','RestCaller',
+  function($scope, $timeout, Resources, RestCaller) {
 
+    // ** View data
     $scope.inputs = {
     	origin: '',
     	dest: ''
@@ -11,44 +12,48 @@ angular.module('tripminder')
     $scope.origins = null;
 	$scope.dests = null;
 
+    // Promise to control $timeout 
 	$scope.timerPromise = null;
 
 
-
-    $scope.GetOrigins = function(){ 
-    	
+    
+    //***** API request functions
+      
+    $scope.GetData = function(inputData){ 
     	if($scope.timerPromise) 
     		$timeout.cancel($scope.timerPromise);
 
-    	if($scope.inputs.origin)
+    	if(inputData)
 	    	$scope.timerPromise = $timeout(function() {
-	    		Resources.GoAutocomplete.get( { input: $scope.inputs.origin, types: '(regions)' } ).$promise.then(function(data){
-	    			$scope.origins = data.predictions;
+	    		Resources.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).$promise.then(function(data){ 
+                    if(inputData == $scope.inputs.origin)
+	    			    $scope.origins = data.predictions;
+                    else
+                        $scope.dests = data.predictions;
 	    		});
 	    	}, 500);
     };
-
-    $scope.GetDests = function(){
-
-    	if($scope.timerPromise) 
-    		$timeout.cancel($scope.timerPromise);
-
-    	if($scope.inputs.dest)
-	    	$scope.timerPromise = $timeout(function() {
-	    		Resources.GoAutocomplete.get( { input: $scope.inputs.dest, types: '(regions)' } ).$promise.then(function(data){
-	    			$scope.dests = data.predictions;
-	    		});
-	    	}, 500);
+      
+    $scope.Search = function(){ 
+    	RestCaller.Search($scope.inputs.origin, $scope.inputs.dest);
     };
 
+      
+      
+    //***** Select functions
+      
     $scope.SelectOrigin = function(i){ 
         $scope.inputs.origin = $scope.origins[i].description;
         $scope.origins = null;
+        if(window.cordova && window.cordova.plugins.Keyboard)
+            cordova.plugins.Keyboard.close();
     };
 
     $scope.SelectDest = function(i){
         $scope.inputs.dest = $scope.dests[i].description;
         $scope.dests = null;
+        if(window.cordova && window.cordova.plugins.Keyboard)
+            cordova.plugins.Keyboard.close();
     };
 
 }]);

@@ -1,0 +1,13 @@
+<div class="tm-container-white" ng-controller="loadingSearchCtrl">
+
+    <div class="tm-cancel-list">
+        <header>
+            <a href="" class="button button-icon icon ion-close" ng-click="Cancel()"></a>
+        </header>
+        <div class="item item-icon-right">
+            <span>En coche...</span> 
+            <i class="icon" ng-class="{'ion-load-c ion-spin': icons.directions == 'progress', 'ion-checkmark-round': icons.directions == 'done', 'ion-close-round assertive': icons.directions == 'fail'}"></i>
+        </div>
+    </div>
+    
+</div>

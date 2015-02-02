@@ -7,7 +7,9 @@
     <div class="list padding tm-spandable-list">
 	  <label class="item item-input item-stacked-label">
 	    <span class="input-label">Origen</span>
-	    <input type="text" placeholder="Ej: Alicante..." ng-model="inputs.origin" ng-change="GetOrigins()">
+	    <div class="input-wrap"> 
+	        <input tm-reset-field type="text" placeholder="Ej: Murcia..." ng-model="inputs.origin" ng-change="GetData(inputs.origin)">
+	   </div>
 	  </label>
 	  <ul class="list">
 	  	<li class="item tm-item-clickeable" ng-repeat="place in origins" ng-click="SelectOrigin($index)">{{ place.description }}</li>
@@ -15,7 +17,9 @@
 
 	  <label class="item item-input item-stacked-label">
 	    <span class="input-label">Destino</span>
-	    <input type="text" placeholder="Ej: Valencia..." ng-model="inputs.dest" ng-change="GetDests()">
+	    <div class="input-wrap">
+	        <input tm-reset-field type="text" placeholder="Ej: Valencia..." ng-model="inputs.dest" ng-change="GetData(inputs.dest)">
+        </div>
 	  </label>
 	  <ul class="list">
 	  	<li class="item tm-item-clickeable" ng-repeat="place in dests" ng-click="SelectDest($index)">{{ place.description }}</li>
@@ -23,7 +27,7 @@
 	</div>
 
 	<div class="padding">
-		<button class="button button-block button-positive">Buscar</button>
+		<button class="button button-block button-positive" ng-click="Search()">Buscar</button>
 	</div>
   </ion-content>
 </ion-view>

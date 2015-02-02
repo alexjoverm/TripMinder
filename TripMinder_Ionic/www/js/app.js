@@ -3,6 +3,8 @@
 angular.module('tripminder', 
   ['ionic',
    'ngResource',
+   'tripminder.directives',
+   'tripminder.services',
    'angular-loading-bar'
   ]
 )

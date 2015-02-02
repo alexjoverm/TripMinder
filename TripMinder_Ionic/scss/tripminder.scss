@@ -24,19 +24,25 @@ PATH=$PATH:$ANDROID_HOME:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS*/
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic 
-@import "www/lib/ionic/scss/ionic";
+@import "www/lib/ionic/scss/ionic"; 
+
+@import "other/_vendors.scss";
 
 @import "other/_variables.scss";
-
-@import "other/_loading-bar.scss"; 
+@import "other/_animations.scss"; 
 
 
 
 .tm-spandable-list{
 	& > .item{
 		border-left: 4px solid $cl-main;
-		& span{ font-weight: bold; }
-		& input{ font-size: 1.05em; margin-top: 6px; }
+        padding: 6px 10px 5px 16px;
+		span{ font-weight: bold; }
+		input{ 
+            font-size: 1.05em; margin-top: 6px; 
+            &:focus{ border-bottom: 1px solid $cl-main; }
+        }
+        .input-wrap{ position: relative; }
 	}
 	& > ul{
 		border-top: 2px solid #ccc;
@@ -50,6 +56,27 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	}
 }
 
+.tm-cancel-list{
+    header{ text-align: right; }
+    .item{ 
+        margin: 0; 
+        span{ 
+            display: inline-block; 
+            text-align: left;
+            width: 250px; 
+            max-width: 90%;
+        }
+    }
+    
+    .button-icon{ 
+        min-height: initial; line-height: 32px; color: $cl-grey-40;
+        &:before{ font-size: 22px; line-height: 32px;}
+    }
+}
+
+.tm-container-white{
+    background: #fff;
+}
 
 
 
