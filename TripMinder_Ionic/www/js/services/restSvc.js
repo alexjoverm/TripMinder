@@ -1,43 +1,30 @@
 
 angular.module('tripminder.services')
 
+
 /*******
   -- ResourcesSvc -- : it performs the ajax API calls and keep a range of cancellers promises
                     in order to can cancel the requests externally
 ********/
 
-.factory('ResourcesSvc', ['$resource', 'Apis','$q',
- function($resource, Apis, $q){
-
-    var cancellers = {
-        directions: $q.defer()
-    }
+.factory('ResourcesSvc', ['RequestFactory','Apis',
+ function(RequestFactory, Apis){
      
     var resources = new function(){ 
         
-        //**** Cancellers helpers methods
-        
-        this.ResetCancellers = function(arr){ 
-            for (var i in arr)
-                cancellers[arr[i]] = $q.defer();
-        };
-        
-        this.ResolveCancellers = function(arr){ 
-            for (var i in arr){
-                cancellers[arr[i]].resolve();
-                cancellers[arr[i]] = $q.defer();
-            }
-        };
-        
-        
         //**** API callers
         
-        this.GoAutocomplete = $resource(Apis.goAutocomplete.url, 
-            { input: '@input', types: '@types' , key: Apis.goAutocomplete.key});
+        this.GoAutocomplete = RequestFactory.createResource({
+            url: Apis.goAutocomplete.url,
+            options: { input: '@input', types: '@types' , key: Apis.goAutocomplete.key},
+            actions: { get: { method: 'GET' } }
+        });
         
-        this.GoDirections = $resource(Apis.goDirections.url, 
-            { origin: '@origin', destination: '@destination', sensor: 'false' /*, key: Apis.goAutocomplete.key*/},
-            { getOne: { method: 'GET', timeout: cancellers.directions.promise } });
+        this.GoDirections = RequestFactory.createResource({
+            url: Apis.goDirections.url,
+            options: { origin: '@origin', destination: '@destination', sensor: 'false'},
+            actions: { get: { method: 'GET' } }
+        });
     };
     
 
@@ -114,9 +101,8 @@ angular.module('tripminder.services')
         this.Cancel = function(){
             for (var prop in promises)
                 if (promises.hasOwnProperty(prop))
-                    $timeout.cancel(promises[prop]);
+                    promises[prop].abort();
             
-            ResourcesSvc.ResolveCancellers(['directions']);
             CloseLoading(0);
         };
         
@@ -127,20 +113,22 @@ angular.module('tripminder.services')
             
             // Init and reset ResourcesSvc and RestSvc promises, also DataSvc data
             ResetVars();
-            ResourcesSvc.ResetCancellers(['directions']);
             DataSvc.ResetSearchVars();
             
-            // Perform API calls
-            promises.directions = ResourcesSvc.GoDirections.getOne({origin: origin, destination: dest}).$promise;
+          //******** Perform API calls
             
-            promises.directions.then(function(data){ 
+          // ** 1: Google Directions
+            promises.directions = ResourcesSvc.GoDirections.get({origin: origin, destination: dest});
+            
+            promises.directions.promise.then(function(data){ 
                 CheckFinished();
                 $rootScope.$broadcast('search-finished', {directions: true});
                 DataSvc.searchResults.car = data.routes;
-                console.log();
             }, function(response){ 
-                CheckFinished();
-                $rootScope.$broadcast('search-finished', {directions: false});
+                if(response != 'ABORT'){
+                    CheckFinished();
+                    $rootScope.$broadcast('search-finished', {directions: false});
+                }
             });
                 
             

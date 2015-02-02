@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "angular-resource": "~1.3.11",
-    "angular-loading-bar": "~0.6.0"
+    "angular-loading-bar": "~0.6.0",
+    "angular-abortable-requests": "~1.0.0"
   }
 }

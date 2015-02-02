@@ -5,7 +5,8 @@ angular.module('tripminder',
    'ngResource',
    'tripminder.directives',
    'tripminder.services',
-   'angular-loading-bar'
+   'angular-loading-bar',
+   'angular-abortable-requests'
   ]
 )
 
@@ -66,11 +67,14 @@ angular.module('tripminder',
 /*.config(function($httpProvider){
     $httpProvider.interceptors.push(function($q, $timeout) {
         return {
-            'response': function(response) {
+            'response': function(response) {  
                 var defer = $q.defer();
-                $timeout(function() {
-                            defer.resolve(response);
-                    }, 1000);
+                
+                if(response.config.url.indexOf('ttp://') >= 0)
+                    $timeout(function() { defer.resolve(response); }, 5000);
+                else
+                    defer.resolve(response);
+                    
                 return defer.promise;
             }
         };

@@ -25,7 +25,7 @@ angular.module('tripminder')
 
     	if(inputData)
 	    	$scope.timerPromise = $timeout(function() {
-	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).$promise.then(function(data){ 
+	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).promise.then(function(data){ 
                     if(inputData == $scope.inputs.origin)
 	    			    $scope.origins = data.predictions;
                     else
@@ -68,7 +68,6 @@ angular.module('tripminder')
     //****** Event handlers  
       
     $scope.$on('search-complete', function(ev, args){ 
-        console.log('complete');
         $state.go('app.results');
     });
 
