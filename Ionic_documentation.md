@@ -70,9 +70,11 @@ Download and install the Android SDK. Now, install API 19 and a version greater 
 
 After that, it must be in the PATH:
 ```
-export ANDROID_HOME="/Users/<user_name>/Library/Android/sdk"
-export ANDROID_TOOLS="/Users/<user_name>/Library/Android/sdk/tools/"
-export ANDROID_PLATFORM_TOOLS="/Users/<user_name>/Library/Android/sdk/platform-tools/"
+/** The next example is in my case, you write your path **/
+
+export ANDROID_HOME="/Applications/android-sdk-macosx/"
+export ANDROID_TOOLS="/Applications/android-sdk-macosx/tools/"
+export ANDROID_PLATFORM_TOOLS="/Applications/android-sdk-macosx/platform-tools/"
 PATH=$PATH:$ANDROID_HOME:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS
 ```
 
@@ -85,13 +87,85 @@ ionic run android
 
 I've described in Day 01 how to lunch the app in Android and iOS, but the best way to test it is using **Chrome**. In there you can run it and see the changes in *"live mode"*, by using Live Reload:
 ```
-ionic serve // start a server
-ionic watch // update on changes
+// start a server on port 9999 and livereload port 9998
+
+ionic serve 9999 9998 
 ```
 Chrome has its own emulation tool, and work very well!
 
 ![Chrome](img_docs/io_00_chrome.png)
 
+
+### Day 03: Let's develop! First view, template & controller
+
+First of all, I'll perform a lot of API calls, and *Angular resources* are perfect for that (is not installed by default), and I want them to be cancelable. Also I want to show loading progress during these calls. 
+
+In order to cope with that, I've installed:
+
+- **Angular resources**: `bower install angular-resource`
+- **Angular abortable requests**: `bower install angular-abortable-requests`
+- **Angular loading bar**: `bower install angular-loading-bar`
+
+*Wether you use `bower`, some libraries path are changed, you'll have to change them within `index.html`. It's better to use `ionic [add | remove] <package>`, but it doesn't work for me so I did it that way.*
+
+
+The next is step (as always) is to include them into `app.js` and `index.html`. I've also changed the *Angular loading bar* style, so I've put the `css` code into a `.scss` vendor file (I'll talk about it).
+
+
+#### Adding a view
+
+To add a view, it must be done in the next 3 steps:
+
+- Create a `.html` Template
+- Create a Controller (optional)
+- Create a state and reference them in the UI-Route code (in `app.js`)
+
+First things first, I've created the view and added the next tags:
+```html
+<ion-view view-title="Buscar rutas">
+  <ion-content class="padding-vertical"> 
+  	 ...
+  </ion-content>
+</ion-view>
+```
+
+In the inner content of these tags, let's write 2 inputs clearables (look at `tm-item-clickeable` attribute on the `<input>` tag):
+```html
+<label class="item item-input item-stacked-label">
+	<span class="input-label">Origen</span>
+	<div class="input-wrap"> 
+	    <input tm-reset-field type="text" placeholder="Ej: Murcia..." ng-model="inputs.origin" ng-change="GetData(inputs.origin)">
+	</div>
+</label>
+```
+
+Ionic framework provide us with so many clases for designing layouts and ui-components, just read the [documentation](http://ionicframework.com/docs/).
+
+Now, I've added the controller and the state, as you can see in it's respective files.
+
+### Day 04: Structuring the app
+
+Organization is the best development practice. It makes the code more reusable, easy to understand and maintainable. So I've structured the `.js` in that way:
+
+![Structure](img_docs/io_01_structure.png)
+
+
+### Day 05: Making requests
+
+First of all, I've added a list and linked to the scope in order to insert the Google Autocomplete API results:
+```html
+<ul class="list">
+	<li class="item tm-item-clickeable" ng-repeat="place in origins" 
+	    ng-click="SelectOrigin($index)">{{ place.description }}</li>
+</ul>
+```
+
+Also, in `services/restSvc.js` I've created 2 services (or angularjs factories):
+
+- **ResourcesSvc**: it creates and control the $resources cancelable.
+- **RestSvc**: uses the ResourcesSvc to make more complex calls.
+
+*RestSvc* also uses $ionicLoading to show a modal message about the progress of the calls.
 
 
 
@@ -103,7 +177,7 @@ Chrome has its own emulation tool, and work very well!
 #### 01. Ionicons and its names
 When you create a ionic project using the cli command line `ionic start projectname type`, an older versión of ***ionicons*** is installed. 
 
-To update them, download them and place them on its `www/lib/...` *scss* and *fonts* folder.
+To update them, download them and place them on its `www/lib/...` *scss* and *fonts* folder. (Don't do it, since ionic still depends on 1.5.x (on January 2015)
 
 If you're using the version 1.5.x of Ionicons, **ion-ios-...** prefix is **ion-ios7-...** instead.
 
