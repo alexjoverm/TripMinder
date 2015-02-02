@@ -6,7 +6,7 @@
         </header>
         <div class="item item-icon-right">
             <span>En coche...</span> 
-            <i class="icon" ng-class="{'ion-load-c ion-spin': icons.directions == 'progress', 'ion-checkmark-round': icons.directions == 'done', 'ion-close-round assertive': icons.directions == 'fail'}"></i>
+            <i class="icon" ng-class="{'ion-load-c ion-spin': icons.directions === null, 'ion-checkmark-round balanced': icons.directions, 'ion-close-round assertive': icons.directions === false}"></i>
         </div>
     </div>
     

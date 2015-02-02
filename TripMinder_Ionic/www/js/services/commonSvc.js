@@ -1,4 +1,4 @@
-angular.module('tripminder')
+angular.module('tripminder.services', [])
 
 .factory('LocalStorage', ['$window', function($window) {
   return {

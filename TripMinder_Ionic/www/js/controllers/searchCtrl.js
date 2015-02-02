@@ -1,7 +1,7 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', 'Resources','RestCaller',
-  function($scope, $timeout, Resources, RestCaller) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup', 'ResourcesSvc','RestSvc',
+  function($scope, $timeout, $state, $ionicPopup, ResourcesSvc, RestSvc) {
 
     // ** View data
     $scope.inputs = {
@@ -25,7 +25,7 @@ angular.module('tripminder')
 
     	if(inputData)
 	    	$scope.timerPromise = $timeout(function() {
-	    		Resources.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).$promise.then(function(data){ 
+	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).$promise.then(function(data){ 
                     if(inputData == $scope.inputs.origin)
 	    			    $scope.origins = data.predictions;
                     else
@@ -35,7 +35,14 @@ angular.module('tripminder')
     };
       
     $scope.Search = function(){ 
-    	RestCaller.Search($scope.inputs.origin, $scope.inputs.dest);
+        
+        if(!$scope.inputs.origin || !$scope.inputs.dest)
+           $ionicPopup.alert({
+             title: 'Datos vacios',
+             template: 'Debes insertar un origen y un destino'
+           });
+        else
+    	   RestSvc.Search($scope.inputs.origin, $scope.inputs.dest);
     };
 
       
@@ -55,5 +62,22 @@ angular.module('tripminder')
         if(window.cordova && window.cordova.plugins.Keyboard)
             cordova.plugins.Keyboard.close();
     };
+      
+      
+      
+    //****** Event handlers  
+      
+    $scope.$on('search-complete', function(ev, args){ 
+        console.log('complete');
+        $state.go('app.results');
+    });
 
 }]);
+
+
+
+
+
+
+
+

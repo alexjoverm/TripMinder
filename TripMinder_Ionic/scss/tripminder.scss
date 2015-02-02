@@ -21,7 +21,7 @@ export ANDROID_PLATFORM_TOOLS="/Applications/android-sdk-macosx/platform-tools/"
 PATH=$PATH:$ANDROID_HOME:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS*/
 
 // The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../lib/ionic/fonts" !default;
+$ionicons-font-path: "../lib/ionic/fonts" !default; 
 
 // Include all of Ionic 
 @import "www/lib/ionic/scss/ionic"; 
