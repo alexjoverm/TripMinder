@@ -150,7 +150,7 @@ Organization is the best development practice. It makes the code more reusable, 
 ![Structure](img_docs/io_01_structure.png)
 
 
-### Day 05: Making requests
+### Day 05: Making requests 
 
 First of all, I've added a list and linked to the scope in order to insert the Google Autocomplete API results:
 ```html
@@ -167,7 +167,11 @@ Also, in `services/restSvc.js` I've created 2 services (or angularjs factories):
 
 *RestSvc* also uses $ionicLoading to show a modal message about the progress of the calls.
 
+So, to make the Search call, it works the following way:
 
+- The controller calls RestSvc.Search()*
+- *RestSvc* uses the *ResourcesSvc* to do the call. Also manage some other variables for showing call states in $ionicLoading layout. 
+- When it finishes, *RestSvc* send the data to *DataSvc*, which is in charge of store the data.
 
 
 
@@ -180,4 +184,3 @@ When you create a ionic project using the cli command line `ionic start projectn
 To update them, download them and place them on its `www/lib/...` *scss* and *fonts* folder. (Don't do it, since ionic still depends on 1.5.x (on January 2015)
 
 If you're using the version 1.5.x of Ionicons, **ion-ios-...** prefix is **ion-ios7-...** instead.
-

@@ -1,7 +1,7 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup', 'ResourcesSvc','RestSvc',
-  function($scope, $timeout, $state, $ionicPopup, ResourcesSvc, RestSvc) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc) {
 
     // ** View data
     $scope.inputs = {
@@ -11,11 +11,33 @@ angular.module('tripminder')
 
     $scope.origins = null;
 	$scope.dests = null;
+    
+    $scope.blured = false;
 
     // Promise to control $timeout 
 	$scope.timerPromise = null;
 
 
+    $scope.ScrollTo = function(id){
+        var elem = document.getElementById(id);
+        $timeout(function(){ 
+            $scope.blured = true; // prevent Clear() to erase data
+            $ionicScrollDelegate.scrollTo(0, elem.offsetTop + 60, true);
+            elem.focus();
+        }, 1);
+    };
+      
+      
+    $scope.Clear = function(varScope){ 
+        if(!$scope.blured){
+            if(varScope == 'origins')
+                $scope.origins = null;
+            else
+                $scope.dests = null;
+        }
+        else
+            $scope.blured = false;
+    };
     
     //***** API request functions
       
@@ -26,10 +48,16 @@ angular.module('tripminder')
     	if(inputData)
 	    	$scope.timerPromise = $timeout(function() {
 	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).promise.then(function(data){ 
-                    if(inputData == $scope.inputs.origin)
+                    if(inputData == $scope.inputs.origin){
 	    			    $scope.origins = data.predictions;
-                    else
+                        if(data.predictions && data.predictions != [])
+                            $scope.ScrollTo('input-1');
+                    }
+                    else{
                         $scope.dests = data.predictions;
+                        if(data.predictions && data.predictions != [])
+                            $scope.ScrollTo('input-2');
+                    }
 	    		});
 	    	}, 500);
     };
