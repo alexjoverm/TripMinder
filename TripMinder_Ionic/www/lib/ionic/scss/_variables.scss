@@ -1,4 +1,31 @@
 
+$font-size-base:                  16px !default;
+$font-size-large:                 22px !default;
+$font-size-small:                 13px !default;
+
+
+$button-font-size:                $font-size-base + 1px !default;
+$button-large-font-size:          $font-size-large + 1px !default;
+$button-small-font-size:          $font-size-small + 1px !default;
+
+$bar-title-font-size:             $font-size-base + 2px !default;
+
+$tabs-text-font-size:             14px !default;
+$tabs-text-font-size-side-icon:   10px !default;
+$tabs-badge-font-size:            12px !default;
+
+$loading-font-size:               $font-size-base !default;
+
+$item-font-size:                  $font-size-base + 1px !default;
+
+$item-button-font-size:           18px !default;
+$item-icon-font-size:             32px !default;
+$item-icon-fill-font-size:        28px !default;
+$item-icon-accessory-font-size:   16px !default;
+
+
+
+
 // Colors
 // -------------------------------
 
@@ -25,6 +52,9 @@ $font-family-base:                $font-family-sans-serif !default;
 $font-size-base:                  14px !default;
 $font-size-large:                 18px !default;
 $font-size-small:                 11px !default;
+
+
+
 
 $line-height-base:                1.428571429 !default; // 20/14
 $line-height-computed:            floor($font-size-base * $line-height-base) !default; // ~20px

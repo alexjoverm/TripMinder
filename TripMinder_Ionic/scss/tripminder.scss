@@ -63,7 +63,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         span{ 
             display: inline-block; 
             text-align: left;
-            width: 250px; 
+            width: 220px; 
             max-width: 90%;
         }
     }
@@ -79,13 +79,51 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 
+//***** MAP
 
+.angular-google-map-container { 
+    height: 250px; 
+}
 
+.gmaps-wrap{
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    
+    &.map-opened{ max-height: 250px; }
+    
+    .map-marker-label{ 
+        
+        $cl-bg: #fff;
+        $cl: $assertive;
+        
+        font-size: 19px;
+        padding: 4px 12px;
+        
+        color: $cl-bg;
+        background: $cl;
+        border: 3px solid $cl-bg;
+        border-radius: 200px;
+        box-shadow: 1px 1px 3px #aaa;
 
+    }
+}
 
-
-
-
-
+.swipe-maps{ 
+    text-align: center;
+    color: #ccc;
+    
+    i{ font-size: 28px; }
+    
+    .help-text{
+        padding-top: 18px;
+        color: $dark;
+    }
+    
+    .map-results{
+        text-align: left;
+        padding-left: 15px;
+    }
+}
 
 

@@ -1,6 +1,7 @@
 
 angular.module('tripminder.directives', [])
 
+
 .directive('tmResetField', ['$compile', '$timeout', function($compile, $timeout) {
   return {
     require: 'ngModel',

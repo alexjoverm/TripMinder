@@ -2,15 +2,17 @@
 
 angular.module('tripminder', 
   ['ionic',
+   'uiGmapgoogle-maps',
    'ngResource',
    'tripminder.directives',
    'tripminder.services',
    'angular-loading-bar',
-   'angular-abortable-requests'
+   'angular-abortable-requests',
+   'ngCordova'
   ]
 )
 
-.run(function($ionicPlatform) {
+.run(['$ionicPlatform', function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,12 +24,13 @@ angular.module('tripminder',
       StatusBar.styleDefault();
     }
   });
-})
+}])
 
 
 /****************  RUTAS  *****************/
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', 
+function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
   .state('app', {
@@ -59,8 +62,16 @@ angular.module('tripminder',
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/search');
-})
+}])
 
+
+.config(['uiGmapGoogleMapApiProvider','Apis', function(uiGmapGoogleMapApiProvider, Apis) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: Apis.google.key,
+        v: '3.17',
+        libraries: 'drawing,visualization'
+    });
+}]);
 
 
 /*****************  CONFIG  ********************/

@@ -174,6 +174,22 @@ So, to make the Search call, it works the following way:
 - When it finishes, *RestSvc* send the data to *DataSvc*, which is in charge of store the data.
 
 
+### Day 06: Install ngCordova and Implement Google Maps
+
+**ngCordova** is a library that wraps Cordova plugins into AngularJS services. It's made by Ionic team, and currently has 63 plugins (February, 2015).
+
+I'm going to implement google maps, so it would be useful to use the [Cordova Geolocation plugin](https://github.com/apache/cordova-plugin-geolocation/blob/master/doc/index.md).
+
+First, I've installed ngCordova following the steps of the [official documentation](http://ngcordova.com/docs/install/). After that, installed the Geolocation plugin:
+```
+ionic plugin add org.apache.cordova.geolocation
+```
+
+Now, let's cope with Google Maps! As usually, there is a great AngularJS library for Google Maps. Follow the [installation guide](http://angular-ui.github.io/angular-google-maps/#!/use).
+
+
+
+
 
 
 ## 3. Issues

@@ -16,7 +16,7 @@ angular.module('tripminder.services')
         
         this.GoAutocomplete = RequestFactory.createResource({
             url: Apis.goAutocomplete.url,
-            options: { input: '@input', types: '@types' , key: Apis.goAutocomplete.key},
+            options: { input: '@input', types: '@types' , key: Apis.google.key },
             actions: { get: { method: 'GET' } }
         });
         
