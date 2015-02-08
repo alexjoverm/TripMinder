@@ -20,7 +20,7 @@ angular.module('tripminder.directives', [])
       }
 
       // compiled reset icon template
-      var template = $compile('<i ng-show="enabled" ng-mousedown="reset()" class="tm-rs-icon ion-close"></i>')(scope);
+      var template = $compile('<i ng-show="enabled" ng-mousedown="reset()" class="tm-rs-icon ion-close ng-hide"></i>')(scope);
       el.after(template);
 
       scope.reset = function() {

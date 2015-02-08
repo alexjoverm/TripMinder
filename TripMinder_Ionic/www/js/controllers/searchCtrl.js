@@ -1,7 +1,7 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc', 'uiGmapGoogleMapApi', '$cordovaGeolocation','$ionicPlatform', 
-  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, uiGmapGoogleMapApi, $cordovaGeolocation, $ionicPlatform) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc', 'uiGmapGoogleMapApi', '$cordovaGeolocation','$ionicPlatform', 'GMapsSvc',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, uiGmapGoogleMapApi, $cordovaGeolocation, $ionicPlatform, GMapsSvc) {
 
     // ** View data
     $scope.inputs = {
@@ -26,6 +26,7 @@ angular.module('tripminder')
         var elem = document.getElementById(id);
         $timeout(function(){ 
             $scope.blured = true; // prevent Clear() to erase data
+            console.log(elem.offsetTop);
             $ionicScrollDelegate.scrollTo(0, elem.offsetTop + 60, true);
             elem.focus();
         }, 100);
@@ -90,7 +91,8 @@ angular.module('tripminder')
             cordova.plugins.Keyboard.close();
     };
 
-    $scope.SelectDest = function(i){
+    $scope.SelectDest = function(i){ 
+        console.log('dest');
         $scope.inputs.dest = $scope.dests[i].description;
         $scope.dests = null;
         if(window.cordova && window.cordova.plugins.Keyboard)
@@ -99,17 +101,37 @@ angular.module('tripminder')
       
       
       
-    //****** MAPS functions
+    //****** MAPS functions 
+      
+    $scope.mapInstance = null;
+    $scope.geocoderInstance = null;
+      
     $scope.map = { 
         opened: false,
+        canScroll: true,
         center: { latitude: 45, longitude: -73 }, 
         zoom: 16,
         options: {
             mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] }
-        }
+        },
+        events: {
+            mousedown: function (m, e, a){  
+                $scope.map.canScroll = false;
+            },
+            mouseup: function (m, e, a){ 
+                $scope.map.canScroll = true;
+            }
+          }
     };
       
-    $scope.mapInstance = null;
+    $scope.OnScroll = function(){ 
+        $ionicScrollDelegate.getScrollView().__enableScrollY = $scope.map.canScroll;
+        console.log($ionicScrollDelegate.getScrollView().__enableScrollY);   
+    };
+      
+    
+      
+    
     $scope.currentPoint = {
         radius: 10,
         geodesic: true,
@@ -140,6 +162,14 @@ angular.module('tripminder')
           events: {
             dragend: function (marker, eventName, args) {
               
+            },
+            mousedown: function (m, e, a){ 
+                console.log(e);
+                GMapsSvc.canDrag.menu = false;
+            },
+            mouseup: function (m, e, a){ 
+                console.log(e);
+                GMapsSvc.canDrag.menu = true;
             }
           }
         },
@@ -158,7 +188,12 @@ angular.module('tripminder')
           },
           events: {
             dragend: function (marker, eventName, args) {
-              
+                $scope.geocoderInstance.geocode(
+                    {'latLng': new google.maps.LatLng(38.38345, -0.514122)}, function(res, status){ 
+                        if(res[1])
+                            $scope.geocodif.dest = res[0].formatted_address;
+                    }
+                );
             }
           }
         }
@@ -171,8 +206,11 @@ angular.module('tripminder')
         var cordovaCPPromise = $cordovaGeolocation.getCurrentPosition();
         
         uiGmapGoogleMapApi.then(function(maps) { 
-            console.log('maps');
+            console.log(maps);
             $scope.mapInstance = maps;
+            $scope.geocoderInstance = new maps.Geocoder();
+            
+            
             cordovaCPPromise.then(function (position) { 
               $timeout(function(){
                   $scope.map.center = { 
@@ -212,6 +250,7 @@ angular.module('tripminder')
         $scope.dragAcum += e.gesture.deltaY / 2;
         $scope.dragAcum = $scope.dragAcum < 100 ? 100 : $scope.dragAcum;
         $scope.dragAcum = $scope.dragAcum > 250 ? 250 : $scope.dragAcum;
+        $scope.map.canScroll = false;
     };
       
     $scope.dragRelease = function(){
@@ -223,7 +262,10 @@ angular.module('tripminder')
             $scope.map.opened = true;
             $scope.dragAcum = 250;
         }
+        $scope.map.canScroll = true;
     };
+      
+    
       
 }]);
 

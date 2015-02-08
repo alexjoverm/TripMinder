@@ -1,29 +1,29 @@
 <ion-view view-title="Buscar rutas">
-    <ion-content class="padding-vertical" scroll="false"> 
+    <ion-content class="padding" on-scroll="OnScroll()"> 
 
-        <div class="padding gmaps-wrap" ng-class="{'map-opened': map.opened}">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+        <div class="padding-vertical gmaps-wrap" ng-class="{'map-opened': map.opened}">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options">
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
 
-        <div class="padding swipe-maps" on-drag="dragSum($event)" on-release="dragRelease()">
+        <div class="padding-vertical swipe-maps" on-drag="dragSum($event)" on-release="dragRelease()">
             <div>
                 <i ng-show="map.opened" class="ion-arrow-up-c anim-fade"> </i> 
                 <i ng-show="!map.opened" class="ion-arrow-down-c anim-fade"> </i> 
             </div>
             Arrastra!
-            <div ng-show="map.opened" class="help-text anim-fade-delayed">
+            <div ng-show="map.opened" class="help-text anim-fade-delayed ng-hide">
                 <p>Selecciona punto de origen y destino en el mapa</p>
                 
                 <div class="map-results">
-                    <p><b>Origen:</b> {{map.center.longitude}} {{geocodif.origin}}</p>
-                    <p><b>Destino:</b> {{map.center.latitude}}  {{geocodif.dest}}</p>
+                    <p><b>Origen:</b> {{geocodif.origin}}</p>
+                    <p><b>Destino:</b> {{geocodif.dest}}</p>
                 </div>
             </div>
         </div>
 
-        <ion-scroll class="padding" zooming="false" direction="y">
+        <!--<ion-scroll class="padding" zooming="true" direction="y">-->
 
             <div class="list tm-spandable-list anim-fade-showSlow" ng-show="!map.opened">
                 <label id="input-1" class="item item-input item-stacked-label">
@@ -53,6 +53,6 @@
             </div>
 
 
-        </ion-scroll> 
+        <!--</ion-scroll>-->
     </ion-content>
 </ion-view>

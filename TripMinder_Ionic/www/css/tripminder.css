@@ -7217,12 +7217,12 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   .gmaps-wrap.map-opened {
     max-height: 250px; }
   .gmaps-wrap .map-marker-label {
-    font-size: 19px;
-    padding: 4px 12px;
+    font-size: 18px;
+    padding: 3px 10px;
     color: #fff;
     background: #ef473a;
     border: 3px solid #fff;
-    border-radius: 200px;
+    border-radius: 5px;
     box-shadow: 1px 1px 3px #aaa; }
 
 .swipe-maps {
@@ -7234,5 +7234,4 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
     padding-top: 18px;
     color: #444; }
   .swipe-maps .map-results {
-    text-align: left;
-    padding-left: 15px; }
+    text-align: left; }

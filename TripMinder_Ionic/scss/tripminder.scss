@@ -97,13 +97,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         $cl-bg: #fff;
         $cl: $assertive;
         
-        font-size: 19px;
-        padding: 4px 12px;
+        font-size: 18px;
+        padding: 3px 10px;
         
         color: $cl-bg;
         background: $cl;
         border: 3px solid $cl-bg;
-        border-radius: 200px;
+        border-radius: 5px;
         box-shadow: 1px 1px 3px #aaa;
 
     }
@@ -122,7 +122,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     
     .map-results{
         text-align: left;
-        padding-left: 15px;
     }
 }
 
