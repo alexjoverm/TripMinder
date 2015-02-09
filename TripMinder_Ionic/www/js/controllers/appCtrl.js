@@ -1,7 +1,7 @@
 angular.module('tripminder')
 
-.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicSideMenuDelegate', '$timeout', 'GMapsSvc',
-  function($scope, $ionicModal, $ionicSideMenuDelegate, $timeout, GMapsSvc) {
+.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicSideMenuDelegate', '$timeout', 'MapsSvc',
+  function($scope, $ionicModal, $ionicSideMenuDelegate, $timeout, MapsSvc) {
       // Form data for the login modal
       $scope.loginData = {};
 
@@ -32,10 +32,9 @@ angular.module('tripminder')
         }, 1000);
       };
       
-      $scope.drag = GMapsSvc.canDrag;
+      $scope.drag = MapsSvc.canDrag;
        
        $scope.$watch('drag', function(newValue, oldValue) { 
-           console.log(newValue.menu);
           $ionicSideMenuDelegate.canDragContent(newValue.menu);
        }, true);
 }]);

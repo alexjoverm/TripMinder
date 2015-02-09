@@ -7159,8 +7159,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
           animation: 1.2s fadeInDelayed; }
 
 .anim-fade-delayed.ng-hide-add {
-  -webkit-animation: 0.1s fadeOut;
-          animation: 0.1s fadeOut; }
+  display: none; }
 
 .anim-fade-delayed.ng-hide-remove {
   -webkit-animation: 1.2s fadeInDelayed;
@@ -7207,7 +7206,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   background: #fff; }
 
 .angular-google-map-container {
-  height: 250px; }
+  height: 230px; }
 
 .gmaps-wrap {
   max-height: 100px;
@@ -7215,7 +7214,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   -webkit-transition: max-height 0.5s ease;
           transition: max-height 0.5s ease; }
   .gmaps-wrap.map-opened {
-    max-height: 250px; }
+    max-height: 230px; }
   .gmaps-wrap .map-marker-label {
     font-size: 18px;
     padding: 3px 10px;
@@ -7233,5 +7232,12 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   .swipe-maps .help-text {
     padding-top: 18px;
     color: #444; }
+    .swipe-maps .help-text .help-title {
+      color: #444;
+      font-style: italic; }
   .swipe-maps .map-results {
     text-align: left; }
+
+.tm-icon-left {
+  margin-right: 16px;
+  font-size: 22px; }

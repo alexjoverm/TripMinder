@@ -82,7 +82,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //***** MAP
 
 .angular-google-map-container { 
-    height: 250px; 
+    height: 230px; 
 }
 
 .gmaps-wrap{
@@ -90,7 +90,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     overflow: hidden;
     transition: max-height 0.5s ease;
     
-    &.map-opened{ max-height: 250px; }
+    &.map-opened{ max-height: 230px; }
     
     .map-marker-label{ 
         
@@ -118,11 +118,21 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     .help-text{
         padding-top: 18px;
         color: $dark;
+        
+        .help-title{ 
+            color: $dark;
+            font-style: italic;
+        }
     }
     
     .map-results{
         text-align: left;
     }
+}
+
+.tm-icon-left{
+    margin-right: 16px;
+    font-size: 22px;
 }
 
 

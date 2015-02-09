@@ -1,7 +1,7 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc', 'uiGmapGoogleMapApi', '$cordovaGeolocation','$ionicPlatform', 'GMapsSvc',
-  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, uiGmapGoogleMapApi, $cordovaGeolocation, $ionicPlatform, GMapsSvc) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc) {
 
     // ** View data
     $scope.inputs = {
@@ -22,31 +22,18 @@ angular.module('tripminder')
     // Promise to control $timeout 
 	$scope.timerPromise = null;
 
+      
+    // ***** INPUT FUNCTIONS *****
+      
     $scope.ScrollTo = function(id){
         var elem = document.getElementById(id);
         $timeout(function(){ 
             $scope.blured = true; // prevent Clear() to erase data
-            console.log(elem.offsetTop);
-            $ionicScrollDelegate.scrollTo(0, elem.offsetTop + 60, true);
+            $ionicScrollDelegate.scrollTo(0, elem.offsetTop + 130, true);
             elem.focus();
         }, 100);
     };
       
-      
-    $scope.Clear = function(varScope){ 
-        if(!$scope.blured){ 
-            $timeout(function(){
-                if(varScope == 'origins')
-                    $scope.origins = null;
-                else
-                    $scope.dests = null;
-            }, 100);
-        }
-        else
-            $scope.blured = false;
-    };
-    
-    //***** API request functions
       
     $scope.GetData = function(inputData){ 
     	if($scope.timerPromise) 
@@ -69,6 +56,43 @@ angular.module('tripminder')
 	    	}, 500);
     };
       
+      
+      
+      
+    // ****** SELECT FUNCTIONS ******
+      
+    $scope.Clear = function(varScope){ 
+        if(!$scope.blured){ 
+            $timeout(function(){
+                if(varScope == 'origins')
+                    $scope.origins = null;
+                else
+                    $scope.dests = null;
+            }, 100);
+        }
+        else
+            $scope.blured = false;
+    };
+      
+    $scope.SelectOrigin = function(i){ 
+        $scope.inputs.origin = $scope.origins[i].description;
+        $scope.origins = null;
+        if(window.cordova && window.cordova.plugins.Keyboard)
+            cordova.plugins.Keyboard.close();
+    };
+
+    $scope.SelectDest = function(i){ 
+        $scope.inputs.dest = $scope.dests[i].description;
+        $scope.dests = null;
+        if(window.cordova && window.cordova.plugins.Keyboard)
+            cordova.plugins.Keyboard.close();
+    };
+      
+    
+    
+      
+    //***** SEARCH FUNCTIONS ******
+      
     $scope.Search = function(){ 
         
         if(!$scope.inputs.origin || !$scope.inputs.dest)
@@ -82,134 +106,37 @@ angular.module('tripminder')
 
       
       
-    //***** Select functions
       
-    $scope.SelectOrigin = function(i){ 
-        $scope.inputs.origin = $scope.origins[i].description;
-        $scope.origins = null;
-        if(window.cordova && window.cordova.plugins.Keyboard)
-            cordova.plugins.Keyboard.close();
-    };
-
-    $scope.SelectDest = function(i){ 
-        console.log('dest');
-        $scope.inputs.dest = $scope.dests[i].description;
-        $scope.dests = null;
-        if(window.cordova && window.cordova.plugins.Keyboard)
-            cordova.plugins.Keyboard.close();
-    };
-      
-      
-      
-    //****** MAPS functions 
+    //****** MAPS ****** 
       
     $scope.mapInstance = null;
     $scope.geocoderInstance = null;
       
-    $scope.map = { 
-        opened: false,
-        canScroll: true,
-        center: { latitude: 45, longitude: -73 }, 
-        zoom: 16,
-        options: {
-            mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] }
+    $scope.map = MapsSvc.CreateMapOriginDest(38.38, -0.51, 16);
+      
+    $scope.map.events =  {
+        mousedown: function (map, ev, args){  
+            MapsSvc.canDrag.menu = false;
+            $scope.map.canScroll = false;
         },
-        events: {
-            mousedown: function (m, e, a){  
-                $scope.map.canScroll = false;
-            },
-            mouseup: function (m, e, a){ 
-                $scope.map.canScroll = true;
-            }
-          }
-    };
-      
-    $scope.OnScroll = function(){ 
-        $ionicScrollDelegate.getScrollView().__enableScrollY = $scope.map.canScroll;
-        console.log($ionicScrollDelegate.getScrollView().__enableScrollY);   
-    };
-      
-    
-      
-    
-    $scope.currentPoint = {
-        radius: 10,
-        geodesic: true,
-        stroke: {
-            color: '#08B21F',
-            weight: 20,
-            opacity: 0.4
-        },
-        fill: {
-            color: '#08B21F',
-            opacity: 1
+        mouseup: function (map, ev, args){ 
+            MapsSvc.canDrag.menu = true;
+            $scope.map.canScroll = true;
         }
     };
-      
-    $scope.markers = [
-        {
-          id: 0,
-          coords: {
-            latitude: 38.38325,
-            longitude: -0.512122
-          },
-          options: { 
-              draggable: true,
-              labelContent: 'Origen',
-              labelClass: 'map-marker-label',
-              labelAnchor: '42 0'
-          },
-          events: {
-            dragend: function (marker, eventName, args) {
-              
-            },
-            mousedown: function (m, e, a){ 
-                console.log(e);
-                GMapsSvc.canDrag.menu = false;
-            },
-            mouseup: function (m, e, a){ 
-                console.log(e);
-                GMapsSvc.canDrag.menu = true;
-            }
-          }
-        },
         
-        {
-          id: 1,
-          coords: {
-            latitude: 38.38345,
-            longitude: -0.514122
-          },
-          options: { 
-              draggable: true,
-              labelContent: 'Destino',
-              labelClass: 'map-marker-label',
-              labelAnchor: '46 0'
-          },
-          events: {
-            dragend: function (marker, eventName, args) {
-                $scope.geocoderInstance.geocode(
-                    {'latLng': new google.maps.LatLng(38.38345, -0.514122)}, function(res, status){ 
-                        if(res[1])
-                            $scope.geocodif.dest = res[0].formatted_address;
-                    }
-                );
-            }
-          }
-        }
-    
-    ];
+      
+    $scope.markers = [ MapsSvc.CreateMarkerOriginDest(0, 38.38325, -0.512122, $scope.geocodif),
+                       MapsSvc.CreateMarkerOriginDest(1, 38.38345, -0.514122, $scope.geocodif)
+                     ];
+      
       
       
     $ionicPlatform.ready(function() { 
         
-        var cordovaCPPromise = $cordovaGeolocation.getCurrentPosition();
+        var cordovaCPPromise = LocationSvc.GetCurrentPosition();
         
-        uiGmapGoogleMapApi.then(function(maps) { 
-            console.log(maps);
-            $scope.mapInstance = maps;
-            $scope.geocoderInstance = new maps.Geocoder();
-            
+        MapsSvc.promises.gMapsAPI.then(function() {
             
             cordovaCPPromise.then(function (position) { 
               $timeout(function(){
@@ -217,33 +144,43 @@ angular.module('tripminder')
                       latitude: position.coords.latitude, 
                       longitude: position.coords.longitude 
                   };
-                  $scope.currentPoint.center = angular.copy($scope.map.center); 
+                  
+                  //********** Localización
+                  MapsSvc.geocoder.geocode(
+                    {'latLng': new google.maps.LatLng($scope.map.center.latitude, $scope.map.center.longitude)}, function(res, status){ 
+                        if(res[1])
+                            $ionicPopup.alert({
+                             title: 'Localización',
+                             template: '<b>Estas en:</b> ' + res[1].formatted_address
+                           });
+                    }
+                );
               }, 0);
-            }, function(err) {
-               $ionicPopup.alert({
-                 title: 'Geolocation',
-                 template: 'Error en el plugin geolocation'
-               });
+            }, function(err) { 
+                LocationSvc.HandleError(err);
             });
         });
     });
       
     
-       
-    
-      
-    
       
       
       
       
-    //****** Event handlers  
+    //****** EVENT HANDLERS ****** 
       
     $scope.$on('search-complete', function(ev, args){ 
         $state.go('app.results');
     });
 
       
+    // Prevent View from scrolling when dragging on the map
+    $scope.OnScroll = function(){ 
+        $ionicScrollDelegate.getScrollView().__enableScrollY = $scope.map.canScroll;
+    };
+      
+      
+    // Custom drag 
     $scope.dragAcum = 100;
       
     $scope.dragSum = function(e){ 

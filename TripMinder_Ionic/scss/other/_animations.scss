@@ -1,17 +1,17 @@
 @keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
+    from { opacity:0; }
+    to { opacity:1; }
 }
 
 @keyframes fadeOut {
-  from { opacity:1; }
-  to { opacity:0; }
+    from { opacity:1; }
+    to { opacity:0; }
 }
 
 @keyframes fadeInDelayed {
-  0% { opacity: 0; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 
@@ -21,28 +21,29 @@
 // Fade
 
 .anim-fade.ng-hide-add {
-  animation: .5s fadeOut;
+    animation: .5s fadeOut;
 }
 
 .anim-fade.ng-hide-remove {
-  animation: .5s fadeIn;
+    animation: .5s fadeIn;
 }
 
 
 .anim-fade-showSlow.ng-hide-add {
-  animation: .5s fadeOut;
+    animation: .5s fadeOut;
 }
 
 .anim-fade-showSlow.ng-hide-remove {
-  animation: 1.2s fadeInDelayed;
+    animation: 1.2s fadeInDelayed;
 }
 
 
 .anim-fade-delayed.ng-hide-add {
-  animation: .1s fadeOut;
+    // animation: .1s fadeOut;
+    display: none;
 }
 
 .anim-fade-delayed.ng-hide-remove {
-  animation: 1.2s fadeInDelayed;
+    animation: 1.2s fadeInDelayed;
 }
 
