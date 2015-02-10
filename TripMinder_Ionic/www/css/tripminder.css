@@ -7167,12 +7167,13 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 
 .tm-spandable-list > .item {
   border-left: 4px solid #387ef5;
-  padding: 6px 10px 5px 16px; }
+  padding: 3px 10px 2px 16px; }
   .tm-spandable-list > .item span {
     font-weight: bold; }
   .tm-spandable-list > .item input {
     font-size: 1.05em;
-    margin-top: 6px; }
+    margin-top: 6px;
+    height: 31px; }
     .tm-spandable-list > .item input:focus {
       border-bottom: 1px solid #387ef5; }
   .tm-spandable-list > .item .input-wrap {
@@ -7206,15 +7207,15 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   background: #fff; }
 
 .angular-google-map-container {
-  height: 230px; }
+  height: 200px; }
 
 .gmaps-wrap {
-  max-height: 100px;
+  max-height: 70px;
   overflow: hidden;
   -webkit-transition: max-height 0.5s ease;
           transition: max-height 0.5s ease; }
   .gmaps-wrap.map-opened {
-    max-height: 230px; }
+    max-height: 200px; }
   .gmaps-wrap .map-marker-label {
     font-size: 18px;
     padding: 3px 10px;
@@ -7228,7 +7229,8 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   text-align: center;
   color: #ccc; }
   .swipe-maps i {
-    font-size: 28px; }
+    font-size: 28px;
+    line-height: 0; }
   .swipe-maps .help-text {
     padding-top: 18px;
     color: #444; }
@@ -7241,3 +7243,27 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 .tm-icon-left {
   margin-right: 16px;
   font-size: 22px; }
+
+@media screen and (max-device-height: 530px) {
+  .angular-google-map-container {
+    height: 155px; }
+  .gmaps-wrap.map-opened {
+    max-height: 155px; }
+  .home-page .list {
+    margin-bottom: 5px; }
+  .home-page .padding-vertical {
+    padding-top: 5px;
+    padding-bottom: 5px; } }
+
+@media screen and (orientation: landscape) {
+  .tm-landscape-right {
+    float: right;
+    width: 70%; }
+  .tm-landscape-left {
+    float: left;
+    width: 30%; }
+  .tm-landscape-hidden {
+    display: none !important; }
+  .angular-google-map-container, .gmaps-wrap, .gmaps-wrap.map-opened {
+    height: 100%;
+    max-height: none; } }

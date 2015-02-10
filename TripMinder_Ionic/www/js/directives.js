@@ -2,7 +2,7 @@
 angular.module('tripminder.directives', [])
 
 
-.directive('tmResetField', ['$compile', '$timeout', function($compile, $timeout) {
+.directive('tmResetField', ['$compile', '$timeout','$rootScope', function($compile, $timeout, $rootScope) {
   return {
     require: 'ngModel',
     scope: {},
@@ -29,6 +29,7 @@ angular.module('tripminder.directives', [])
         scope.enabled = false;
         $timeout(function() {
             el[0].focus();
+            $rootScope.$broadcast('input-cleared', {input: attrs.ngModel});
         }, 0, false);
       };
 

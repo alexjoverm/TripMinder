@@ -31,8 +31,10 @@ angular.module('tripminder.services')
                 canScroll: true,
                 center: { latitude: pLat, longitude: pLon }, 
                 zoom: pZoom,
+                control: {},
                 options: {
-                    mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] }
+                    mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] },
+                    streetViewControl: false
                 }
              };
          };

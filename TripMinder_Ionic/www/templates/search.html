@@ -1,60 +1,53 @@
 <ion-view view-title="Buscar rutas">
-    <ion-content class="padding" on-scroll="OnScroll()" has-bouncing="false"> 
+    <ion-content class="padding home-page" on-scroll="OnScroll()" has-bouncing="false"> 
 
-        <div class="padding-vertical gmaps-wrap" ng-class="{'map-opened': map.opened}">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+        <div class="gmaps-wrap tm-landscape-right" ng-class="{'map-opened': map.opened}">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options" control="map.control">
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
 
-        <div class="padding-vertical swipe-maps">
-            <div on-drag="dragSum($event)" on-release="dragRelease()">
-                <div>
-                    <i ng-show="map.opened" class="ion-arrow-up-c anim-fade"> </i> 
-                    <i ng-show="!map.opened" class="ion-arrow-down-c anim-fade"> </i> 
-                </div>
-                Arrastra!
-            </div>
-            <div ng-show="map.opened" class="help-text anim-fade-delayed ng-hide">
-                <p class="help-title">Selecciona origen y destino en el mapa</p>
-
-                <div class="map-results">
-                    <p><b>Origen:</b> {{geocodif.origin}}</p>
-                    <p><b>Destino:</b> {{geocodif.dest}}</p>
+        <div class="tm-landscape-left">
+            <div class="padding-vertical swipe-maps">
+                <div class="tm-landscape-hidden" on-drag="dragSum($event)" on-release="dragRelease()">
+                    <div ng-click="UpdateBounds()">
+                        <i ng-show="map.opened" class="ion-arrow-up-c anim-fade"> </i> 
+                        <i ng-show="!map.opened" class="ion-arrow-down-c anim-fade"> </i> 
+                    </div>
+                    <span ng-show="!map.opened">Arrastra!</span>
                 </div>
             </div>
+
+            
+
+            <div class="list tm-spandable-list">
+                <label id="input-1" class="item item-input item-stacked-label">
+                    <span class="input-label">Origen</span>
+                    <div class="input-wrap"> 
+                        <input tm-reset-field type="text" placeholder="Ej: Murcia..." ng-model="inputs.origin" ng-change="GetData(inputs.origin)" ng-blur="Clear('origins')" ng-focus="Focus()">
+                    </div>
+                </label>
+                <ul class="list">
+                    <li class="item tm-item-clickeable" ng-repeat="place in origins" ng-click="SelectOrigin($index)">{{ place.description }}</li>
+                </ul>
+
+                <label id="input-2" class="item item-input item-stacked-label">
+                    <span class="input-label">Destino</span>
+                    <div class="input-wrap">
+                        <input tm-reset-field type="text" placeholder="Ej: Valencia..." ng-model="inputs.dest" ng-change="GetData(inputs.dest)" ng-blur="Clear('dests')" ng-focus="Focus()">
+                    </div>
+                </label>
+                <ul class="list">
+                    <li class="item tm-item-clickeable" ng-repeat="place in dests" ng-click="SelectDest($index)">{{ place.description }}</li>
+                </ul>
+            </div>
+
+
+            <div>
+                <button class="button button-block button-positive" ng-click="Search()">Buscar</button>
+            </div>
         </div>
 
-        <!--<ion-scroll class="padding" zooming="true" direction="y">-->
 
-        <div class="list tm-spandable-list anim-fade-showSlow" ng-show="!map.opened">
-            <label id="input-1" class="item item-input item-stacked-label">
-                <span class="input-label">Origen</span>
-                <div class="input-wrap"> 
-                    <input tm-reset-field type="text" placeholder="Ej: Murcia..." ng-model="inputs.origin" ng-change="GetData(inputs.origin)" ng-blur="Clear('origins')">
-                </div>
-            </label>
-            <ul class="list">
-                <li class="item tm-item-clickeable" ng-repeat="place in origins" ng-click="SelectOrigin($index)">{{ place.description }}</li>
-            </ul>
-
-            <label id="input-2" class="item item-input item-stacked-label">
-                <span class="input-label">Destino</span>
-                <div class="input-wrap">
-                    <input tm-reset-field type="text" placeholder="Ej: Valencia..." ng-model="inputs.dest" ng-change="GetData(inputs.dest)" ng-blur="Clear('dests')">
-                </div>
-            </label>
-            <ul class="list">
-                <li class="item tm-item-clickeable" ng-repeat="place in dests" ng-click="SelectDest($index)">{{ place.description }}</li>
-            </ul>
-        </div>
-
-
-        <div>
-            <button class="button button-block button-positive" ng-click="Search()">Buscar</button>
-        </div>
-
-
-        <!--</ion-scroll>-->
     </ion-content>
 </ion-view>

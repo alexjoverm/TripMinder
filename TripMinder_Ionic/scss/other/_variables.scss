@@ -1,9 +1,7 @@
 
-//******* IONIC overrides
 
+//***** Colors *****
 
-
-// Colors
 $cl-main: $positive; 
 
 $cl-grey-40: #777;
@@ -12,3 +10,9 @@ $cl-grey-65: #bbb;
 $cl-grey-70: #ccc;
 $cl-grey-80: #ddd;
 $cl-grey-90: #eee;
+
+
+
+//***** Dimensions *****
+$map-home-height: 200px;
+$map-home-height-small: 155px;

@@ -36,10 +36,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .tm-spandable-list{
 	& > .item{
 		border-left: 4px solid $cl-main;
-        padding: 6px 10px 5px 16px;
+        padding: 3px 10px 2px 16px;
+        
 		span{ font-weight: bold; }
 		input{ 
-            font-size: 1.05em; margin-top: 6px; 
+            font-size: 1.05em; margin-top: 6px;
+            height: 31px;
             &:focus{ border-bottom: 1px solid $cl-main; }
         }
         .input-wrap{ position: relative; }
@@ -82,15 +84,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //***** MAP
 
 .angular-google-map-container { 
-    height: 230px; 
+    height: $map-home-height; 
 }
 
-.gmaps-wrap{
-    max-height: 100px;
-    overflow: hidden;
+.gmaps-wrap{ 
+    max-height: 70px;
+    overflow: hidden; 
     transition: max-height 0.5s ease;
     
-    &.map-opened{ max-height: 230px; }
+    &.map-opened{ max-height: $map-home-height; }
     
     .map-marker-label{ 
         
@@ -113,7 +115,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     text-align: center;
     color: #ccc;
     
-    i{ font-size: 28px; }
+    i{ font-size: 28px; line-height: 0; }
     
     .help-text{
         padding-top: 18px;
@@ -136,3 +138,4 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 
+@import "other/_responsive.scss"; 
