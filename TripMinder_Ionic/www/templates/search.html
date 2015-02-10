@@ -1,15 +1,15 @@
 <ion-view view-title="Buscar rutas">
     <ion-content class="padding home-page" on-scroll="OnScroll()" has-bouncing="false"> 
 
-        <div class="gmaps-wrap tm-landscape-right" ng-class="{'map-opened': map.opened}">
+        <div class="gmaps-wrap" ng-class="{'map-opened': map.opened}">
             <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options" control="map.control">
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
 
-        <div class="tm-landscape-left">
+        <div>
             <div class="padding-vertical swipe-maps">
-                <div class="tm-landscape-hidden" on-drag="dragSum($event)" on-release="dragRelease()">
+                <div on-drag="dragSum($event)" on-release="dragRelease()">
                     <div ng-click="UpdateBounds()">
                         <i ng-show="map.opened" class="ion-arrow-up-c anim-fade"> </i> 
                         <i ng-show="!map.opened" class="ion-arrow-down-c anim-fade"> </i> 

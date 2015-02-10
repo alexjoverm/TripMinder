@@ -17,32 +17,3 @@
         }
     }
 }
-
-
-
-// ********* POR HACER
-
-@media screen and (orientation: landscape) { 
-
-    .tm-landscape-right{
-        float: right;
-        width: 70%;
-    }
-
-    .tm-landscape-left{
-        float: left;
-        width: 30%;
-    }
-
-    .tm-landscape-hidden{
-        display: none !important;
-    }
-
-    .angular-google-map-container,
-    .gmaps-wrap,
-    .gmaps-wrap.map-opened{ 
-        height: 100%; 
-        max-height: none;
-    }
-
-}
