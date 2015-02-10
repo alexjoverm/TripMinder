@@ -37,7 +37,6 @@ angular.module('tripminder')
     	if(inputData)
 	    	$scope.timerPromise = $timeout(function() {
 	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '(regions)' } ).promise.then(function(data){ 
-                    console.log(inputData);
                     if(inputData == $scope.inputs.origin){
 	    			    $scope.origins = data.predictions;
                         if(data.predictions && data.predictions != [])
@@ -205,16 +204,20 @@ angular.module('tripminder')
 
                 map.fitBounds(bounds);
             }
-            if($scope.markers.length == 1 && map.getZoom()> 15)
-                map.setZoom(15);
+            if($scope.markers.length == 1 && map.getZoom() > 14)
+                map.setZoom(14);
     
         });
     };
       
+    $scope.RemoveMarker = function(id){
+        for (var i in $scope.markers)
+            if($scope.markers[i].id == id)
+               $scope.markers.splice(i, 1); 
+    };
+      
     
-    $scope.$watch('markers', function(newValue, oldValue){
-        $scope.UpdateBounds();
-    }, true);
+    
       
       
       
@@ -253,7 +256,21 @@ angular.module('tripminder')
       
     
       
+    //******* WATCHES ******
       
+    $scope.$watch('markers', function(newValue, oldValue){
+        $scope.UpdateBounds();
+    }, true);  
+    
+    $scope.$watch('inputs.origin', function(newValue, oldValue){
+        if(!newValue)
+            $scope.RemoveMarker(0);
+    });
+      
+    $scope.$watch('inputs.dest', function(newValue, oldValue){
+        if(!newValue)
+            $scope.RemoveMarker(1);
+    });
       
       
     //****** EVENT HANDLERS ****** 
@@ -276,34 +293,7 @@ angular.module('tripminder')
     $scope.OnScroll = function(){ 
         $ionicScrollDelegate.getScrollView().__enableScrollY = $scope.map.canScroll;
     };
-      
-      
-    // Custom drag 
-    $scope.dragAcum = 100;
-      
-    $scope.dragSum = function(e){ 
-        $scope.dragAcum += e.gesture.deltaY / 2;
-        $scope.dragAcum = $scope.dragAcum < 100 ? 100 : $scope.dragAcum;
-        $scope.dragAcum = $scope.dragAcum > 250 ? 250 : $scope.dragAcum;
-        $scope.map.canScroll = false;
-    };
-      
-    $scope.dragRelease = function(){
-        if($scope.dragAcum < 175){
-            $scope.map.opened = false;
-            $scope.dragAcum = 100;
-        }
-        else{
-            $scope.map.opened = true;
-            $scope.dragAcum = 250;
-        }
-        $scope.map.canScroll = true;
-    };
-      
-      
-      
-      
-    
+
       
 }]);
 

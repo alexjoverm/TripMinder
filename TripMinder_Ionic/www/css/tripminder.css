@@ -7165,6 +7165,9 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   -webkit-animation: 1.2s fadeInDelayed;
           animation: 1.2s fadeInDelayed; }
 
+.padding-top-l {
+  padding-top: 20px; }
+
 .tm-spandable-list > .item {
   border-left: 4px solid #387ef5;
   padding: 3px 10px 2px 16px; }
@@ -7173,7 +7176,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   .tm-spandable-list > .item input {
     font-size: 1.05em;
     margin-top: 6px;
-    height: 31px; }
+    height: 33px; }
     .tm-spandable-list > .item input:focus {
       border-bottom: 1px solid #387ef5; }
   .tm-spandable-list > .item .input-wrap {
@@ -7207,15 +7210,13 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   background: #fff; }
 
 .angular-google-map-container {
-  height: 200px; }
+  height: 220px; }
 
 .gmaps-wrap {
-  max-height: 70px;
+  max-height: 220px;
   overflow: hidden;
   -webkit-transition: max-height 0.5s ease;
           transition: max-height 0.5s ease; }
-  .gmaps-wrap.map-opened {
-    max-height: 200px; }
   .gmaps-wrap .map-marker-label {
     font-size: 18px;
     padding: 3px 10px;
@@ -7246,11 +7247,11 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 
 @media screen and (max-device-height: 530px) {
   .angular-google-map-container {
-    height: 155px; }
-  .gmaps-wrap.map-opened {
-    max-height: 155px; }
+    height: 170px; }
+  .gmaps-wrap {
+    max-height: 170px; }
   .home-page .list {
-    margin-bottom: 5px; }
+    margin-bottom: 10px; }
   .home-page .padding-vertical {
-    padding-top: 5px;
-    padding-bottom: 5px; } }
+    padding-top: 7px;
+    padding-bottom: 7px; } }

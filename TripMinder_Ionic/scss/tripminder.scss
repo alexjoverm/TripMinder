@@ -30,7 +30,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 @import "other/_variables.scss";
 @import "other/_animations.scss"; 
-
+@import "other/_dimensions.scss";
 
 
 .tm-spandable-list{
@@ -40,8 +40,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         
 		span{ font-weight: bold; }
 		input{ 
-            font-size: 1.05em; margin-top: 6px; 
-            height: 31px;
+            font-size: 1.05em; margin-top: 6px;
+            height: 33px;
             &:focus{ border-bottom: 1px solid $cl-main; }
         }
         .input-wrap{ position: relative; }
@@ -88,11 +88,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .gmaps-wrap{ 
-    max-height: 70px;
+    max-height: $map-home-height;
     overflow: hidden; 
     transition: max-height 0.5s ease;
-    
-    &.map-opened{ max-height: $map-home-height; }
     
     .map-marker-label{ 
         
