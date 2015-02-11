@@ -1,0 +1,24 @@
+.results-data{
+    .list .item{
+        .summary, .data{  display: inline-block  }
+        .summary{ 
+            width: 68%; 
+            float: left;
+            overflow: auto;
+            text-overflow: ellipsis;
+            line-height: 2.8;
+        }
+        .data{ 
+            width: 32%; 
+            float: right;
+            text-align: right;
+        }
+    }
+}
+
+.tm-tabs.tabs-striped{
+    .tab-item.tab-item-active{
+        border-width: 5px 0 0 0 !important;
+        border-color: $cl-orange;
+    }
+}

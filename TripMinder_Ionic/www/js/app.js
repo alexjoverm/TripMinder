@@ -69,7 +69,7 @@ function($stateProvider, $urlRouterProvider) {
     uiGmapGoogleMapApiProvider.configure({
         key: Apis.google.key,
         v: '3.17',
-        libraries: 'drawing,visualization'
+        libraries: 'drawing,visualization,geometry'
     });
 }]);
 

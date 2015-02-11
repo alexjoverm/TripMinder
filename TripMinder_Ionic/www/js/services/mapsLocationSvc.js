@@ -34,7 +34,8 @@ angular.module('tripminder.services')
                 control: {},
                 options: {
                     mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] },
-                    streetViewControl: false
+                    streetViewControl: false,
+                    disableDoubleClickZoom: true
                 }
              };
          };

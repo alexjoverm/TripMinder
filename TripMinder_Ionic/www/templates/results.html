@@ -1,7 +1,41 @@
 <ion-view view-title="Resultados">
-    <ion-content class="padding-vertical"> 
+    <ion-pane class="padding-vertical">
+        <ion-tabs class="tm-tabs tabs-positive tabs-striped tabs-icon-only">
 
-        <pre>{{searchResults.car | json}}</pre>
-   
-    </ion-content>
+            <ion-tab icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control" options="map.options">
+                        <ui-gmap-polyline path="map.polyline" stroke="map.stroke" fit="true" draggable="false" clickable="false" editable="false" static="true" icons="map.icons"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <div class="results-data padding-top-l">
+                    <div class="list">
+                        <li class="item item-icon-left">
+                            <div class="summary">
+                                <i class="icon ion-android-car"> </i> 
+                                {{ searchResults.car[0].summary }} 
+                            </div>
+                            <div class="data">
+                                <p>{{ searchResults.car[0].legs[0].distance.text }}</p>
+                                <p>{{ searchResults.car[0].legs[0].duration.text }}</p> 
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </ion-tab>
+
+            <ion-tab icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+                <!-- Tab 2 content -->
+            </ion-tab>
+
+            <ion-tab icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+                <!-- Tab 3 content -->
+            </ion-tab>
+
+        </ion-tabs>
+
+
+
+    </ion-pane>
 </ion-view>

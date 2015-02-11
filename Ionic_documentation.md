@@ -200,3 +200,18 @@ When you create a ionic project using the cli command line `ionic start projectn
 To update them, download them and place them on its `www/lib/...` *scss* and *fonts* folder. (Don't do it, since ionic still depends on 1.5.x (on January 2015)
 
 If you're using the version 1.5.x of Ionicons, **ion-ios-...** prefix is **ion-ios7-...** instead.
+
+**Important note: if you're using Ionicons 2.X, you need to change** `ion-ios-arrow-back` **for** `ion-ios-arrow-back` **within** `www/lib/js/ionic.bundle.js`
+
+
+#### 02. Google Maps integration 
+Using Ionic (v 1.0.0-beta14, on February 2015), there is an issue with the events of Google Maps Javascript API v3. The **click, mousedown and mouseup** don't work well. They work only if you don't fire any event for 5 seconds, and you do it.
+
+The only workaround I've found is using the **dblclick** event instead, and disabling the **disableDoubleClickZoom** property.
+
+I was using it to add a Marker on click.
+
+
+**See links:** [Forum thread](http://forum.ionicframework.com/t/click-not-detected-on-google-map-even-using-data-tap-disabled-true/3922) , [Issue](https://github.com/driftyco/ionic/issues/2614)
+
+

@@ -86,8 +86,6 @@ angular.module('tripminder')
 
     $scope.SelectDest = function(i){ 
         $scope.inputs.dest = $scope.dests[i].description;
-        console.log($scope.dests[i].description);
-        console.log($scope.inputs.dest);
         $scope.dests = null;
         
         if(window.cordova && window.cordova.plugins.Keyboard)
@@ -101,7 +99,6 @@ angular.module('tripminder')
         $timeout(function(){ $ionicScrollDelegate.scrollTo(0, 0, true); }, 0);
         
         var search = { found: false, pos: 0};
-        
         for (var i in $scope.markers)
             if($scope.markers[i].id == id){
                 search.found = true;
@@ -111,7 +108,6 @@ angular.module('tripminder')
         MapsSvc.geocoder.geocode({'address': placeStr}, function(res, st) {
             if(res[0]){
                 if(search.found){ 
-                    console.log(res);
                     $scope.markers[search.pos].coords.latitude = res[0].geometry.location.lat();
                     $scope.markers[search.pos].coords.longitude = res[0].geometry.location.lng();
                 }
@@ -146,28 +142,29 @@ angular.module('tripminder')
       
     $scope.map = MapsSvc.CreateMapOriginDest(38.38, -0.51, 16);
       
-    $scope.map.events =  {
-        mousedown: function (map, ev, args){  
+      
+    $scope.map.events =  { 
+        dragstart: function (m, e, a){
             MapsSvc.canDrag.menu = false;
             $scope.map.canScroll = false;
         },
-        mouseup: function (map, ev, args){ 
+        dragend: function(m, e, a){
             MapsSvc.canDrag.menu = true;
             $scope.map.canScroll = true;
         },
-        click: function(map, ev, args){
-            
+        dblclick : function (map, ev, args){ // Add marker on DblClick
+
             if($scope.markers.length < 2){
                 var lat = args[0].latLng.lat();
                 var lon = args[0].latLng.lng();
                 var id = 0;
-                
+
                 // If already exists the origin
                 if($scope.markers.length == 1 && $scope.markers[0].id == 0)
                     id = 1;
-                
+
                 MapsSvc.geocoder.geocode({'latLng': new google.maps.LatLng(lat, lon)}, function(res, s){  
-                    
+
                     if(res[1]){ 
                         $timeout(function(){
                             if(id == 0)
@@ -177,9 +174,8 @@ angular.module('tripminder')
                         }, 0);
                     }
                 });
-                
+
                 $scope.markers.push(MapsSvc.CreateMarkerOriginDest(id, lat, lon, $scope.inputs));
-                $scope.$apply();
             }
         }
     };

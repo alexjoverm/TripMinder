@@ -6124,7 +6124,7 @@ Original idea from: http://stackoverflow.com/questions/22758950/google-map-drawi
 
         Map.prototype.replace = false;
 
-        Map.prototype.template = '<div class="angular-google-map"><div class="angular-google-map-container"></div><div ng-transclude style="display: none"></div></div>';
+        Map.prototype.template = '<div class="angular-google-map" data-tap-disabled="true"><div class="angular-google-map-container"></div><div ng-transclude style="display: none"></div></div>';
 
         Map.prototype.scope = {
           center: '=',

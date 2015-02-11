@@ -2245,7 +2245,7 @@ IonicModule
     },
 
     backButton: {
-      icon: 'ion-ios7-arrow-back',
+      icon: 'ion-ios-arrow-back',
       text: 'Back',
       previousTitleText: true
     },

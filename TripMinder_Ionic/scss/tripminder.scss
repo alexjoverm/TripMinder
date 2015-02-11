@@ -24,13 +24,13 @@ PATH=$PATH:$ANDROID_HOME:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS*/
 $ionicons-font-path: "../lib/ionic/fonts" !default; 
 
 // Include all of Ionic 
-@import "www/lib/ionic/scss/ionic"; 
+@import "www/lib/ionic/scss/ionic";
 
 @import "other/_vendors.scss";
 
 @import "other/_variables.scss";
 @import "other/_animations.scss"; 
-@import "other/_dimensions.scss";
+@import "other/_dimensions.scss"; 
 
 
 .tm-spandable-list{
@@ -89,51 +89,33 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .gmaps-wrap{ 
     max-height: $map-home-height;
-    overflow: hidden; 
-    transition: max-height 0.5s ease;
-    
-    .map-marker-label{ 
-        
-        $cl-bg: #fff;
-        $cl: $assertive;
-        
-        font-size: 18px;
-        padding: 3px 10px;
-        
-        color: $cl-bg;
-        background: $cl;
-        border: 3px solid $cl-bg;
-        border-radius: 5px;
-        box-shadow: 1px 1px 3px #aaa;
-
-    }
+    //overflow: hidden; 
+    transition: max-height 0.5s ease; 
 }
 
-.swipe-maps{ 
-    text-align: center;
-    color: #ccc;
-    
-    i{ font-size: 28px; line-height: 0; }
-    
-    .help-text{
-        padding-top: 18px;
-        color: $dark;
+.map-marker-label{ 
         
-        .help-title{ 
-            color: $dark;
-            font-style: italic;
-        }
-    }
-    
-    .map-results{
-        text-align: left;
-    }
+    $cl-bg: #fff;
+    $cl: $assertive;
+
+    font-size: 18px;
+    padding: 3px 10px;
+
+    color: $cl-bg;
+    background: $cl;
+    border: 3px solid $cl-bg;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #aaa;
+
 }
+
+
 
 .tm-icon-left{
     margin-right: 16px;
     font-size: 22px;
 }
 
-
+ 
+@import "results.scss";  
 @import "other/_responsive.scss"; 
