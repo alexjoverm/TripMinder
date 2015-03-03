@@ -1,0 +1,37 @@
+<ion-view view-title="Buscar rutas">
+    <ion-content class="padding home-page"> 
+
+        <div class="gmaps-wrap">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options" control="map.control" data-tap-disabled="true">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+
+        <div class="padding-top-l">        
+            <div class="list tm-spandable-list">
+                <label id="input-1" class="item item-input item-stacked-label">
+                    <span class="input-label">Origen</span>
+                    <div class="input-wrap"> 
+                        <input type="text" placeholder="Ej: Murcia..." ng-model="inputs.origin" g-places-autocomplete>
+                    </div>
+                </label>
+                <div ng-class="{'add-height': inputs.origin_focused}"></div>
+
+                <label id="input-2" class="item item-input item-stacked-label">
+                    <span class="input-label">Destino</span>
+                    <div class="input-wrap">
+                        <input type="text" placeholder="Ej: Valencia..." ng-model="inputs.dest" g-places-autocomplete>
+                    </div>
+                </label>
+                <div ng-class="{'add-height': inputs.dest_focused}"></div>
+            </div>
+
+
+            <div>
+                <button class="button button-block button-positive" ng-click="Search()">Buscar</button>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>

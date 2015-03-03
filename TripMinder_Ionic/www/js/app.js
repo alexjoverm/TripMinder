@@ -58,6 +58,15 @@ function($stateProvider, $urlRouterProvider) {
         controller: 'ResultsCtrl'
       }
     }
+  })
+  .state('app.resultsDetail', {
+    url: "/results/:id",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/resultsDetail.html",
+        controller: 'ResultsDetailCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
@@ -65,6 +74,11 @@ function($stateProvider, $urlRouterProvider) {
 }])
 
 
+.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common["X-Requested-With"];
+}])
+ 
 .config(['uiGmapGoogleMapApiProvider','Apis', function(uiGmapGoogleMapApiProvider, Apis) {
     uiGmapGoogleMapApiProvider.configure({
         key: Apis.google.key,

@@ -30,6 +30,7 @@ angular.module('tripminder')
     };
       
       
+    // Perform Google Autocomplete Request and call to ScrollTo
     $scope.GetData = function(inputData){ 
     	if($scope.timerPromise) 
     		$timeout.cancel($scope.timerPromise);
@@ -56,6 +57,7 @@ angular.module('tripminder')
       
     // ****** SELECT FUNCTIONS ******
       
+    // Clear input and ScrollTo top
     $scope.Clear = function(varScope){ 
         
         $scope.blurPromise = $timeout(function(){ 
@@ -68,12 +70,14 @@ angular.module('tripminder')
         }, 300);
     };
       
+    // Using blurPromise, prevents the list of result to close when it's shown, since
+    // it provokes blur & focus 
     $scope.Focus = function(){ 
         if($scope.blurPromise)
             $timeout.cancel($scope.blurPromise);
     };
       
-      
+    // Select the Origin from list 
     $scope.SelectOrigin = function(i){ 
         $scope.inputs.origin = $scope.origins[i].description;
         $scope.origins = null;
@@ -84,6 +88,7 @@ angular.module('tripminder')
         $scope.AfterSelect($scope.inputs.origin, 0);
     };
 
+    // Same for Dest
     $scope.SelectDest = function(i){ 
         $scope.inputs.dest = $scope.dests[i].description;
         $scope.dests = null;
@@ -94,6 +99,7 @@ angular.module('tripminder')
         $scope.AfterSelect($scope.inputs.dest, 1);
     };
       
+    // After select, Scroll to top & Update / Add marker
     $scope.AfterSelect = function(placeStr, id){ 
         
         $timeout(function(){ $ionicScrollDelegate.scrollTo(0, 0, true); }, 0);
@@ -234,15 +240,15 @@ angular.module('tripminder')
                   };
                   
                   //********** Localización
-                  MapsSvc.geocoder.geocode(
+                  /*MapsSvc.geocoder.geocode(
                     {'latLng': new google.maps.LatLng($scope.map.center.latitude, $scope.map.center.longitude)}, function(res, status){ 
-                        if(res[1])
+                        if(res && res[1])
                             $ionicPopup.alert({
                              title: 'Localización',
                              template: '<b>Estas en:</b> ' + res[1].formatted_address
                            });
                     }
-                );
+                );*/
               }, 0);
             }, function(err) { 
                 LocationSvc.HandleError(err);

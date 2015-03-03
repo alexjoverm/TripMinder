@@ -1,0 +1,32 @@
+<ion-view view-title="Resultados">
+    <ion-content>
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control" options="map.options">
+                        <ui-gmap-polyline path="map.polyline" stroke="map.stroke" fit="true" draggable="false" clickable="false" editable="false" static="true"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+               <div class="tm-route-description padding-l">
+                   <h3>{{ route.title }}</h3>
+                   <div>
+                       <span>{{ route.distance.text }}</span>  
+                       <span>{{ route.duration.text }}</span>
+                   </div>
+               </div>
+               
+                <div class="results-data">
+                    <div class="list">
+                        <li class="item item-icon-left" ng-repeat="step in route.steps">
+                            <div class="summary">
+                                <i class="icon" ng-class="{'ion-android-car': step.travel_mode == 'DRIVING' }"> </i> 
+                                <p data-ng-bind-html="step.html_instructions"></p>
+                            </div>
+                            <div class="data">
+                                <p>{{ step.distance.text }}</p>
+                                <p>{{ step.duration.text }}</p> 
+                            </div>
+                        </li>
+                    </div>
+                </div>
+    </ion-content>
+</ion-view>
