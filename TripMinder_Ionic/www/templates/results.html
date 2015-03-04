@@ -2,24 +2,24 @@
     <ion-pane class="padding-vertical">
         <ion-tabs class="tm-tabs-padtop tm-tabs tabs-positive tabs-striped tabs-icon-only">
 
-            <ion-tab icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+            <ion-tab icon="ion-android-car">
                 <div class="gmaps-wrap">
                     <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control" options="map.options">
-                        <ui-gmap-polyline path="map.polyline" stroke="map.stroke" fit="true" draggable="false" clickable="false" editable="false" static="true"></ui-gmap-polyline>
+                        <ui-gmap-polyline ng-repeat="polyline in map.carPolylines" path="polyline.path" stroke="polyline.stroke" z-index="polyline.zIndex" fit="true" draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
                     </ui-gmap-google-map>
                 </div>
 
                 <div class="results-data padding-top-l">
                     <div class="list">
-                        <a ui-sref="app.resultsDetail({ id: 'car' })">
+                        <a ng-repeat="route in searchResults.car" ui-sref="app.resultsDetail({ id: 'car', num: $index })">
                             <li class="item item-icon-left">
                                 <div class="summary">
                                     <i class="icon ion-android-car"> </i> 
-                                    <p class="ellipsis">{{ searchResults.car.title }}</p> 
+                                    <p class="ellipsis">{{$index}} - {{ route.title }}</p> 
                                 </div>
                                 <div class="data">
-                                    <p>{{ searchResults.car.distance.text }}</p>
-                                    <p>{{ searchResults.car.duration.text }}</p> 
+                                    <p>{{ route.distance.text }}</p>
+                                    <p>{{ route.duration.text }}</p> 
                                 </div>
                             </li>
                         </a>
@@ -28,11 +28,23 @@
                 </div>
             </ion-tab>
 
-            <ion-tab icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+            <ion-tab icon="ion-android-walk">
+                <!-- Tab 2 content -->
+            </ion-tab>
+            
+            <ion-tab icon="ion-android-bicycle">
+                <!-- Tab 2 content -->
+            </ion-tab>
+           
+            <ion-tab icon="ion-android-bus">
                 <!-- Tab 2 content -->
             </ion-tab>
 
-            <ion-tab icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+            <ion-tab icon="ion-android-subway">
+                <!-- Tab 3 content -->
+            </ion-tab>
+            
+            <ion-tab icon="ion-plane">
                 <!-- Tab 3 content -->
             </ion-tab>
 

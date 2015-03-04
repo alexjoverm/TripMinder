@@ -22,7 +22,14 @@ angular.module('tripminder.services')
         
         this.GoDirections = RequestFactory.createResource({
             url: Apis.goDirections.url,
-            options: { origin: '@origin', destination: '@destination', sensor: 'false'},
+            options: { 
+                origin: '@origin', 
+                destination: '@destination', 
+                sensor: 'false',
+                mode: '@mode',
+                alternatives: '@alternatives',
+                avoid: '@avoid'
+            },
             actions: { get: { method: 'GET'} }
         });
     };
@@ -117,14 +124,21 @@ angular.module('tripminder.services')
             
           //******** Perform API calls
             
-          // ** 1: Google Directions
-            promises.directions = ResourcesSvc.GoDirections.get({origin: origin, destination: dest});
+          // ** 1: Google Directions (CAR)
+            var opt = {
+                origin: origin, 
+                destination: dest,
+                alternatives: true
+            }
+            
+            promises.directions = ResourcesSvc.GoDirections.get(opt);
             
             promises.directions.promise.then(function(data){ 
+                console.log(data);
                 CheckFinished();
                 //Broadcast finished (true = success, false = failed)
                 $rootScope.$broadcast('search-finished', { directions: true });
-                DataSvc.AddCarRoute(data.routes);
+                DataSvc.AddCarRoutes(data.routes);
             }, function(response){ 
                 if(response != 'ABORT'){
                     CheckFinished();

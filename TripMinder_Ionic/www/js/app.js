@@ -60,7 +60,7 @@ function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.resultsDetail', {
-    url: "/results/:id",
+    url: "/results/:id/:num",
     views: {
       'menuContent': {
         templateUrl: "templates/resultsDetail.html",
@@ -85,7 +85,7 @@ function($stateProvider, $urlRouterProvider) {
         v: '3.17',
         libraries: 'drawing,visualization,geometry'
     });
-}]);
+}])
 
 
 /*****************  CONFIG  ********************/
@@ -101,6 +101,10 @@ function($stateProvider, $urlRouterProvider) {
                     defer.resolve(response);
                     
                 return defer.promise;
+            },
+            'request': function(config){
+                console.log(config);
+                return config;
             }
         };
     });

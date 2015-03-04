@@ -7626,7 +7626,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   box-shadow: 1px 1px 3px #aaa; }
 
 .tm-icon-left {
-  margin-right: 16px;
+  margin-right: 12px;
   font-size: 22px; }
 
 .results-data .list .item .summary, .results-data .list .item .data {
