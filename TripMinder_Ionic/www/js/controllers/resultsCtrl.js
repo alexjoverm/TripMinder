@@ -1,51 +1,44 @@
 angular.module('tripminder')
 
-.controller('ResultsCtrl', ['$scope', '$timeout', 'DataSvc', 'MapsSvc',
-  function($scope, $timeout, DataSvc, MapsSvc) { 
-      
-      $scope.searchResults = DataSvc.searchResults;
+    .controller('ResultsCtrl', ['$scope', '$timeout', 'DataSvc', 'MapsSvc',
+        function ($scope, $timeout, DataSvc, MapsSvc) {
 
-      $scope.map = MapsSvc.CreateMapOriginDest(38.38, -0.51, 16);
-      $scope.map.strokeDefault = {
-        color: '#387ef5',
-        weight: 4,
-        opacity: 0.6
-      };
-      $scope.map.strokeSelected = {
-        color: '#1aa595',
-        weight: 6,
-        opacity: 1
-      };
-      
-      
-      // **** Get polyline of map
-      MapsSvc.promises.gMapsAPI.then(function(){ 
-          
-          if($scope.searchResults.car) 
-              $scope.map.carPolylines = [];
-        
-              for(var i in $scope.searchResults.car){ 
-                  var poli = MapsSvc.gMapsAPI.geometry.encoding.decodePath($scope.searchResults.car[i].polyline);
-                  
-                  console.log(i);
-                  
-                  // PROBAR A PONERLAS AL REVES Y CAMBIAR EL Z-INDEX EN EL EVENTO
-                  
-                  $scope.map.carPolylines.push(
-                      {
-                          path: poli,
-                          stroke: (i == 0 ? $scope.map.strokeSelected : $scope.map.strokeDefault),
-                          zIndex: $scope.searchResults.car.length - i
-                      }
-                  );
-              }
-          
-              $timeout(function(){
-                  var map = $scope.map.control.getGMap();
-                  console.log(map);
-              }, 400);
-          
-      });
-      
-  }
-]);
+            $scope.searchResults = DataSvc.searchResults;
+            console.log($scope.searchResults)
+
+            $scope.map = MapsSvc.CreateDefaultResultMap();
+
+
+            // **** Get polyline of map
+            MapsSvc.promises.gMapsAPI.then(function () {
+
+                $scope.map.polylines = {
+                    car: null,
+                    bicycling: null,
+                    walking: null,
+                    bus: null,
+                    train: null,
+                    plane: null
+                }
+
+                // Add polylines to $scope.map, one per each mean of transport
+                Object.keys($scope.searchResults).forEach(function(key){
+                    $scope.map.polylines[key] = [];
+
+                    if(Array.isArray($scope.searchResults[key])) {
+                        $scope.searchResults[key].forEach(function (route, i) {
+                            $scope.map.polylines[key].push(
+                                {
+                                    path: MapsSvc.gMapsAPI.geometry.encoding.decodePath(route.polyline),
+                                    stroke: (i == 0 ? $scope.map.strokeSelected : $scope.map.strokeDefault),
+                                    zIndex: $scope.searchResults[key].length - i
+                                }
+                            );
+                        });
+                    }
+                });
+
+            });
+
+        }
+    ]);

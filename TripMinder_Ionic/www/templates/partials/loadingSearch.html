@@ -4,9 +4,9 @@
         <header>
             <a href="" class="button button-icon icon ion-close" ng-click="Cancel()"></a>
         </header>
-        <div class="item item-icon-right">
-            <span>En coche...</span> 
-            <i class="icon" ng-class="{'ion-load-c ion-spin': icons.directions === null, 'ion-checkmark-round balanced': icons.directions, 'ion-close-round assertive': icons.directions === false}"></i>
+        <div class="item item-icon-right" ng-repeat="route in routes">
+            <span>{{ route.text }}...</span>
+            <i class="icon" ng-class="{'ion-load-c ion-spin': route.icon === null, 'ion-checkmark-round balanced': route.icon, 'ion-close-round assertive': route.icon === false}"></i>
         </div>
     </div>
     

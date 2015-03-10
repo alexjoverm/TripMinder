@@ -4,17 +4,8 @@ angular.module('tripminder')
   function($scope, $stateParams, $timeout, DataSvc, MapsSvc) { 
       
       $scope.route = DataSvc.searchResults[$stateParams.id][$stateParams.num];
-      
-      console.log($stateParams.id);
-      console.log($stateParams.num);
-      console.log(DataSvc.searchResults[$stateParams.id]);
-      console.log(DataSvc.searchResults[$stateParams.id][$stateParams.num]);
 
-      $scope.map = MapsSvc.CreateMapOriginDest(38.38, -0.51, 16);
-      $scope.map.stroke = {
-        color: '#387ef5',
-        weight: 5
-      };
+      $scope.map = MapsSvc.CreateDefaultResultMap();
       
       
       // **** Get polyline of map

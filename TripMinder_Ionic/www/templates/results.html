@@ -1,55 +1,185 @@
 <ion-view view-title="Resultados">
     <ion-pane class="padding-vertical">
+
+
         <ion-tabs class="tm-tabs-padtop tm-tabs tabs-positive tabs-striped tabs-icon-only">
 
             <ion-tab icon="ion-android-car">
                 <div class="gmaps-wrap">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control" options="map.options">
-                        <ui-gmap-polyline ng-repeat="polyline in map.carPolylines" path="polyline.path" stroke="polyline.stroke" z-index="polyline.zIndex" fit="true" draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.car" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
                     </ui-gmap-google-map>
                 </div>
 
-                <div class="results-data padding-top-l">
+                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="list">
-                        <a ng-repeat="route in searchResults.car" ui-sref="app.resultsDetail({ id: 'car', num: $index })">
+                        <a ng-repeat="route in searchResults.car"
+                           ui-sref="app.resultsDetail({ id: 'car', num: $index })">
                             <li class="item item-icon-left">
                                 <div class="summary">
-                                    <i class="icon ion-android-car"> </i> 
-                                    <p class="ellipsis">{{$index}} - {{ route.title }}</p> 
+                                    <i class="icon ion-android-car"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
                                 </div>
                                 <div class="data">
                                     <p>{{ route.distance.text }}</p>
-                                    <p>{{ route.duration.text }}</p> 
+
+                                    <p>{{ route.duration.text }}</p>
                                 </div>
                             </li>
                         </a>
 
+                        <p class="padding" ng-show="!searchResults.car || searchResults.car.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
                     </div>
-                </div>
+                </ion-scroll>
             </ion-tab>
 
+
             <ion-tab icon="ion-android-walk">
-                <!-- Tab 2 content -->
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.walking" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll zooming="false" direction="y"  class="results-data padding-top-l">
+                    <div class="list">
+                        <a ng-repeat="route in searchResults.walking"
+                           ui-sref="app.resultsDetail({ id: 'walking', num: $index })">
+                            <li class="item item-icon-left">
+                                <div class="summary">
+                                    <i class="icon ion-android-car"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+                        </a>
+
+                        <p class="padding" ng-show="!searchResults.walking || searchResults.walking.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
             </ion-tab>
-            
+
             <ion-tab icon="ion-android-bicycle">
-                <!-- Tab 2 content -->
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.bicycling" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <a ng-repeat="route in searchResults.bicycling"
+                           ui-sref="app.resultsDetail({ id: 'bicycling', num: $index })">
+                            <li class="item item-icon-left">
+                                <div class="summary">
+                                    <i class="icon ion-android-bicycle"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+                        </a>
+
+                        <p class="padding" ng-show="!searchResults.bicycling || searchResults.bicycling.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
             </ion-tab>
-           
+
             <ion-tab icon="ion-android-bus">
-                <!-- Tab 2 content -->
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.bus" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <a ng-repeat="route in searchResults.bus"
+                           ui-sref="app.resultsDetail({ id: 'bus', num: $index })">
+                            <li class="item item-icon-left">
+                                <div class="summary">
+                                    <i class="icon ion-android-bicycle"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+                        </a>
+
+                        <p class="padding" ng-show="!searchResults.bus || searchResults.bus.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
             </ion-tab>
 
             <ion-tab icon="ion-android-subway">
-                <!-- Tab 3 content -->
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.train" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <a ng-repeat="route in searchResults.train"
+                           ui-sref="app.resultsDetail({ id: 'train', num: $index })">
+                            <li class="item item-icon-left">
+                                <div class="summary">
+                                    <i class="icon ion-android-subway"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+                        </a>
+
+                        <p class="padding" ng-show="!searchResults.train || searchResults.train.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
             </ion-tab>
-            
+
             <ion-tab icon="ion-plane">
                 <!-- Tab 3 content -->
             </ion-tab>
 
         </ion-tabs>
-
 
 
     </ion-pane>

@@ -25,21 +25,8 @@ angular.module('tripminder.services')
              });
          };
          
-         this.CreateMapOriginDest = function(pLat, pLon, pZoom, map){
-            return { 
-                opened: false,
-                canScroll: true,
-                center: { latitude: pLat, longitude: pLon }, 
-                zoom: pZoom,
-                control: {},
-                options: {
-                    mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] },
-                    streetViewControl: false,
-                    disableDoubleClickZoom: true
-                }
-             };
-         };
          
+         // Markers
          this.CreateMarkerOriginDest = function(pId, pLat, pLon, pGeocodif){
              
              var _labelContent = 'Origen';
@@ -84,6 +71,40 @@ angular.module('tripminder.services')
                   }
              };
          };
+         
+         
+         // Maps
+         this.CreateMapOriginDest = function(pLat, pLon, pZoom, map){
+            return { 
+                opened: false,
+                canScroll: true,
+                center: { latitude: pLat, longitude: pLon }, 
+                zoom: pZoom,
+                control: {},
+                options: {
+                    mapTypeControlOptions: { mapTypeIds: ['ROADMAP'] },
+                    streetViewControl: false,
+                    disableDoubleClickZoom: true
+                }
+             };
+         };
+         
+         this.CreateDefaultResultMap = function(){
+            var map = this.CreateMapOriginDest(38.38, -0.51, 16);
+            map.strokeDefault = {
+                color: '#387ef5',
+                weight: 4,
+                opacity: 0.6
+            };
+            map.strokeSelected = {
+                color: '#1aa595',
+                weight: 6,
+                opacity: 1
+            };
+            
+             return map;
+         };
+         
          
      };
      

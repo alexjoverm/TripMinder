@@ -1,0 +1,100 @@
+{
+  "bounds": {
+    "northeast": {
+      "lat": 42.870842,
+      "lng": -1.1394561
+    },
+    "southwest": {
+      "lat": 37.98588489999999,
+      "lng": -8.551588299999999
+    }
+  },
+  "copyrights": "Datos de mapas ©2015 Google, basado en BCN IGN España",
+  "legs": [
+    {
+      "arrival_time": {
+        "text": "12:50",
+        "time_zone": "Europe/Madrid",
+        "value": 1425988200
+      },
+      "departure_time": {},
+      "distance": {
+        "text": "975 km",
+        "value": 974941
+      },
+      "duration": {},
+      "end_address": "Santiago de Compostela, La Coruña, España",
+      "end_location": {
+        "lat": 42.870842,
+        "lng": -8.544697
+      },
+      "start_address": "Murcia, Murcia, España",
+      "start_location": {},
+      "steps": [
+        {
+          "distance": {},
+          "duration": {},
+          "end_location": {},
+          "html_instructions": "Autobus en dirección a Aeropuerto Madrid-Barajas T4",
+          "polyline": {
+            "points": "wbzfFrp}EksdErbiCqtoGpsdJmfRekO"
+          },
+          "start_location": {},
+          "transit_details": {
+            "arrival_stop": {
+              "location": {
+                "lat": 40.4923357,
+                "lng": -3.5938594
+              },
+              "name": "Aeropuerto Madrid-Barajas T4"
+            },
+            "arrival_time": {
+              "text": "6:45",
+              "time_zone": "Europe/Madrid",
+              "value": 1425966300
+            },
+            "departure_stop": {},
+            "departure_time": {},
+            "headsign": "Aeropuerto Madrid-Barajas T4",
+            "line": {
+              "agencies": [
+                {
+                  "name": "ALSA",
+                  "phone": "011 34 902422242",
+                  "url": "http://www.alsa.es/"
+                }
+              ],
+              "name": "Mojacar-Vera-Madrid",
+              "url": "http://www.alsa.es/",
+              "vehicle": {
+                "icon": "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                "name": "Autobus",
+                "type": "BUS"
+              }
+            },
+            "num_stops": 3
+          },
+          "travel_mode": "TRANSIT"
+        },
+        .
+        .
+        .
+        .
+        .
+        .
+      }
+      ],
+      "via_waypoint": []
+    }
+  ],
+  "overview_polyline": {
+    "points": ""
+  },
+  "summary": "",
+  "warnings": [
+    "Las rutas a pie están en versión beta. Ten cuidado. –  En esta ruta puede que no haya aceras o pasos para peatones."
+  ],
+  "waypoint_order": []
+}
+
+

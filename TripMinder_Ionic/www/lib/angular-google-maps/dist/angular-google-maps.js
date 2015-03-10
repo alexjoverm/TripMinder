@@ -4633,7 +4633,7 @@ Original idea from: http://stackoverflow.com/questions/22758950/google-map-drawi
           self = this;
           this.$log = $log;
           this.plurals = new PropMap();
-          this.scopePropNames = ['path', 'stroke', 'clickable', 'draggable', 'editable', 'geodesic', 'icons', 'visible'];
+          this.scopePropNames = ['path', 'stroke', 'clickable', 'draggable', 'editable', 'geodesic', 'icons', 'visible', 'zIndex'];
           _.each(this.scopePropNames, (function(_this) {
             return function(name) {
               return _this[name + 'Key'] = void 0;

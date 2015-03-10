@@ -7600,7 +7600,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 .tm-cancel-list .button-icon {
   min-height: initial;
   line-height: 32px;
-  color: #777; }
+  color: #444; }
   .tm-cancel-list .button-icon:before {
     font-size: 22px;
     line-height: 32px; }
