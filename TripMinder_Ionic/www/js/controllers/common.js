@@ -17,7 +17,7 @@ angular.module('tripminder')
               id: 'walking',
               text: "Andando",
               icon: null
-          }/*,
+          },
           {
               id: 'bus',
               text: "En bus",
@@ -27,7 +27,7 @@ angular.module('tripminder')
               id: 'train',
               text: "En tren",
               icon: null
-          },
+          }/*,
           {
               id: 'plane',
               text: "En avión",

@@ -7564,6 +7564,9 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 .padding-top-l {
   padding-top: 20px; }
 
+.padding-bottom-xl {
+  padding-top: 40px; }
+
 .padding-l {
   padding: 22px; }
 
@@ -7629,10 +7632,21 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   margin-right: 12px;
   font-size: 22px; }
 
+.clear {
+  width: 1px;
+  height: 1px;
+  display: block;
+  clear: both;
+  float: none; }
+
+.float-right {
+  display: inline-block;
+  float: right; }
+
 .results-data .list .item .summary, .results-data .list .item .data {
   display: inline-block; }
 .results-data .list .item .summary {
-  width: 68%;
+  width: 70%;
   float: left; }
   .results-data .list .item .summary p {
     height: 50px;
@@ -7646,10 +7660,24 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
     overflow: auto;
     text-overflow: ellipsis; }
 .results-data .list .item .data {
-  width: 32%;
+  width: 30%;
   float: right;
   text-align: right; }
+.results-data .list .item.tm-item-transit .summary {
+  padding-top: 10px; }
+  .results-data .list .item.tm-item-transit .summary p {
+    display: inline-block;
+    margin: 0;
+    padding-left: 8px;
+    height: 34px;
+    width: 96%; }
+    .results-data .list .item.tm-item-transit .summary p.limit-width {
+      width: 80%; }
+  .results-data .list .item.tm-item-transit .summary i {
+    font-size: 24px; }
 
+.tm-tabs.tabs-striped .tabs {
+  border-bottom: none; }
 .tm-tabs.tabs-striped .tab-item.tab-item-active {
   border-width: 5px 0 0 0 !important;
   border-color: #f82; }
@@ -7659,8 +7687,21 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 
 .tm-route-description {
   text-align: center; }
-  .tm-route-description span {
-    padding: 0 24px; }
+  .tm-route-description h5 {
+    color: #555;
+    margin-bottom: 20px; }
+  .tm-route-description .route-data span:first-child {
+    padding-right: 20px; }
+  .tm-route-description .route-data span:last-child {
+    padding-left: 20px; }
+
+.transit-details {
+  width: 100%;
+  font-size: 13px;
+  margin-top: 6px;
+  color: #5593f6; }
+  .transit-details i {
+    margin-right: 8px; }
 
 @media screen and (max-device-height: 530px) {
   .angular-google-map-container {

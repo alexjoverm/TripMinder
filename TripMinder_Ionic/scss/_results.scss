@@ -1,48 +1,92 @@
-.results-data{
-    .list .item{
-        .summary, .data{  display: inline-block  }
-        .summary{ 
-            width: 68%; 
-            float: left;
+.results-data {
+  .list .item {
 
-            p{
-                height: 50px;
-                display: table-cell;
-                vertical-align: middle;
-                font-size: 17px;
-                white-space: normal;
-                line-height: 1.6;
-            }
-            
-            p.ellipsis{
-                white-space: nowrap;
-                overflow: auto;
-                text-overflow: ellipsis;
-            }
+    .summary, .data {
+      display : inline-block
+    }
+    .summary {
+      width : 70%;
+      float : left;
+
+      p {
+        height         : 50px;
+        display        : table-cell;
+        vertical-align : middle;
+        font-size      : 17px;
+        white-space    : normal;
+        line-height    : 1.6;
+      }
+
+      p.ellipsis {
+        white-space   : nowrap;
+        overflow      : auto;
+        text-overflow : ellipsis;
+      }
+    }
+    .data {
+      width      : 30%;
+      float      : right;
+      text-align : right;
+    }
+
+    &.tm-item-transit {
+      .summary {
+        padding-top : 10px;
+
+        p {
+          display: inline-block;
+          margin       : 0;
+          padding-left : 8px;
+          height       : 34px;
+          width: 96%;
+
+          &.limit-width{
+            width: 80%;
+          }
         }
-        .data{ 
-            width: 32%; 
-            float: right;
-            text-align: right;
+
+        i {
+          font-size : 24px;
         }
+      }
     }
+  }
 }
 
-.tm-tabs.tabs-striped{
-    .tab-item.tab-item-active{
-        border-width: 5px 0 0 0 !important;
-        border-color: $cl-orange;
-    }
+.tm-tabs.tabs-striped {
+  .tabs{ border-bottom: none; }
+
+  .tab-item.tab-item-active {
+    border-width : 5px 0 0 0 !important;
+    border-color : $cl-orange;
+  }
 }
 
-.tm-tabs-padtop{
-    .pane.tab-content{
-        padding-top: 43px;
-    }
+.tm-tabs-padtop {
+  .pane.tab-content {
+    padding-top : 43px;
+  }
 }
 
-.tm-route-description{
-    text-align: center;
+.tm-route-description {
+  text-align : center;
 
-    span{ padding: 0 24px; }
+  h5{ color: #555; margin-bottom: 20px; }
+
+  .route-data{
+    span:first-child{
+      padding-right: 20px;
+    }
+    span:last-child{
+      padding-left: 20px;
+    }
+  }
+}
+
+.transit-details{
+  width: 100%;
+  font-size: 13px;
+  margin-top: 6px;
+  color: lighten($cl-main, 6%);
+  i{ margin-right: 8px; }
 }

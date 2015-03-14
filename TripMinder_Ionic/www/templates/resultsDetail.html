@@ -7,10 +7,13 @@
                 </div>
 
                <div class="tm-route-description padding-l">
-                   <h3>{{ route.title }}</h3>
-                   <div>
-                       <span><i class="tm-icon-left ion-android-pin"></i>{{ route.distance.text }}</span>  
-                       <span><i class="tm-icon-left ion-android-time"></i>{{ route.duration.text }}</span>
+                   <h3>{{ route.title | capitalize }}</h3>
+                   <h5>{{ adress.origin | capitalize }} - {{ adress.dest | capitalize }}</h5>
+                   <div class="route-data">
+                       <p>
+                           <span><i class="tm-icon-left ion-arrow-graph-up-right"></i>{{ route.distance.text }}</span>
+                           <span><i class="tm-icon-left ion-android-watch"></i>{{ route.duration.text }}</span>
+                       </p>
                    </div>
                </div>
                
@@ -18,12 +21,25 @@
                     <div class="list">
                         <li class="item item-icon-left" ng-repeat="step in route.steps">
                             <div class="summary">
-                                <i class="icon" ng-class="{'ion-android-car': step.travel_mode == 'DRIVING' }"> </i> 
+                                <i class="icon"
+                                   ng-class="{'ion-android-car': step.travel_mode == 'DRIVING', 'ion-android-walk': step.travel_mode == 'WALKING',
+                                    'ion-android-bicycle': step.travel_mode == 'BICYCLING', 'ion-android-bus': step.transit_details.line.vehicle == 'bus',
+                                    'ion-android-subway': step.transit_details.line.vehicle == 'train', 'ion-plane': step.transit_details.line.vehicle == 'plane'}"> </i>
                                 <p data-ng-bind-html="step.html_instructions"></p>
                             </div>
                             <div class="data">
                                 <p>{{ step.distance.text }}</p>
                                 <p>{{ step.duration.text }}</p> 
+                            </div>
+                            <div class="clear"></div>
+                            <div class="transit-details" ng-show="step.transit_details">
+                                <i class="ion-android-time"></i>
+                                {{ step.transit_details.departure_time.text }} -
+                                {{ step.transit_details.arrival_time.text }}
+
+                                <div class="float-right">
+                                    <i class="ion-android-hand"></i> {{ step.transit_details.num_stops }} stops
+                                </div>
                             </div>
                         </li>
                     </div>

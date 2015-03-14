@@ -120,6 +120,10 @@ angular.module('tripminder.services')
                     // Init and reset ResourcesSvc and RestSvc promises, also DataSvc data
                     ResetVars();
                     DataSvc.ResetSearchVars();
+                    DataSvc.adress = {
+                        origin: origin.split(',')[0],
+                        dest: dest.split(',')[0]
+                    }
 
                     //******** Perform API calls
 

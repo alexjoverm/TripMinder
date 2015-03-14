@@ -1,12 +1,35 @@
 angular.module('tripminder')
 
-    .controller('ResultsCtrl', ['$scope', '$timeout', 'DataSvc', 'MapsSvc',
-        function ($scope, $timeout, DataSvc, MapsSvc) {
+    .controller('ResultsCtrl', ['$scope', '$timeout', '$window', '$state', 'DataSvc', 'MapsSvc',
+        function ($scope, $timeout, $window, $state, DataSvc, MapsSvc) {
+
+            var CalculateHeight = function(){
+                return (($window.innerHeight ||
+                    document.documentElement.clientHeight  ||
+                    document.body.clientHeight)
+                    - (50 + 40 + 220) + 'px'); //margintop, topbar, tabbar, map
+            }
 
             $scope.searchResults = DataSvc.searchResults;
-            console.log($scope.searchResults)
+
 
             $scope.map = MapsSvc.CreateDefaultResultMap();
+
+            // Height for ion-scroll
+            $scope.win_height = {
+                height: CalculateHeight()
+            };
+
+            angular.element($window).bind('resize', function() {
+                $scope.win_height.height = CalculateHeight();
+                $scope.$apply();
+            });
+
+
+            $scope.GoToDetail = function(params){
+                params.item = angular.toJson(params.item);
+                $state.go('app.resultsDetail', params);
+            };
 
 
             // **** Get polyline of map
@@ -19,7 +42,7 @@ angular.module('tripminder')
                     bus: null,
                     train: null,
                     plane: null
-                }
+                };
 
                 // Add polylines to $scope.map, one per each mean of transport
                 Object.keys($scope.searchResults).forEach(function(key){

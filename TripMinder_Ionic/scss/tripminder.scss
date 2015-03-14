@@ -83,14 +83,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 //***** MAP
 
-.angular-google-map-container { 
+.angular-google-map-container {
     height: $map-home-height; 
 }
 
 .gmaps-wrap{ 
     max-height: $map-home-height;
     //overflow: hidden; 
-    transition: max-height 0.5s ease;  
+    transition: max-height 0.5s ease;
 }
  
 .map-marker-label{ 
@@ -116,6 +116,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     font-size: 22px;
 }
 
+.clear{
+  width: 1px; height: 1px; display: block;
+  clear: both; float: none;
+}
+
+.float-right{
+  display: inline-block;
+  float: right;
+}
  
 @import "results.scss";  
 @import "other/_responsive.scss"; 

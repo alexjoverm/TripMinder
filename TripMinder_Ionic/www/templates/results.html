@@ -14,11 +14,10 @@
                     </ui-gmap-google-map>
                 </div>
 
-                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="list">
-                        <a ng-repeat="route in searchResults.car"
-                           ui-sref="app.resultsDetail({ id: 'car', num: $index })">
-                            <li class="item item-icon-left">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.car | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'car', num: route.index })">
                                 <div class="summary">
                                     <i class="icon ion-android-car"> </i>
 
@@ -30,7 +29,6 @@
                                     <p>{{ route.duration.text }}</p>
                                 </div>
                             </li>
-                        </a>
 
                         <p class="padding" ng-show="!searchResults.car || searchResults.car.length == 0"> No hay resultados disponibles para este medio de transporte </p>
 
@@ -49,13 +47,12 @@
                     </ui-gmap-google-map>
                 </div>
 
-                <ion-scroll zooming="false" direction="y"  class="results-data padding-top-l">
+                <ion-scroll ng-style="win_height" zooming="false" direction="y"  class="results-data padding-top-l">
                     <div class="list">
-                        <a ng-repeat="route in searchResults.walking"
-                           ui-sref="app.resultsDetail({ id: 'walking', num: $index })">
-                            <li class="item item-icon-left">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.walking | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'walking', num: route.index })">
                                 <div class="summary">
-                                    <i class="icon ion-android-car"> </i>
+                                    <i class="icon ion-android-walk"> </i>
 
                                     <p class="ellipsis">{{ route.title }}</p>
                                 </div>
@@ -65,7 +62,6 @@
                                     <p>{{ route.duration.text }}</p>
                                 </div>
                             </li>
-                        </a>
 
                         <p class="padding" ng-show="!searchResults.walking || searchResults.walking.length == 0"> No hay resultados disponibles para este medio de transporte </p>
 
@@ -83,11 +79,10 @@
                     </ui-gmap-google-map>
                 </div>
 
-                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="list">
-                        <a ng-repeat="route in searchResults.bicycling"
-                           ui-sref="app.resultsDetail({ id: 'bicycling', num: $index })">
-                            <li class="item item-icon-left">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.bicycling | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'bicycling', num: route.index })">
                                 <div class="summary">
                                     <i class="icon ion-android-bicycle"> </i>
 
@@ -99,7 +94,6 @@
                                     <p>{{ route.duration.text }}</p>
                                 </div>
                             </li>
-                        </a>
 
                         <p class="padding" ng-show="!searchResults.bicycling || searchResults.bicycling.length == 0"> No hay resultados disponibles para este medio de transporte </p>
 
@@ -117,15 +111,19 @@
                     </ui-gmap-google-map>
                 </div>
 
-                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="list">
-                        <a ng-repeat="route in searchResults.bus"
-                           ui-sref="app.resultsDetail({ id: 'bus', num: $index })">
-                            <li class="item item-icon-left">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.bus | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'bus', num: route.index })">
                                 <div class="summary">
-                                    <i class="icon ion-android-bicycle"> </i>
+                                    <i class="icon" ng-repeat="vehicle in route.vehicles | limitTo:3"
+                                       ng-class="{'ion-android-walk': vehicle == 'walking', 'ion-android-bus': vehicle == 'bus',
+                                       'ion-android-subway': vehicle == 'train', 'ion-android-bicycle': vehicle == 'bicycling',
+                                       'ion-android-car': vehicle == 'driving'}"> </i>
 
-                                    <p class="ellipsis">{{ route.title }}</p>
+                                    <p class="ellipsis" ng-class="{'limit-width': route.steps.length > 2}">
+                                        {{ route.title | capitalize:'first' }}
+                                    </p>
                                 </div>
                                 <div class="data">
                                     <p>{{ route.distance.text }}</p>
@@ -133,7 +131,6 @@
                                     <p>{{ route.duration.text }}</p>
                                 </div>
                             </li>
-                        </a>
 
                         <p class="padding" ng-show="!searchResults.bus || searchResults.bus.length == 0"> No hay resultados disponibles para este medio de transporte </p>
 
@@ -151,23 +148,26 @@
                     </ui-gmap-google-map>
                 </div>
 
-                <ion-scroll zooming="false" direction="y" class="results-data padding-top-l">
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="list">
-                        <a ng-repeat="route in searchResults.train"
-                           ui-sref="app.resultsDetail({ id: 'train', num: $index })">
-                            <li class="item item-icon-left">
-                                <div class="summary">
-                                    <i class="icon ion-android-subway"> </i>
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.train | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'train', num: route.index })">
+                            <div class="summary">
+                                <i class="icon" ng-repeat="vehicle in route.vehicles | limitTo:3"
+                                   ng-class="{'ion-android-walk': vehicle == 'walking', 'ion-android-bus': vehicle == 'bus',
+                                       'ion-android-subway': vehicle == 'train', 'ion-android-bicycle': vehicle == 'bicycling',
+                                       'ion-android-car': vehicle == 'driving'}"> </i> </i>
 
-                                    <p class="ellipsis">{{ route.title }}</p>
-                                </div>
-                                <div class="data">
-                                    <p>{{ route.distance.text }}</p>
+                                <p class="ellipsis" ng-class="{'limit-width': route.steps.length > 2}">
+                                    {{ route.title | capitalize:'first' }}
+                                </p>
+                            </div>
+                            <div class="data">
+                                <p>{{ route.distance.text }}</p>
 
-                                    <p>{{ route.duration.text }}</p>
-                                </div>
-                            </li>
-                        </a>
+                                <p>{{ route.duration.text }}</p>
+                            </div>
+                        </li>
 
                         <p class="padding" ng-show="!searchResults.train || searchResults.train.length == 0"> No hay resultados disponibles para este medio de transporte </p>
 
