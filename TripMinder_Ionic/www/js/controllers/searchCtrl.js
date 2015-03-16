@@ -5,8 +5,8 @@ angular.module('tripminder')
 
     // ** View data
     $scope.inputs = {
-    	origin: 'laihia, finland',
-    	dest: 'tammera, finland'
+    	origin: 'london, uk',
+    	dest: 'edimburg, uk'
     };
 
     $scope.origins = null;
