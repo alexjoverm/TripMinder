@@ -19,7 +19,7 @@
                
                 <div class="results-data">
                     <div class="list">
-                        <li class="item item-icon-left" ng-repeat="step in route.steps">
+                        <li class="item item-icon-left" ng-repeat="step in route.steps | limitTo: config.itemsDisplayed ">
                             <div class="summary">
                                 <i class="icon"
                                    ng-class="{'ion-android-car': step.travel_mode == 'DRIVING', 'ion-android-walk': step.travel_mode == 'WALKING',
@@ -43,6 +43,12 @@
                             </div>
                         </li>
                     </div>
+
+                    <ion-infinite-scroll
+                            ng-if="moreItemsCanBeAdded()"
+                            on-infinite="addItems()">
+                    </ion-infinite-scroll>
+
                 </div>
     </ion-content>
 </ion-view>
