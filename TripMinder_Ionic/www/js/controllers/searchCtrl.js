@@ -6,7 +6,7 @@ angular.module('tripminder')
     // ** View data
     $scope.inputs = {
     	origin: 'london, uk',
-    	dest: 'edimburg, uk'
+    	dest: 'edinburg, uk'
     };
 
     $scope.origins = null;
@@ -132,7 +132,26 @@ angular.module('tripminder')
     //***** SEARCH FUNCTIONS ******
       
     $scope.Search = function(){ 
-        
+
+        /*var time = new Date().getTime();
+
+        var obj1 = IATA.Search($scope.inputs.origin)
+        var obj2 = IATA.Search($scope.inputs.dest)
+
+        console.log(obj1)
+        console.log(obj2)
+
+        obj1.other_matches.forEach(function (item){
+            console.log(IATA.GetIATA(item.pos))
+        })
+
+        //console.log(IATA.Search($scope.inputs.dest))
+
+        var time2 = new Date().getTime();
+        time2 -= time;
+
+        console.log(time2 + ' ms')*/
+
         if(!$scope.inputs.origin || !$scope.inputs.dest)
            $ionicPopup.alert({
              title: 'Datos vacios',

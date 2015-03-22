@@ -92,6 +92,12 @@ angular.module('tripminder',
     }])
 
 
+    .run(['IATA' , function(IATA){
+        IATA.LoadData();
+    }])
+
+
+
     .filter('capitalize', function () {
         return function (input, format) {
             if (!input) {
@@ -129,31 +135,37 @@ angular.module('tripminder',
 
             return array;
         };
-    });
+    })
 
 
 
 /*****************  CONFIG  ********************/
 /*.config(function($httpProvider){
- $httpProvider.interceptors.push(function($q, $timeout) {
- return {
- 'response': function(response) {
- var defer = $q.defer();
+    $httpProvider.interceptors.push(function($q, $timeout) {
+        return {
+            'response': function(response) {
+                var defer = $q.defer();
 
- if(response.config.url.indexOf('ttp://') >= 0)
- $timeout(function() { defer.resolve(response); }, 5000);
- else
- defer.resolve(response);
+                if(response.config.url.indexOf('sdttpe://') >= 0)
+                    $timeout(function() { defer.resolve(response); }, 1);
+                else
+                    defer.resolve(response);
 
- return defer.promise;
- },
- 'request': function(config){
- console.log(config);
- return config;
- }
- };
- });
- });*/
+                return defer.promise;
+            },
+            'request': function(config){
+                //console.log(config)
+                if(config.url.indexOf('qpxExpr') >=0)
+                    console.log(config)
+                return config;
+            },
+            'responseError': function(a){
+                console.log(a)
+                return a;
+            }
+        };
+    });
+});*/
 
 
 

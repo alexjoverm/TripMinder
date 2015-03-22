@@ -27,12 +27,12 @@ angular.module('tripminder')
               id: 'train',
               text: "En tren",
               icon: null
-          }/*,
+          },
           {
               id: 'plane',
               text: "En avión",
               icon: null
-          }*/
+          }
       ];
       
       $scope.Cancel = function(){

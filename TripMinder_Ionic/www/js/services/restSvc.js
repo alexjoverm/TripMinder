@@ -31,6 +31,12 @@ angular.module('tripminder.services')
                     },
                     actions: {get: {method: 'GET'}}
                 });
+
+                this.QPXExpress = RequestFactory.createResource({
+                    url    : Apis.qpxExpress.url,
+                    options: {key: Apis.google.key},
+                    actions: {myPost: {method: 'POST'}}
+                });
             };
 
 
@@ -44,8 +50,8 @@ angular.module('tripminder.services')
  the controllers and ResourcesSvc.
  ********/
 
-    .factory('RestSvc', ['$ionicLoading', 'ResourcesSvc', '$timeout', '$rootScope', 'DataSvc',
-        function ($ionicLoading, ResourcesSvc, $timeout, $rootScope, DataSvc) {
+    .factory('RestSvc', ['$ionicLoading', 'ResourcesSvc', '$timeout', '$rootScope', 'DataSvc', 'Apis','IATA',
+        function ($ionicLoading, ResourcesSvc, $timeout, $rootScope, DataSvc, Apis, IATA) {
 
             // ** Private
 
@@ -59,7 +65,7 @@ angular.module('tripminder.services')
 
             var calls = {
                 done : 0,
-                total: 4
+                total: 5
             };
 
             var CloseLoading = function (delay) {
@@ -122,7 +128,7 @@ angular.module('tripminder.services')
                     DataSvc.ResetSearchVars();
                     DataSvc.adress = {
                         origin: origin.split(',')[0],
-                        dest: dest.split(',')[0]
+                        dest  : dest.split(',')[0]
                     }
 
                     //******** Perform API calls
@@ -204,6 +210,39 @@ angular.module('tripminder.services')
                             CheckFinished();
                             $rootScope.$broadcast('search-finished', {train: false});
                             $rootScope.$broadcast('search-finished', {bus: false});
+                        }
+                    });
+
+
+                    // ** 5: QPX Express (PLANE)
+
+                    var requestObj = angular.copy(Apis.qpxExpress.request);
+                    requestObj.request.slice[0].date = (new Date()).toISOString().slice(0, 10);
+
+                    // Find Origin and Dest IATA name
+                    var origin_obj = IATA.Search(origin);
+                    var dest_obj = IATA.Search(dest);
+
+                    requestObj.request.slice[0].origin = origin_obj.bestMatch.code.toUpperCase();
+                    requestObj.request.slice[0].destination = dest_obj.bestMatch.code.toUpperCase();
+
+
+                    promises.plane = ResourcesSvc.QPXExpress.myPost(JSON.stringify(requestObj));
+
+                    promises.plane.promise.then(function (data) {
+                        CheckFinished();
+                        $rootScope.$broadcast('search-finished', {plane: true});
+
+                        console.log(JSON.stringify(data, null, 2))
+                        alert(data.kind)
+
+                        // Add TRAIN & BUS routes (they are in the same reply)
+                        //DataSvc.AddTransitRoutes(data.routes);
+
+                    }, function (response) {
+                        if (response != 'ABORT') {
+                            CheckFinished();
+                            $rootScope.$broadcast('search-finished', {plane: false});
                         }
                     });
 
