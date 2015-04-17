@@ -1,7 +1,15 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc',
-  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc','IATA',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc, IATA) {
+
+      var SearchMarker = function(id){
+          for(var i in $scope.markers)
+            if($scope.markers[i].id == id)
+                return $scope.markers[i];
+      };
+
+
 
     // ** View data
     $scope.inputs = {
@@ -133,32 +141,31 @@ angular.module('tripminder')
       
     $scope.Search = function(){ 
 
-        /*var time = new Date().getTime();
+        var time = new Date().getTime();
 
-        var obj1 = IATA.Search($scope.inputs.origin)
-        var obj2 = IATA.Search($scope.inputs.dest)
+        var obj1 = IATA.Search(SearchMarker(0).coords);
+        var obj2 = IATA.Search(SearchMarker(1).coords);
 
-        console.log(obj1)
-        console.log(obj2)
-
-        obj1.other_matches.forEach(function (item){
-            console.log(IATA.GetIATA(item.pos))
-        })
+        console.log(obj1);
+        console.log("dist1(km): " + obj1[0].distance +'km');
+        console.log(obj2);
+        console.log("dist2(km): " + obj2[0].distance +'km');
 
         //console.log(IATA.Search($scope.inputs.dest))
 
         var time2 = new Date().getTime();
         time2 -= time;
 
-        console.log(time2 + ' ms')*/
+        alert(time2 + ' ms');
 
-        if(!$scope.inputs.origin || !$scope.inputs.dest)
+        /*if(!$scope.inputs.origin || !$scope.inputs.dest)
            $ionicPopup.alert({
              title: 'Datos vacios',
              template: 'Debes insertar un origen y un destino'
            });
         else
     	   RestSvc.Search($scope.inputs.origin, $scope.inputs.dest);
+    	   */
     };
 
       
