@@ -24,7 +24,22 @@ angular.module('tripminder.services')
                  _maps.geocoder = new api.Geocoder();
              });
          };
-         
+
+         this.CreateCustomMarker = function(id, lat, lon, label){
+             return {
+                 id: id,
+                 coords: {
+                     latitude: lat,
+                     longitude: lon
+                 },
+                 options: {
+                     draggable: false,
+                     labelContent: label,
+                     labelClass: 'map-marker-label',
+                     labelAnchor: (18 + 4*label.length) + ' 0'
+                 }
+             }
+         };
          
          // Markers
          this.CreateMarkerOriginDest = function(pId, pLat, pLon, pGeocodif){
@@ -124,7 +139,7 @@ angular.module('tripminder.services')
              return $cordovaGeolocation.getCurrentPosition(options);
          }
          
-         this.HandlerError = function(err){
+         this.HandleError = function(err){
             if(err.code == err.TIMEOUT)
                $ionicPopup.alert({
                  title: '<i class="tm-icon-left ion-alert"></i> Error en la localización',

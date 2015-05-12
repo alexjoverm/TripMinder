@@ -1,0 +1,41 @@
+<ion-view view-title="Resultados">
+    <ion-content>
+
+        <div class="tm-route-description padding-l">
+            <h3>{{ route.origin.text }} - {{ route.destination.text }}</h3>
+            <div class="route-data">
+                <p>
+                    <span> {{ route.price.value }} {{ route.price.currency }}</span>
+                    <span><i class="tm-icon-left ion-android-watch"></i>{{ route.duration.text }}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="results-data">
+            <div class="list">
+                <li class="item plane-detail" ng-repeat="step in route.flights | limitTo: config.itemsDisplayed ">
+                    <div class="summary">
+                        <p><i class="icon ion-plane"></i> {{ step.origin.text }} - {{ step.destination.text }}</p>
+                        <p>{{ step.carrier.code }}-{{ step.aircraft }} <i>({{ step.carrier.name }})</i></p>
+                    </div>
+                    <div class="data">
+                        <p>Nº: {{ step.number }}</p>
+                        <p>{{ step.duration.text }}</p>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="transit-details">
+                        <i class="ion-android-time"></i>
+                        <b>{{ step.departureTime | date:'HH:mm' }} </b> ({{ step.departureTime | date:'dd-MM-yyyy' }})
+                        - <b>{{ step.arrivalTime | date:'HH:mm' }} </b> ({{ step.arrivalTime | date:'dd-MM-yyyy' }})
+                    </div>
+                </li>
+            </div>
+
+            <ion-infinite-scroll
+                    ng-if="moreItemsCanBeAdded()"
+                    on-infinite="addItems()">
+            </ion-infinite-scroll>
+
+        </div>
+    </ion-content>
+</ion-view>

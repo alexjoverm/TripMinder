@@ -62,17 +62,33 @@ angular.module('tripminder.services', [])
             },
 
             Search: function(coords){
-                console.log(iata.icao.length)
+
+                //var arraux = [];
+                //
+                //for(var i = 0; i < iata.icao.length; i++)
+                //    if(iata.iata[i][0] != 'Z' && iata.icao != "\\N")
+                //        arraux.push({
+                //            airport: iata.airport[i],
+                //            city: iata.city[i],
+                //            country: iata.country[i],
+                //            iata: iata.iata[i],
+                //            icao: iata.icao[i],
+                //            lat: iata.lat[i],
+                //            lon: iata.lon[i],
+                //            altitude: iata.altitude[i]
+                //        });
+                //
+                //console.log(JSON.stringify(arraux, null, 2));
+
 
                 var result = [];
 
                 var R = 6371; // Earth radius in km
-                var max_obj = 3;
+                var max_results = 5;
 
                 var lon1 = coords.longitude;
                 var lat1 = coords.latitude;
 
-                console.log('lon1: ' + lon1 + '   -  lat1: ' + lat1);
 
                 // Exhaustive search
 
@@ -90,50 +106,40 @@ angular.module('tripminder.services', [])
                     var dist = Math.sqrt(x*x + y*y) * R;*/
 
 
+                    // Harvensine
+
+                    /*var dLat = (lat2-lat1).toRad();
+                     var dLon = (lon2-lon1).toRad();
+
+                     var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                     Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                     Math.sin(dLon/2) * Math.sin(dLon/2);
+                     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+                     var dist = R * c;*/
+
+
                     // Spherical law of cosines
                     var dLon = (lon2-lon1).toRad();
                     var dist = Math.acos( Math.sin(lat1.toRad()) * Math.sin(lat2.toRad()) +
                             Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * Math.cos(dLon) ) * R;
 
-
-
-                    // Harvensine
-
-                    /*var dLat = (lat2-lat1).toRad();
-                    var dLon = (lon2-lon1).toRad();
-
-                    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
-                        Math.sin(dLon/2) * Math.sin(dLon/2);
-                    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-                    var dist = R * c;*/
-
-
-
                     var obj = angular.copy(this.GetIATA(i));
                     obj.distance = dist;
 
-                   // console.log('dist(km): ' + dist/1000);
 
-                    if(result.length < max_obj)
+                    if(result.length == 0)
                         result.push(obj);
-                        // Arreglar, no se insertan ordenados aqui
                     else {
-
-
-
                         var inserted = false;
                         for (var j = 0; j < result.length && !inserted; j++)
                             if (obj.distance < result[j].distance && obj.iata != result[j].iata) {
                                 result.splice(j, 0, obj);
-                                result.pop();
                                 inserted = true;
+
+                                if(result.length >= max_results) result.pop();
                             }
-
                     }
-
-                    //return;
                 }
 
 
@@ -172,7 +178,6 @@ angular.module('tripminder.services', [])
                 $http.get('js/static/IATA_codes.json').
                     success(function(data, status, headers, config) {
                         iata = data;
-                        console.log(iata);
                     }).
                     error(function(data, status, headers, config) {
                         console.log(data);

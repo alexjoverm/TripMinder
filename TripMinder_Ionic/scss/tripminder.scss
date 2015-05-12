@@ -89,8 +89,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .gmaps-wrap{ 
     max-height: $map-home-height;
-    //overflow: hidden; 
-    transition: max-height 0.5s ease;
 }
  
 .map-marker-label{ 

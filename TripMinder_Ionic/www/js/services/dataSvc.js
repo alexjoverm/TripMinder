@@ -76,6 +76,12 @@ angular.module('tripminder.services')
                 plane    : null
             };
 
+            this.planeData = {
+                searchingPlane: false,
+                origins: null,
+                dests: null
+            };
+
             this.adress = null;
 
             this.ResetSearchVars = function () {
@@ -101,11 +107,11 @@ angular.module('tripminder.services')
                         end_location  : arr[i].legs[0].end_location,
                         steps         : arr[i].legs[0].steps,
                         polyline      : arr[i].overview_polyline.points
-                    }
+                    };
 
                     datakeeper.searchResults[mode].push(obj);
                 }
-            }
+            };
 
             this.AddTransitRoutes = function (arr) {
                 datakeeper.searchResults['bus'] = [];
@@ -129,8 +135,73 @@ angular.module('tripminder.services')
                     processTransitSteps(obj);
                     datakeeper.searchResults[obj.main_vehicle].push(obj);
                 });
+            };
+
+            this.AddPlaneRoutes = function (res) {
+
+                console.log(res);
+
+                datakeeper.searchResults['plane'] = [];
+
+                var data = res.trips.data;
+                var trips = res.trips.tripOption;
+
+                try{
+                    // Guardar máx 3 resultados
+                    for(var i=0; i < trips.length && i < 3; i++){
+
+                        var durationTxt = (trips[i].slice[0].duration / 60 < 1 ? trips[i].slice[0].duration + ' min' : parseInt(trips[i].slice[0].duration / 60) + ' h ' + trips[i].slice[0].duration % 60 + ' min');
+                        var subFlights = [];
+
+                        for(var j=0; j < trips[i].slice[0].segment.length; j++){
+                            var currSegment = trips[i].slice[0].segment[j];
+                            var subDurationTxt = (currSegment.leg[0].duration / 60 < 1 ? currSegment.leg[0].duration + ' min' : parseInt(currSegment.leg[0].duration / 60) + ' h ' + currSegment.leg[0].duration % 60 + ' min');
+
+                            var _origin = _.find(data.city, { 'code': currSegment.leg[0].origin });
+                            var _dest = _.find(data.city, { 'code': currSegment.leg[0].destination });
+
+                            var subObj = {
+                                departureTime: new Date(currSegment.leg[0].departureTime),
+                                arrivalTime: new Date(currSegment.leg[0].arrivalTime),
+                                aircraft: currSegment.leg[0].aircraft,
+                                carrier: _.find(data.carrier, { 'code': currSegment.flight.carrier }),
+                                number: currSegment.flight.number,
+                                origin: { code: currSegment.leg[0].origin, text: _origin.name },
+                                destination: { code: currSegment.leg[0].destination, text: _dest.name },
+                                duration: {text: subDurationTxt, value: currSegment.duration}
+                            };
+
+                            subFlights.push(subObj);
+                        }
+
+                        var origin = subFlights[0].origin;
+                        var dest = subFlights[subFlights.length - 1].destination;
+                        var depTime = subFlights[0].departureTime;
+                        var arrTime = subFlights[subFlights.length - 1].arrivalTime;
+
+                        var priceNum = trips[i].saleTotal.replace(/[A-Za-z]+/g, '');
+                        var priceCurr = trips[i].saleTotal.replace(/[0-9]+(\.[0-9]+){0,1}/g, '');
+
+
+                        var obj = {
+                            origin: origin,
+                            destination: dest,
+                            departureTime: depTime,
+                            arrivalTime: arrTime,
+                            price: {value: priceNum, currency: priceCurr},
+                            duration: { text: durationTxt, value: trips[i].slice[0].duration },
+                            connections: trips[i].slice[0].segment.length,
+                            flights: subFlights
+                        };
+
+                        datakeeper.searchResults['plane'].push(obj);
+                    }
+
+                    console.log(datakeeper.searchResults['plane']);
+                }
+                catch(err){ console.log(err); }
             }
-        }
+        };
 
         return datakeeper;
     }

@@ -1,9 +1,9 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc','IATA',
-  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc, IATA) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc) {
 
-      var SearchMarker = function(id){
+      var FindMarker = function(id){
           for(var i in $scope.markers)
             if($scope.markers[i].id == id)
                 return $scope.markers[i];
@@ -14,7 +14,9 @@ angular.module('tripminder')
     // ** View data
     $scope.inputs = {
     	origin: 'london, uk',
-    	dest: 'edinburg, uk'
+    	dest: 'edinburg, uk',
+        originSelected: false,
+        destSelected: false
     };
 
     $scope.origins = null;
@@ -43,6 +45,11 @@ angular.module('tripminder')
     	if($scope.timerPromise) 
     		$timeout.cancel($scope.timerPromise);
 
+        if(inputData == $scope.inputs.origin)
+            $scope.inputs.originSelected = false;
+        else
+            $scope.inputs.destSelected = false;
+
     	if(inputData)
 	    	$scope.timerPromise = $timeout(function() {
 	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '' } ).promise.then(function(data){ 
@@ -58,7 +65,7 @@ angular.module('tripminder')
                             $scope.ScrollTo('input-2');
                     }
 	    		});
-	    	}, 600);
+	    	}, 500);
     };
       
       
@@ -67,21 +74,21 @@ angular.module('tripminder')
     // ****** SELECT FUNCTIONS ******
       
     // Clear input and ScrollTo top
-    $scope.Clear = function(varScope){ 
-        
-        $scope.blurPromise = $timeout(function(){ 
+    $scope.Clear = function(varScope){
+
+        $scope.blurPromise = $timeout(function(){
             if(varScope == 'origins')
                 $scope.origins = null;
             else
                 $scope.dests = null;
 
             $ionicScrollDelegate.scrollTo(0, 0, true);
-        }, 300);
+        }, 250);
     };
-      
+
     // Using blurPromise, prevents the list of result to close when it's shown, since
-    // it provokes blur & focus 
-    $scope.Focus = function(){ 
+    // it provokes blur & focus
+    $scope.Focus = function(){
         if($scope.blurPromise)
             $timeout.cancel($scope.blurPromise);
     };
@@ -90,6 +97,7 @@ angular.module('tripminder')
     $scope.SelectOrigin = function(i){ 
         $scope.inputs.origin = $scope.origins[i].description;
         $scope.origins = null;
+        $scope.inputs.originSelected = true;
     
         if(window.cordova && window.cordova.plugins.Keyboard)
             cordova.plugins.Keyboard.close();
@@ -101,7 +109,8 @@ angular.module('tripminder')
     $scope.SelectDest = function(i){ 
         $scope.inputs.dest = $scope.dests[i].description;
         $scope.dests = null;
-        
+        $scope.inputs.destSelected = true;
+
         if(window.cordova && window.cordova.plugins.Keyboard)
             cordova.plugins.Keyboard.close();
         
@@ -141,31 +150,35 @@ angular.module('tripminder')
       
     $scope.Search = function(){ 
 
-        var time = new Date().getTime();
+        //var time = new Date().getTime();
+        //
+        //var obj1 = IATA.Search(FindMarker(0).coords);
+        //var obj2 = IATA.Search(FindMarker(1).coords);
+        //
+        //console.log(obj1);
+        //console.log("dist1(km): " + obj1[0].distance +'km');
+        //console.log(obj2);
+        //console.log("dist2(km): " + obj2[0].distance +'km');
+        //
+        ////console.log(IATA.Search($scope.inputs.dest))
+        //
+        //var time2 = new Date().getTime();
+        //time2 -= time;
+        //
+        //alert(time2 + ' ms');
 
-        var obj1 = IATA.Search(SearchMarker(0).coords);
-        var obj2 = IATA.Search(SearchMarker(1).coords);
-
-        console.log(obj1);
-        console.log("dist1(km): " + obj1[0].distance +'km');
-        console.log(obj2);
-        console.log("dist2(km): " + obj2[0].distance +'km');
-
-        //console.log(IATA.Search($scope.inputs.dest))
-
-        var time2 = new Date().getTime();
-        time2 -= time;
-
-        alert(time2 + ' ms');
-
-        /*if(!$scope.inputs.origin || !$scope.inputs.dest)
+        if(!$scope.inputs.origin || !$scope.inputs.dest)
            $ionicPopup.alert({
              title: 'Datos vacios',
-             template: 'Debes insertar un origen y un destino'
+             template: 'Debes insertar un origen y un destino.'
            });
+        else if($scope.markers.length < 2)
+            $ionicPopup.alert({
+                title: 'Origen o destino incorrecto',
+                template: 'Debes seleccionar un origen y destino de la lista, o marcar dos puntos en el mapa.'
+            });
         else
-    	   RestSvc.Search($scope.inputs.origin, $scope.inputs.dest);
-    	   */
+    	   RestSvc.Search($scope.inputs.origin, $scope.inputs.dest, FindMarker(0).coords, FindMarker(1).coords);
     };
 
       

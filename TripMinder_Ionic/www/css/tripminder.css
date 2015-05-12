@@ -7615,9 +7615,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   height: 220px; }
 
 .gmaps-wrap {
-  max-height: 220px;
-  -webkit-transition: max-height 0.5s ease;
-          transition: max-height 0.5s ease; }
+  max-height: 220px; }
 
 .map-marker-label {
   font-size: 18px;
@@ -7675,6 +7673,26 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
       width: 80%; }
   .results-data .list .item.tm-item-transit .summary i {
     font-size: 24px; }
+.results-data .list .item.tm-item-plane .summary p {
+  display: block;
+  margin: 0;
+  height: 27px;
+  width: 96%;
+  margin-left: 30px; }
+  .results-data .list .item.tm-item-plane .summary p.limit-width {
+    width: 80%; }
+.results-data .list .item.tm-item-plane .summary i {
+  font-size: 24px;
+  position: absolute;
+  top: 28px; }
+.results-data .list .item.tm-item-plane .data p {
+  height: 26px; }
+.results-data .list .item.plane-detail .summary p {
+  display: block;
+  white-space: nowrap;
+  height: 26px; }
+.results-data .list .item.plane-detail .data p {
+  height: 27px; }
 
 .tm-tabs.tabs-striped .tabs {
   border-bottom: none; }

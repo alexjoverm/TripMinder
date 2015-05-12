@@ -121,7 +121,7 @@ angular.module('tripminder.services')
 
                 /*** Callers functions ***/
 
-                this.Search = function (origin, dest) {
+                this.Search = function (origin, dest, originCoord, destCoord) {
 
                     // Init and reset ResourcesSvc and RestSvc promises, also DataSvc data
                     ResetVars();
@@ -129,7 +129,7 @@ angular.module('tripminder.services')
                     DataSvc.adress = {
                         origin: origin.split(',')[0],
                         dest  : dest.split(',')[0]
-                    }
+                    };
 
                     //******** Perform API calls
 
@@ -216,35 +216,46 @@ angular.module('tripminder.services')
 
                     // ** 5: QPX Express (PLANE)
 
-                    var requestObj = angular.copy(Apis.qpxExpress.request);
-                    requestObj.request.slice[0].date = (new Date()).toISOString().slice(0, 10);
+
 
                     // Find Origin and Dest IATA name
-                    var origin_obj = IATA.Search(origin);
-                    var dest_obj = IATA.Search(dest);
+                    var origin_obj = IATA.Search(originCoord);
+                    var dest_obj = IATA.Search(destCoord);
 
-                    requestObj.request.slice[0].origin = origin_obj.bestMatch.code.toUpperCase();
-                    requestObj.request.slice[0].destination = dest_obj.bestMatch.code.toUpperCase();
+                    DataSvc.planeData.origins = origin_obj;
+                    DataSvc.planeData.dests = dest_obj;
+                    console.log(DataSvc.planeData);
+
+                    if(origin_obj.length && dest_obj.length){
+
+                        var requestObj = angular.copy(Apis.qpxExpress.request);
+                        requestObj.request.slice[0].date = (new Date()).toISOString().slice(0, 10);
+
+                        // For now ONLY FIRST OCCURRENCE
+                        requestObj.request.slice[0].origin = origin_obj[0].iata;
+                        requestObj.request.slice[0].destination = dest_obj[0].iata;
 
 
-                    promises.plane = ResourcesSvc.QPXExpress.myPost(JSON.stringify(requestObj));
 
-                    promises.plane.promise.then(function (data) {
-                        CheckFinished();
-                        $rootScope.$broadcast('search-finished', {plane: true});
+                        promises.plane = ResourcesSvc.QPXExpress.myPost(JSON.stringify(requestObj));
 
-                        console.log(JSON.stringify(data, null, 2))
-                        alert(data.kind)
-
-                        // Add TRAIN & BUS routes (they are in the same reply)
-                        //DataSvc.AddTransitRoutes(data.routes);
-
-                    }, function (response) {
-                        if (response != 'ABORT') {
+                        promises.plane.promise.then(function (data) {
                             CheckFinished();
-                            $rootScope.$broadcast('search-finished', {plane: false});
-                        }
-                    });
+                            $rootScope.$broadcast('search-finished', {plane: true});
+
+                            DataSvc.AddPlaneRoutes(data);
+                        }, function (response) {
+                            if (response != 'ABORT') {
+                                CheckFinished();
+                                $rootScope.$broadcast('search-finished', {plane: false});
+                            }
+                        });
+                    }
+                    else{
+                        CheckFinished();
+                        $rootScope.$broadcast('search-finished', {plane: false});
+                    }
+
 
 
                     // Show loading screen
@@ -252,6 +263,28 @@ angular.module('tripminder.services')
                         templateUrl: 'templates/partials/loadingSearch.html'
                     });
                 };
+
+                this.PlaneSearch = function(origin, dest, date){
+
+                    if(!date) date = new Date();
+
+                    var requestObj = angular.copy(Apis.qpxExpress.request);
+                    requestObj.request.slice[0].date = date.toISOString().slice(0, 10);
+
+                    // For now ONLY FIRST OCCURRENCE
+                    requestObj.request.slice[0].origin = origin;
+                    requestObj.request.slice[0].destination = dest;
+
+                    promises.plane = ResourcesSvc.QPXExpress.myPost(JSON.stringify(requestObj));
+
+                    promises.plane.promise.then(function (data) {
+                        DataSvc.AddPlaneRoutes(data);
+                    }, function (response) {
+                        console.log(arguments);
+                    });
+
+                    return promises.plane.promise;
+                }
             };
 
 

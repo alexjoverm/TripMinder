@@ -6,6 +6,8 @@ angular.module('tripminder')
       $scope.route = DataSvc.searchResults[$stateParams.id][$stateParams.num];
       $scope.adress = DataSvc.adress;
 
+      console.log($scope.route);
+
       $scope.map = MapsSvc.CreateDefaultResultMap();
 
       $scope.config = {
@@ -13,7 +15,12 @@ angular.module('tripminder')
       };
 
       $scope.moreItemsCanBeAdded = function(){
-          return $scope.route.steps.length > $scope.config.itemsDisplayed;
+          if($scope.route.steps)
+            return $scope.route.steps.length > $scope.config.itemsDisplayed;
+          else if($scope.route.flights)
+            return $scope.route.flights.length > $scope.config.itemsDisplayed;
+          else
+            return false;
       };
 
       $scope.addItems = function(){
@@ -31,7 +38,7 @@ angular.module('tripminder')
       MapsSvc.promises.gMapsAPI.then(function(){ 
           
           // COMPROBAR SI PROVIENE DE GOOGLE MAPS O ES UNA LINEA DE PUNTOS
-          if($scope.route) 
+          if($scope.route && $scope.route.polyline)
               $scope.map.polyline = MapsSvc.gMapsAPI.geometry.encoding.decodePath($scope.route.polyline);
       });
       

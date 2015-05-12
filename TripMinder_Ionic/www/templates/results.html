@@ -175,8 +175,62 @@
                 </ion-scroll>
             </ion-tab>
 
+
+
             <ion-tab icon="ion-plane">
-                <!-- Tab 3 content -->
+
+                <div class="gmaps-wrap" ng-show="searchResults.plane && searchResults.plane.length > 0">
+                    <ui-gmap-google-map center='planeMap.center' zoom='planeMap.zoom' options="planeMap.options" control="planeMap.control" data-tap-disabled="true">
+                        <ui-gmap-markers models='planeMarkers' options="'options'" coords="'coords'" idKey="'id'"></ui-gmap-markers>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list ng-hide" ng-show="searchResults.plane && searchResults.plane.length > 0">
+                        <li class="item tm-item-plane" ng-repeat="route in searchResults.plane | index"
+                            ng-click="GoToPlaneDetail({ id: 'plane', num: route.index })">
+                            <div class="summary">
+                                <i class="icon ion-plane"> </i>
+                                <p class="ellipsis">{{ route.origin.text }} - {{ route.destination.text }}</p>
+                                <p>
+                                    <small ng-show="route.connections == 1">Vuelo directo</small>
+                                    <small ng-show="route.connections > 1">{{route.connections - 1}} transbordos</small>
+                                </p>
+                            </div>
+                            <div class="data">
+                                <p>{{ route.price.value }} {{ route.price.currency }}</p>
+
+                                <p>{{ route.duration.text }}</p>
+                            </div>
+                        </li>
+
+                        <p class="padding text-center">
+                            <button class="button button-positive" ng-click="ClearPlane()">Otras opciones</button>
+                        </p>
+                    </div>
+
+                    <div ng-show="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" class="select-places padding">
+                        <p class="padding" ng-show="!planeData.searchingPlane"> No hay resultados disponibles para este medio de transporte </p>
+
+                        <h4>Crea tu itinerario</h4>
+
+                        <form ng-submit="SearchPlane(input)">
+                            <label class="item item-input">
+                                <span class="input-label">Origen</span>
+                                <select id="origin" ng-options="item.city for item in planeData.origins" ng-model="input.origin"></select>
+                            </label>
+
+                            <label class="item item-input">
+                                <span class="input-label">Destino</span>
+                                <select id="dest" ng-options="item.city for item in planeData.dests" ng-model="input.dest"></select>
+                            </label>
+
+                            <p class="padding text-center">
+                                <button class="button button-positive" type="submit">Buscar</button>
+                            </p>
+                        </form>
+                    </div>
+                </ion-scroll>
             </ion-tab>
 
         </ion-tabs>

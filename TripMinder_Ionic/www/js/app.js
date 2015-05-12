@@ -67,6 +67,15 @@ angular.module('tripminder',
                             controller: 'ResultsDetailCtrl'
                         }
                     }
+                })
+                .state('app.planeDetail', {
+                    url: "/plane-results/:id/:num",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "templates/planeDetail.html",
+                            controller: 'ResultsDetailCtrl'
+                        }
+                    }
                 });
 
             // if none of the above states are matched, use this as the fallback
