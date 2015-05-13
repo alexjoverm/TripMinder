@@ -12,7 +12,6 @@ angular.module('tripminder')
 
             $scope.searchResults = DataSvc.searchResults;
             $scope.planeData = DataSvc.planeData;
-            console.log($scope.planeData);
 
             $scope.planeMarkers = [];
 
@@ -20,6 +19,9 @@ angular.module('tripminder')
 
             $scope.map = MapsSvc.CreateDefaultResultMap();
             $scope.planeMap = MapsSvc.CreateMapOriginDest(38.38, -0.51, 16);
+
+
+
 
             // Height for ion-scroll
             $scope.win_height = {
@@ -43,7 +45,6 @@ angular.module('tripminder')
             };
 
             $scope.SearchPlane = function(input){
-                console.log(input);
                 RestSvc.PlaneSearch(input.origin.iata, input.dest.iata).then(function(data){
                     if(data.trips.tripOption){
                         $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, input.origin.lat, input.origin.lon, input.origin.city));
@@ -63,24 +64,40 @@ angular.module('tripminder')
 
                 MapsSvc.promises.gMapsAPI.then(function(){
                     if($scope.planeMarkers.length > 0){
-                        var map = $scope.planeMap.control.getGMap();
-                        var bounds = new google.maps.LatLngBounds();
-
-                        for (var i in $scope.planeMarkers){
-                            var aux = new google.maps.LatLng(
-                                $scope.planeMarkers[i].coords.latitude,
-                                $scope.planeMarkers[i].coords.longitude
-                            );
-                            bounds.extend(aux);
-                        }
-
                         $timeout(function() {
+                            var map = $scope.planeMap.control.getGMap();
+                            var bounds = new google.maps.LatLngBounds();
+
+                            for (var i in $scope.planeMarkers){
+                                var aux = new google.maps.LatLng(
+                                    $scope.planeMarkers[i].coords.latitude,
+                                    $scope.planeMarkers[i].coords.longitude
+                                );
+                                bounds.extend(aux);
+                            }
+
                             map.fitBounds(bounds);
                         }, 100);
                     }
 
                 });
             };
+
+
+
+            $scope.InitPlaneMap = function(){
+                if($scope.searchResults.plane && $scope.searchResults.plane.length > 0){
+                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, $scope.planeData.origins[0].lat, $scope.planeData.origins[0].lon, $scope.planeData.origins[0].city));
+                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, $scope.planeData.dests[0].lat, $scope.planeData.dests[0].lon, $scope.planeData.dests[0].city));
+
+                    $scope.UpdateBounds();
+                }
+            };
+
+
+
+
+
 
 
             // **** Get polyline of map

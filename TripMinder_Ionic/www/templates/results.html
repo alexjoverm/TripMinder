@@ -177,7 +177,7 @@
 
 
 
-            <ion-tab icon="ion-plane">
+            <ion-tab icon="ion-plane" on-select="InitPlaneMap()">
 
                 <div class="gmaps-wrap" ng-show="searchResults.plane && searchResults.plane.length > 0">
                     <ui-gmap-google-map center='planeMap.center' zoom='planeMap.zoom' options="planeMap.options" control="planeMap.control" data-tap-disabled="true">
