@@ -1,0 +1,378 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install', '-g', 'ionic' ]
+2 info using npm@2.1.3
+3 info using node@v0.10.26
+4 verbose node symlink /usr/bin/node
+5 silly cache add args [ 'ionic', null ]
+6 verbose cache add spec ionic
+7 silly cache add parsed spec { raw: 'ionic',
+7 silly cache add   scope: null,
+7 silly cache add   name: 'ionic',
+7 silly cache add   rawSpec: '',
+7 silly cache add   spec: '*',
+7 silly cache add   type: 'range' }
+8 verbose addNamed ionic@*
+9 verbose addNamed ionic@* not in flight; adding
+10 silly addNamed semver.valid null
+11 silly addNamed semver.validRange *
+12 silly addNameRange { name: 'ionic', range: '*', hasData: false }
+13 verbose mapToRegistry name ionic
+14 verbose mapToRegistry uri https://registry.npmjs.org/ionic
+15 verbose request on initialization, where is /ionic
+16 verbose request after pass 1, where is /ionic
+17 verbose request url raw /ionic
+18 verbose request resolving registry [ 'https://registry.npmjs.org/', './ionic' ]
+19 verbose request after pass 2, where is https://registry.npmjs.org/ionic
+20 verbose request no auth needed
+21 info attempt registry request try #1 at 12:08:53
+22 verbose request id 27668514ffbd2cb0
+23 verbose etag "1N1W3X5OE7O10E8K9999JK28L"
+24 http request GET https://registry.npmjs.org/ionic
+25 http 200 https://registry.npmjs.org/ionic
+26 silly registry.get cb [ 200,
+26 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+26 silly registry.get     etag: '"ECVL94FZCQI8T97BWNYNH6V53"',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'cache-control': 'max-age=60',
+26 silly registry.get     'content-length': '364288',
+26 silly registry.get     'accept-ranges': 'bytes',
+26 silly registry.get     date: 'Fri, 15 May 2015 10:08:53 GMT',
+26 silly registry.get     via: '1.1 varnish',
+26 silly registry.get     age: '0',
+26 silly registry.get     connection: 'keep-alive',
+26 silly registry.get     'x-served-by': 'cache-fra1239-FRA',
+26 silly registry.get     'x-cache': 'HIT',
+26 silly registry.get     'x-cache-hits': '1',
+26 silly registry.get     'x-timer': 'S1431684533.806677,VS0,VE187',
+26 silly registry.get     vary: 'Accept' } ]
+27 silly addNameRange number 2 { name: 'ionic', range: '*', hasData: true }
+28 silly addNameRange versions [ 'ionic',
+28 silly addNameRange   [ '0.9.6',
+28 silly addNameRange     '0.9.8',
+28 silly addNameRange     '0.9.9',
+28 silly addNameRange     '0.9.10',
+28 silly addNameRange     '0.9.11',
+28 silly addNameRange     '0.9.12',
+28 silly addNameRange     '0.9.13',
+28 silly addNameRange     '0.9.14',
+28 silly addNameRange     '0.9.15',
+28 silly addNameRange     '0.9.16',
+28 silly addNameRange     '1.0.0-beta.1',
+28 silly addNameRange     '1.0.0-beta',
+28 silly addNameRange     '1.0.1-beta',
+28 silly addNameRange     '1.0.3-beta',
+28 silly addNameRange     '1.0.4',
+28 silly addNameRange     '1.0.5',
+28 silly addNameRange     '1.0.6',
+28 silly addNameRange     '1.0.7',
+28 silly addNameRange     '1.0.8',
+28 silly addNameRange     '1.0.9',
+28 silly addNameRange     '1.0.10',
+28 silly addNameRange     '1.0.11',
+28 silly addNameRange     '1.0.12',
+28 silly addNameRange     '1.0.13',
+28 silly addNameRange     '1.0.14',
+28 silly addNameRange     '1.0.15',
+28 silly addNameRange     '1.0.16',
+28 silly addNameRange     '1.0.17',
+28 silly addNameRange     '1.1.0-beta1',
+28 silly addNameRange     '1.1.0-beta2',
+28 silly addNameRange     '1.1.0-beta3',
+28 silly addNameRange     '1.1.0-beta4',
+28 silly addNameRange     '1.1.0-beta5',
+28 silly addNameRange     '1.1.0-beta6',
+28 silly addNameRange     '1.1.0',
+28 silly addNameRange     '1.1.1-beta1',
+28 silly addNameRange     '1.1.1-beta2',
+28 silly addNameRange     '1.1.1-beta3',
+28 silly addNameRange     '1.1.1',
+28 silly addNameRange     '1.1.3',
+28 silly addNameRange     '1.1.4',
+28 silly addNameRange     '1.1.5-beta1',
+28 silly addNameRange     '1.1.5-beta2',
+28 silly addNameRange     '1.1.5-beta3',
+28 silly addNameRange     '1.1.5-beta4',
+28 silly addNameRange     '1.1.5-beta5',
+28 silly addNameRange     '1.1.5',
+28 silly addNameRange     '1.1.6',
+28 silly addNameRange     '1.1.7-beta1',
+28 silly addNameRange     '1.1.7',
+28 silly addNameRange     '1.1.8-beta1',
+28 silly addNameRange     '1.1.8-beta2',
+28 silly addNameRange     '1.1.8-beta3',
+28 silly addNameRange     '1.1.8-beta4',
+28 silly addNameRange     '1.1.8-beta5',
+28 silly addNameRange     '1.1.8',
+28 silly addNameRange     '1.1.9-beta1',
+28 silly addNameRange     '1.1.9',
+28 silly addNameRange     '1.1.10',
+28 silly addNameRange     '1.1.11-beta1',
+28 silly addNameRange     '1.1.11-beta2',
+28 silly addNameRange     '1.1.11',
+28 silly addNameRange     '1.1.12-beta1',
+28 silly addNameRange     '1.1.12-beta2',
+28 silly addNameRange     '1.1.12-beta3',
+28 silly addNameRange     '1.1.12',
+28 silly addNameRange     '1.1.13',
+28 silly addNameRange     '1.1.14-beta1',
+28 silly addNameRange     '1.1.14-beta2',
+28 silly addNameRange     '1.1.14-beta3',
+28 silly addNameRange     '1.2.0-beta1',
+28 silly addNameRange     '1.2.0',
+28 silly addNameRange     '1.2.1-beta1',
+28 silly addNameRange     '1.2.1-beta2',
+28 silly addNameRange     '1.2.1-beta3',
+28 silly addNameRange     '1.2.1-beta4',
+28 silly addNameRange     '1.2.1',
+28 silly addNameRange     '1.2.2',
+28 silly addNameRange     '1.2.3-beta1',
+28 silly addNameRange     '1.2.3-beta2',
+28 silly addNameRange     '1.2.3-beta3',
+28 silly addNameRange     '1.2.3',
+28 silly addNameRange     '1.2.4-beta1',
+28 silly addNameRange     '1.2.4-beta2',
+28 silly addNameRange     '1.2.4-beta3',
+28 silly addNameRange     '1.2.4',
+28 silly addNameRange     '1.2.5-beta1',
+28 silly addNameRange     '1.2.5-beta2',
+28 silly addNameRange     '1.2.5-beta3',
+28 silly addNameRange     '1.2.5',
+28 silly addNameRange     '1.2.6-beta1',
+28 silly addNameRange     '1.2.6-beta2',
+28 silly addNameRange     '1.2.6-beta3',
+28 silly addNameRange     '1.2.6',
+28 silly addNameRange     '1.2.7',
+28 silly addNameRange     '1.2.8-beta1',
+28 silly addNameRange     '1.2.8-beta2',
+28 silly addNameRange     '1.2.8',
+28 silly addNameRange     '1.2.9',
+28 silly addNameRange     '1.2.10',
+28 silly addNameRange     '1.2.11',
+28 silly addNameRange     '1.2.12',
+28 silly addNameRange     '1.2.13',
+28 silly addNameRange     '1.2.14-beta1',
+28 silly addNameRange     '1.2.14-beta2',
+28 silly addNameRange     '1.2.14-beta3',
+28 silly addNameRange     '1.2.14-beta4',
+28 silly addNameRange     '1.2.14-beta5',
+28 silly addNameRange     '1.2.14-beta6',
+28 silly addNameRange     '1.2.14',
+28 silly addNameRange     '1.3.0-beta1',
+28 silly addNameRange     '1.3.0',
+28 silly addNameRange     '1.3.1',
+28 silly addNameRange     '1.3.2',
+28 silly addNameRange     '1.3.3',
+28 silly addNameRange     '1.3.4',
+28 silly addNameRange     '1.3.5',
+28 silly addNameRange     '1.3.6',
+28 silly addNameRange     '1.3.7',
+28 silly addNameRange     '1.3.8',
+28 silly addNameRange     '1.3.9',
+28 silly addNameRange     '1.3.10',
+28 silly addNameRange     '1.4.0-alpha.1',
+28 silly addNameRange     '1.3.11',
+28 silly addNameRange     '1.3.1-1.alpha.0',
+28 silly addNameRange     '1.4.0-alpha.2',
+28 silly addNameRange     '1.3.12',
+28 silly addNameRange     '1.3.12-beta.1',
+28 silly addNameRange     '1.3.12-beta.2',
+28 silly addNameRange     '1.3.13-beta.0',
+28 silly addNameRange     '1.3.1-3.beta.1',
+28 silly addNameRange     '1.3.1-3.beta.2',
+28 silly addNameRange     '1.3.13',
+28 silly addNameRange     '1.3.1-3.beta.4',
+28 silly addNameRange     '1.3.14-beta',
+28 silly addNameRange     '1.3.14-beta.1',
+28 silly addNameRange     '1.4.0-alpha.3',
+28 silly addNameRange     '1.3.14',
+28 silly addNameRange     '1.4.0-alpha.4',
+28 silly addNameRange     '1.4.0-alpha.5',
+28 silly addNameRange     '1.3.15-beta.0',
+28 silly addNameRange     '1.3.15-beta.1',
+28 silly addNameRange     '1.3.15-beta.2',
+28 silly addNameRange     '1.3.15-beta.3',
+28 silly addNameRange     '1.3.15-beta.4',
+28 silly addNameRange     '1.3.15',
+28 silly addNameRange     '1.3.16',
+28 silly addNameRange     '1.4.0-alpha.6',
+28 silly addNameRange     '1.3.17-beta.0',
+28 silly addNameRange     '1.3.17-beta.1',
+28 silly addNameRange     '1.3.17-beta.2',
+28 silly addNameRange     '1.3.17-beta.3',
+28 silly addNameRange     '1.3.1-7.beta.4',
+28 silly addNameRange     '1.3.17',
+28 silly addNameRange     '1.3.18-beta.0',
+28 silly addNameRange     '1.3.18-beta.1',
+28 silly addNameRange     '1.3.18-beta.2',
+28 silly addNameRange     '1.3.18-beta.3',
+28 silly addNameRange     '1.3.18',
+28 silly addNameRange     '1.3.19-beta.0',
+28 silly addNameRange     '1.3.19-beta.1',
+28 silly addNameRange     '1.3.19-beta.2',
+28 silly addNameRange     '1.3.19-beta.3',
+28 silly addNameRange     '1.3.19-beta.4',
+28 silly addNameRange     '1.3.19',
+28 silly addNameRange     '1.3.20',
+28 silly addNameRange     '1.4.1-beta.0',
+28 silly addNameRange     '1.4.0-beta.1',
+28 silly addNameRange     '1.4.0-beta.2',
+28 silly addNameRange     '1.4.0-beta.3',
+28 silly addNameRange     '1.4.0-beta.5',
+28 silly addNameRange     '1.4.0-beta.6',
+28 silly addNameRange     '1.4.0-beta.7',
+28 silly addNameRange     '1.3.21-beta.0',
+28 silly addNameRange     '1.3.21-beta.1',
+28 silly addNameRange     '1.3.21',
+28 silly addNameRange     '1.3.22',
+28 silly addNameRange     '1.4.0-beta.8',
+28 silly addNameRange     '1.4.0-beta.9',
+28 silly addNameRange     '1.4.0-beta.10',
+28 silly addNameRange     '1.4.0-beta.11',
+28 silly addNameRange     '1.4.0-beta.12',
+28 silly addNameRange     '1.4.0-beta.13',
+28 silly addNameRange     '1.4.0-beta.14',
+28 silly addNameRange     '1.4.0-beta.15',
+28 silly addNameRange     '1.4.0-beta.16',
+28 silly addNameRange     '1.4.0-beta.17',
+28 silly addNameRange     '1.4.0-beta.18',
+28 silly addNameRange     '1.4.0',
+28 silly addNameRange     '1.4.1' ] ]
+29 verbose addNamed ionic@1.4.1
+30 verbose addNamed ionic@1.4.1 not in flight; adding
+31 silly addNamed semver.valid 1.4.1
+32 silly addNamed semver.validRange 1.4.1
+33 verbose addRemoteTarball https://registry.npmjs.org/ionic/-/ionic-1.4.1.tgz not in flight; adding
+34 verbose addRemoteTarball [ 'https://registry.npmjs.org/ionic/-/ionic-1.4.1.tgz',
+34 verbose addRemoteTarball   '72bea509cd7a72444227f62684985e01b6ad9109' ]
+35 info retry fetch attempt 1 at 12:08:54
+36 info attempt registry request try #1 at 12:08:54
+37 http fetch GET https://registry.npmjs.org/ionic/-/ionic-1.4.1.tgz
+38 http fetch 200 https://registry.npmjs.org/ionic/-/ionic-1.4.1.tgz
+39 silly fetchAndShaCheck shasum 72bea509cd7a72444227f62684985e01b6ad9109
+40 verbose addTmpTarball /var/folders/hg/r_prl95s6rq16kw9lj2kfdrw0000gn/T/npm-34365-76d22d7e/registry.npmjs.org/ionic/-/ionic-1.4.1.tgz not in flight; verifying
+41 verbose addTmpTarball already have metadata; skipping unpack
+42 verbose afterAdd /Users/alejandrojovermorales/.npm/ionic/1.4.1/package/package.json not in flight; writing
+43 silly install resolved [ { name: 'ionic',
+43 silly install resolved     version: '1.4.1',
+43 silly install resolved     preferGlobal: true,
+43 silly install resolved     description: 'A tool for creating and developing Ionic Framework mobile apps.',
+43 silly install resolved     homepage: 'http://ionicframework.com/',
+43 silly install resolved     bin: { ionic: 'bin/ionic' },
+43 silly install resolved     scripts:
+43 silly install resolved      { bump: 'node lib/tasks/bumpversion',
+43 silly install resolved        'beta-bump': 'node lib/tasks/bumpversion --level pre --identifier beta',
+43 silly install resolved        'publish-release': 'node lib/tasks/bumpversion --npmPublish',
+43 silly install resolved        'publish-tag': 'node lib/tasks/bumpversion --level beta --npmPublishTag',
+43 silly install resolved        'full-release': 'node lib/tasks/bumpversion --npmInstall --git --npmPublish',
+43 silly install resolved        test: 'npm run jasmine',
+43 silly install resolved        e2e: 'jasmine-node --captureExceptions ./e2e',
+43 silly install resolved        jasmine: 'jasmine-node --captureExceptions  ./spec' },
+43 silly install resolved     keywords:
+43 silly install resolved      [ 'ionic',
+43 silly install resolved        'ionic framework',
+43 silly install resolved        'ionicframework',
+43 silly install resolved        'mobile',
+43 silly install resolved        'app',
+43 silly install resolved        'hybrid',
+43 silly install resolved        'cordova',
+43 silly install resolved        'phonegap' ],
+43 silly install resolved     repository:
+43 silly install resolved      { type: 'git',
+43 silly install resolved        url: 'https://github.com/driftyco/ionic-cli.git' },
+43 silly install resolved     contributors: [ [Object], [Object], [Object], [Object] ],
+43 silly install resolved     license: 'MIT',
+43 silly install resolved     dependencies:
+43 silly install resolved      { archiver: '0.5.1',
+43 silly install resolved        async: '^0.9.0',
+43 silly install resolved        cheerio: '^0.19.0',
+43 silly install resolved        'cli-table': '^0.3.1',
+43 silly install resolved        colors: '0.6.2',
+43 silly install resolved        connect: '3.1.1',
+43 silly install resolved        'connect-livereload': '0.5.2',
+43 silly install resolved        crc: '3.2.1',
+43 silly install resolved        'cross-spawn': '0.2.3',
+43 silly install resolved        'event-stream': '3.0.x',
+43 silly install resolved        finalhandler: '0.2.0',
+43 silly install resolved        'form-data': '0.1.4',
+43 silly install resolved        gulp: '3.8.8',
+43 silly install resolved        'ionic-app-lib': '0.0.18',
+43 silly install resolved        ncp: '0.4.2',
+43 silly install resolved        npm: '2.1.3',
+43 silly install resolved        'opbeat-ionic': '^1.1.3',
+43 silly install resolved        open: '0.0.5',
+43 silly install resolved        optimist: '0.6.0',
+43 silly install resolved        progress: '1.1.7',
+43 silly install resolved        prompt: '0.2.12',
+43 silly install resolved        'proxy-middleware': '^0.7.0',
+43 silly install resolved        q: '1.0.1',
+43 silly install resolved        request: '2.51.0',
+43 silly install resolved        semver: '^4.2.0',
+43 silly install resolved        'serve-static': '1.7.1',
+43 silly install resolved        shelljs: '0.2.6',
+43 silly install resolved        'tiny-lr-fork': '0.0.5',
+43 silly install resolved        underscore: '~1.7.0',
+43 silly install resolved        unzip: '0.1.9',
+43 silly install resolved        'vinyl-fs': '0.3.7',
+43 silly install resolved        xml2js: '0.4.4' },
+43 silly install resolved     devDependencies: { 'jasmine-node': '^1.14.5' },
+43 silly install resolved     gitHead: 'd7e7e9cc3a021860b11e94227c0077f0eafdae68',
+43 silly install resolved     bugs: { url: 'https://github.com/driftyco/ionic-cli/issues' },
+43 silly install resolved     _id: 'ionic@1.4.1',
+43 silly install resolved     _shasum: '72bea509cd7a72444227f62684985e01b6ad9109',
+43 silly install resolved     _from: 'ionic@*',
+43 silly install resolved     _npmVersion: '2.5.1',
+43 silly install resolved     _nodeVersion: '0.10.33',
+43 silly install resolved     _npmUser: { name: 'jbavari', email: 'jbavari@gmail.com' },
+43 silly install resolved     dist:
+43 silly install resolved      { shasum: '72bea509cd7a72444227f62684985e01b6ad9109',
+43 silly install resolved        tarball: 'http://registry.npmjs.org/ionic/-/ionic-1.4.1.tgz' },
+43 silly install resolved     maintainers: [ [Object], [Object], [Object] ],
+43 silly install resolved     directories: {},
+43 silly install resolved     _resolved: 'https://registry.npmjs.org/ionic/-/ionic-1.4.1.tgz' } ]
+44 info install ionic@1.4.1 into /usr/lib
+45 info installOne ionic@1.4.1
+46 verbose lock using /Users/alejandrojovermorales/.npm/_locks/ionic-870c91ec4eeb12ef.lock for /usr/lib/node_modules/ionic
+47 verbose unbuild lib/node_modules/ionic
+48 info preuninstall ionic@1.3.22
+49 info uninstall ionic@1.3.22
+50 verbose unbuild rmStuff ionic@1.3.22 from /usr/lib/node_modules
+51 verbose /usr/bin,[object Object] binRoot
+52 verbose gentlyRm verifying that /usr/lib/node_modules/ionic is managed by npm
+53 silly cacheAndTest /usr/lib/node_modules/ionic is inside /usr/lib/node_modules
+54 silly gentlyRm /usr/lib/node_modules/ionic is managed by npm
+55 silly gentlyRm /usr/bin/ionic is not under /usr/lib/node_modules/ionic
+56 silly gentlyRm checking to see if /usr/bin/ionic is a link
+57 silly gentlyRm /usr/bin/ionic is a link
+58 silly gentlyRm /usr/lib/node_modules/ionic/bin/ionic inside /usr/lib/node_modules/ionic
+59 verbose gentlyRm vacuuming /usr/bin/ionic
+60 silly gentlyRm removing /usr/bin/ionic
+61 verbose unlock done using /Users/alejandrojovermorales/.npm/_locks/ionic-870c91ec4eeb12ef.lock for /usr/lib/node_modules/ionic
+62 verbose stack Error: EACCES, unlink '/usr/bin/ionic'
+63 verbose cwd /Users/alejandrojovermorales/Downloads/TripMinder/TripMinder_Ionic
+64 error Darwin 14.3.0
+65 error argv "node" "/usr/bin/npm" "install" "-g" "ionic"
+66 error node v0.10.26
+67 error npm  v2.1.3
+68 error path /usr/bin/ionic
+69 error code EACCES
+70 error errno 3
+71 error Error: EACCES, unlink '/usr/bin/ionic'
+71 error  { [Error: EACCES, unlink '/usr/bin/ionic'] errno: 3, code: 'EACCES', path: '/usr/bin/ionic' }
+72 error Please try running this command again as root/Administrator.
+73 verbose exit [ 3, true ]
+74 verbose unbuild lib/node_modules/ionic
+75 info preuninstall ionic@1.3.22
+76 info uninstall ionic@1.3.22
+77 verbose unbuild rmStuff ionic@1.3.22 from /usr/lib/node_modules
+78 verbose /usr/bin,[object Object] binRoot
+79 verbose gentlyRm verifying that /usr/lib/node_modules/ionic is managed by npm
+80 silly isManaged /usr/lib/node_modules/ionic is inside /usr/lib/node_modules
+81 silly gentlyRm /usr/lib/node_modules/ionic is managed by npm
+82 silly gentlyRm /usr/bin/ionic is not under /usr/lib/node_modules/ionic
+83 silly gentlyRm checking to see if /usr/bin/ionic is a link
+84 silly gentlyRm /usr/bin/ionic is a link
+85 silly gentlyRm /usr/lib/node_modules/ionic/bin/ionic inside /usr/lib/node_modules/ionic
+86 verbose gentlyRm vacuuming /usr/bin/ionic
+87 silly gentlyRm removing /usr/bin/ionic
+88 error error rolling back Error: EACCES, unlink '/usr/bin/ionic'
+88 error error rolling back  { [Error: EACCES, unlink '/usr/bin/ionic'] errno: 3, code: 'EACCES', path: '/usr/bin/ionic' }
