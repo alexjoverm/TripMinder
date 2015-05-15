@@ -3,6 +3,9 @@ TripMinder
 
 Final degree project (Multimedia Engineering) created by [Alex Jover](https://plus.google.com/u/0/106756912070996900741/posts). It consist on a multiplatform application which helps people to travel around the world.
 
+[Here you can find the thesis according to the Final Degree project.]
+(https://www.dropbox.com/s/jhy5wo7u20k8svs/TFG.pdf?dl=0)
+
 It's made in [Ionic Framework](http://ionicframework.com/), so **Angularjs + Apache cordova + Sass + Ionic layer**.
 
 There are some documents corresponding to this project:
