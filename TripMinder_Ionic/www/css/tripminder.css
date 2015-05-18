@@ -6621,7 +6621,7 @@ progress {
   padding: 2px 4px 1px;
   min-width: 28px;
   min-height: 30px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 26px; }
   .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.icon-right:before {
     font-size: 16px;
@@ -7640,6 +7640,9 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 .float-right {
   display: inline-block;
   float: right; }
+
+.font-regular {
+  font-weight: 400; }
 
 .results-data .list .item .summary, .results-data .list .item .data {
   display: inline-block; }

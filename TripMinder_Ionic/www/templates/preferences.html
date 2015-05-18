@@ -1,0 +1,18 @@
+<ion-view view-title="Preferencias">
+    <ion-content>
+
+        <div class="padding">
+            <h3 class="padding-vertical font-regular">Intereses</h3>
+
+            <ul class="list">
+                <li class="item item-checkbox" ng-repeat="(key, preference) in preferences">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="preferences[key]" ng-change="Update()">
+                    </label>
+                    {{ key }}
+                </li>
+            </ul>
+        </div>
+
+    </ion-content>
+</ion-view>

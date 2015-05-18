@@ -76,6 +76,24 @@ angular.module('tripminder',
                             controller: 'ResultsDetailCtrl'
                         }
                     }
+                })
+                .state('app.history', {
+                    url: "/history",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "templates/history.html",
+                            controller: 'HistoryCtrl'
+                        }
+                    }
+                })
+                .state('app.preferences', {
+                    url: "/preferences",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "templates/preferences.html",
+                            controller: 'PreferencesCtrl'
+                        }
+                    }
                 });
 
             // if none of the above states are matched, use this as the fallback

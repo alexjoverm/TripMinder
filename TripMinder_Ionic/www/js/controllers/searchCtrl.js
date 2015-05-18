@@ -1,7 +1,7 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc',
-  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc','PersistenceSvc',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc, PersistenceSvc) {
 
       var FindMarker = function(id){
           for(var i in $scope.markers)
@@ -177,8 +177,10 @@ angular.module('tripminder')
                 title: 'Origen o destino incorrecto',
                 template: 'Debes seleccionar un origen y destino de la lista, o marcar dos puntos en el mapa.'
             });
-        else
-    	   RestSvc.Search($scope.inputs.origin, $scope.inputs.dest, FindMarker(0).coords, FindMarker(1).coords);
+        else {
+            PersistenceSvc.AddRouteHistory($scope.inputs.origin, $scope.inputs.dest, FindMarker(0).coords, FindMarker(1).coords);
+            RestSvc.Search($scope.inputs.origin, $scope.inputs.dest, FindMarker(0).coords, FindMarker(1).coords);
+        }
     };
 
       

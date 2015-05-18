@@ -1,0 +1,27 @@
+<ion-view view-title="Historial">
+    <ion-content>
+
+        <div class="padding">
+            <button class="button button-block button-assertive" ng-click="Clean()">Borrar historial</button>
+        </div>
+
+        <div class="results-data">
+            <div class="list">
+                <li class="item" ng-click="Search(route.value.origin, route.value.dest,route.value.originCoords, route.value.destCoords)" ng-repeat="route in routes | limitTo: config.itemsDisplayed">
+                    <div class="summary">
+                        <p>{{ route.value.origin }} - {{ route.value.dest }}</p>
+                    </div>
+                    <div class="data">
+                        <p>{{ route.value.date | date:'dd-MM-yyyy' }}</p>
+                        <p>{{ route.value.date | date:'HH:mm' }}</p>
+                    </div>
+                </li>
+            </div>
+
+            <ion-infinite-scroll
+                    ng-if="moreItemsCanBeAdded()"
+                    on-infinite="addItems()">
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>
