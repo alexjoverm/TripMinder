@@ -23,9 +23,9 @@
                             <div class="summary">
                                 <i class="icon"
                                    ng-class="{'ion-android-car': step.travel_mode == 'DRIVING', 'ion-android-walk': step.travel_mode == 'WALKING',
-                                    'ion-android-bicycle': step.travel_mode == 'BICYCLING', 'ion-android-bus': step.transit_details.line.vehicle == 'bus',
-                                    'ion-android-subway': step.transit_details.line.vehicle == 'train', 'ion-plane': step.transit_details.line.vehicle == 'plane'}"> </i>
-                                <p data-ng-bind-html="step.html_instructions"></p>
+                                    'ion-android-bicycle': step.travel_mode == 'BICYCLING', 'ion-android-bus': step.transit.line.vehicle == 'bus',
+                                    'ion-android-subway': step.transit.line.vehicle == 'train', 'ion-plane': step.transit.line.vehicle == 'plane'}"> </i>
+                                <p data-ng-bind-html="step.instructions"></p>
                             </div>
                             <div class="data">
                                 <p>{{ step.distance.text }}</p>

@@ -50,8 +50,8 @@ angular.module('tripminder.services')
  the controllers and ResourcesSvc.
  ********/
 
-    .factory('RestSvc', ['$ionicLoading', 'ResourcesSvc', '$timeout', '$rootScope', 'DataSvc', 'Apis','IATA',
-        function ($ionicLoading, ResourcesSvc, $timeout, $rootScope, DataSvc, Apis, IATA) {
+    .factory('RestSvc', ['$ionicLoading', 'ResourcesSvc', '$timeout', '$rootScope', 'DataSvc', 'Apis','IATA', 'googleDirections',
+        function ($ionicLoading, ResourcesSvc, $timeout, $rootScope, DataSvc, Apis, IATA, googleDirections) {
 
             // ** Private
 
@@ -110,18 +110,12 @@ angular.module('tripminder.services')
                     return calls.done == calls.total;
                 };
 
-                this.Cancel = function () {
-                    for (var prop in promises)
-                        if (promises.hasOwnProperty(prop))
-                            promises[prop].abort();
-
-                    CloseLoading(0);
-                };
-
 
                 /*** Callers functions ***/
 
                 this.Search = function (origin, dest, originCoord, destCoord) {
+
+                    console.log(arguments)
 
                     // Init and reset ResourcesSvc and RestSvc promises, also DataSvc data
                     ResetVars();
@@ -133,22 +127,28 @@ angular.module('tripminder.services')
 
                     //******** Perform API calls
 
+                    var args = {
+                        origin: originCoord.latitude + ',' + originCoord.longitude,
+                        destination: destCoord.latitude + ',' + destCoord.longitude,
+                        provideRouteAlternatives: true,
+                        travelMode: 'driving'
+                    };
+
+
                     // ** 1: Google Directions (CAR)
-                    var opt = {
-                        origin      : origin,
-                        destination : dest,
-                        alternatives: true,
-                        mode        : 'driving'
-                    }
 
-                    promises.car = ResourcesSvc.GoDirections.get(opt);
+                    promises.car = googleDirections.getDirections(args);
 
-                    promises.car.promise.then(function (data) {
+                    console.log(promises.car)
+
+                    promises.car.then(function (data) {
+                        console.log(arguments);
                         CheckFinished();
                         //Broadcast finished (true = success, false = failed)
                         $rootScope.$broadcast('search-finished', {car: true});
                         DataSvc.AddDirectionsRoutes('car', data.routes);
                     }, function (response) {
+                        console.log(arguments);
                         if (response != 'ABORT') {
                             CheckFinished();
                             $rootScope.$broadcast(opt.mode, {car: false});
@@ -157,11 +157,11 @@ angular.module('tripminder.services')
 
 
                     // ** 2: Google Directions (BICYCLING)
-                    opt.mode = 'bicycling';
+                    args.travelMode = 'bicycling';
 
-                    promises.bicycling = ResourcesSvc.GoDirections.get(opt);
+                    promises.bicycling = googleDirections.getDirections(args);
 
-                    promises.bicycling.promise.then(function (data) {
+                    promises.bicycling.then(function (data) {
                         CheckFinished();
                         $rootScope.$broadcast('search-finished', {bicycling: true});
                         DataSvc.AddDirectionsRoutes('bicycling', data.routes);
@@ -172,13 +172,12 @@ angular.module('tripminder.services')
                         }
                     });
 
-
                     // ** 3: Google Directions (WALKING)
-                    opt.mode = 'walking';
+                    args.travelMode = 'walking';
 
-                    promises.walking = ResourcesSvc.GoDirections.get(opt);
+                    promises.walking = googleDirections.getDirections(args);
 
-                    promises.walking.promise.then(function (data) {
+                    promises.walking.then(function (data) {
                         CheckFinished();
                         $rootScope.$broadcast('search-finished', {walking: true});
                         DataSvc.AddDirectionsRoutes('walking', data.routes);
@@ -189,14 +188,12 @@ angular.module('tripminder.services')
                         }
                     });
 
-
                     // ** 4: Google Transit (TRAIN & BUS)
-                    opt.mode = 'transit';
-                    opt.departure_time = Math.round(new Date().getTime() / 1000.0);
+                    args.travelMode = 'transit';
 
-                    promises.transit = ResourcesSvc.GoDirections.get(opt);
+                    promises.transit = googleDirections.getDirections(args);
 
-                    promises.transit.promise.then(function (data) {
+                    promises.transit.then(function (data) {
                         CheckFinished();
                         $rootScope.$broadcast('search-finished', {train: true});
                         $rootScope.$broadcast('search-finished', {bus: true});
@@ -212,6 +209,98 @@ angular.module('tripminder.services')
                             $rootScope.$broadcast('search-finished', {bus: false});
                         }
                     });
+
+
+
+
+
+
+
+
+                    //origin = encodeURIComponent(origin);
+                    //dest = encodeURIComponent(dest);
+                    //
+                    //// ** 1: Google Directions (CAR)
+                    //var opt = {
+                    //    origin      : origin,
+                    //    destination : dest,
+                    //    alternatives: true,
+                    //    mode        : 'driving'
+                    //};
+                    //
+                    //console.log(opt);
+                    //
+                    //promises.car = ResourcesSvc.GoDirections.get(opt);
+                    //
+                    //promises.car.promise.then(function (data) {
+                    //    CheckFinished();
+                    //    //Broadcast finished (true = success, false = failed)
+                    //    $rootScope.$broadcast('search-finished', {car: true});
+                    //    DataSvc.AddDirectionsRoutes('car', data.routes);
+                    //}, function (response) {
+                    //    if (response != 'ABORT') {
+                    //        CheckFinished();
+                    //        $rootScope.$broadcast(opt.mode, {car: false});
+                    //    }
+                    //});
+                    //
+                    //
+                    //// ** 2: Google Directions (BICYCLING)
+                    //opt.mode = 'bicycling';
+                    //
+                    //promises.bicycling = ResourcesSvc.GoDirections.get(opt);
+                    //
+                    //promises.bicycling.promise.then(function (data) {
+                    //    CheckFinished();
+                    //    $rootScope.$broadcast('search-finished', {bicycling: true});
+                    //    DataSvc.AddDirectionsRoutes('bicycling', data.routes);
+                    //}, function (response) {
+                    //    if (response != 'ABORT') {
+                    //        CheckFinished();
+                    //        $rootScope.$broadcast('search-finished', {bicycling: false});
+                    //    }
+                    //});
+                    //
+                    //
+                    //// ** 3: Google Directions (WALKING)
+                    //opt.mode = 'walking';
+                    //
+                    //promises.walking = ResourcesSvc.GoDirections.get(opt);
+                    //
+                    //promises.walking.promise.then(function (data) {
+                    //    CheckFinished();
+                    //    $rootScope.$broadcast('search-finished', {walking: true});
+                    //    DataSvc.AddDirectionsRoutes('walking', data.routes);
+                    //}, function (response) {
+                    //    if (response != 'ABORT') {
+                    //        CheckFinished();
+                    //        $rootScope.$broadcast('search-finished', {walking: false});
+                    //    }
+                    //});
+                    //
+                    //
+                    //// ** 4: Google Transit (TRAIN & BUS)
+                    //opt.mode = 'transit';
+                    //opt.departure_time = Math.round(new Date().getTime() / 1000.0);
+                    //
+                    //promises.transit = ResourcesSvc.GoDirections.get(opt);
+                    //
+                    //promises.transit.promise.then(function (data) {
+                    //    CheckFinished();
+                    //    $rootScope.$broadcast('search-finished', {train: true});
+                    //    $rootScope.$broadcast('search-finished', {bus: true});
+                    //
+                    //
+                    //    // Add TRAIN & BUS routes (they are in the same reply)
+                    //    DataSvc.AddTransitRoutes(data.routes);
+                    //
+                    //}, function (response) {
+                    //    if (response != 'ABORT') {
+                    //        CheckFinished();
+                    //        $rootScope.$broadcast('search-finished', {train: false});
+                    //        $rootScope.$broadcast('search-finished', {bus: false});
+                    //    }
+                    //});
 
 
                     // ** 5: QPX Express (PLANE)

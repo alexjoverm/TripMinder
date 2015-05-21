@@ -39,7 +39,7 @@ angular.module('tripminder')
           
           // COMPROBAR SI PROVIENE DE GOOGLE MAPS O ES UNA LINEA DE PUNTOS
           if($scope.route && $scope.route.polyline)
-              $scope.map.polyline = MapsSvc.gMapsAPI.geometry.encoding.decodePath($scope.route.polyline);
+              $scope.map.polyline = $scope.route.polyline;
       });
       
   }

@@ -45,23 +45,6 @@ angular.module('tripminder.services', [])
 
             Search: function(coords){
 
-                //var arraux = [];
-                //
-                //for(var i = 0; i < iata.icao.length; i++)
-                //    if(iata.iata[i][0] != 'Z' && iata.icao != "\\N")
-                //        arraux.push({
-                //            airport: iata.airport[i],
-                //            city: iata.city[i],
-                //            country: iata.country[i],
-                //            iata: iata.iata[i],
-                //            icao: iata.icao[i],
-                //            lat: iata.lat[i],
-                //            lon: iata.lon[i],
-                //            altitude: iata.altitude[i]
-                //        });
-                //
-                //console.log(JSON.stringify(arraux, null, 2));
-
 
                 var result = [];
 

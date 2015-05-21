@@ -8,7 +8,8 @@ angular.module('tripminder',
         'tripminder.services',
         'angular-loading-bar',
         'angular-abortable-requests',
-        'ngCordova'
+        'ngCordova',
+        'dbaq.google.directions'
     ]
 )
 
@@ -167,32 +168,30 @@ angular.module('tripminder',
 
 
 /*****************  CONFIG  ********************/
-/*.config(function($httpProvider){
-    $httpProvider.interceptors.push(function($q, $timeout) {
-        return {
-            'response': function(response) {
-                var defer = $q.defer();
-
-                if(response.config.url.indexOf('sdttpe://') >= 0)
-                    $timeout(function() { defer.resolve(response); }, 1);
-                else
-                    defer.resolve(response);
-
-                return defer.promise;
-            },
-            'request': function(config){
-                //console.log(config)
-                if(config.url.indexOf('qpxExpr') >=0)
-                    console.log(config)
-                return config;
-            },
-            'responseError': function(a){
-                console.log(a)
-                return a;
-            }
-        };
-    });
-});*/
+//.config(function($httpProvider){
+//    $httpProvider.interceptors.push(function($q, $timeout) {
+//        return {
+//            'response': function(response) {
+//                var defer = $q.defer();
+//
+//                if(response.config.url.indexOf('sdttpe://') >= 0)
+//                    $timeout(function() { defer.resolve(response); }, 1);
+//                else
+//                    defer.resolve(response);
+//
+//                return defer.promise;
+//            },
+//            'request': function(config){
+//                    console.log(JSON.stringify(config));
+//                return config;
+//            },
+//            'responseError': function(a){
+//                console.log(arguments);
+//                return a;
+//            }
+//        };
+//    });
+//});
 
 
 

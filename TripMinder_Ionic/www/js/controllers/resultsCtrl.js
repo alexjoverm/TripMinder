@@ -13,6 +13,14 @@ angular.module('tripminder')
             $scope.searchResults = DataSvc.searchResults;
             $scope.planeData = DataSvc.planeData;
 
+            for(var i in $scope.planeData.origins)
+                if(!$scope.planeData.origins[i].combobox)
+                    $scope.planeData.origins[i].combobox = $scope.planeData.origins[i].city + ' - ' + $scope.planeData.origins[i].iata;
+
+            for(var i in $scope.planeData.dests)
+                if(!$scope.planeData.dests[i].combobox)
+                    $scope.planeData.dests[i].combobox = $scope.planeData.dests[i].city + ' - ' + $scope.planeData.dests[i].iata;
+
             $scope.planeMarkers = [];
 
 
@@ -47,8 +55,8 @@ angular.module('tripminder')
             $scope.SearchPlane = function(input){
                 RestSvc.PlaneSearch(input.origin.iata, input.dest.iata).then(function(data){
                     if(data.trips.tripOption){
-                        $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, input.origin.lat, input.origin.lon, input.origin.city));
-                        $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, input.dest.lat, input.dest.lon, input.dest.city));
+                        $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, input.origin.lat, input.origin.lon, input.origin.city + ' - ' + input.origin.iata));
+                        $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, input.dest.lat, input.dest.lon, input.dest.city + ' - ' + input.dest.iata));
                         $scope.UpdateBounds();
                     }
                 });
@@ -87,8 +95,8 @@ angular.module('tripminder')
 
             $scope.InitPlaneMap = function(){
                 if($scope.searchResults.plane && $scope.searchResults.plane.length > 0){
-                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, $scope.planeData.origins[0].lat, $scope.planeData.origins[0].lon, $scope.planeData.origins[0].city));
-                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, $scope.planeData.dests[0].lat, $scope.planeData.dests[0].lon, $scope.planeData.dests[0].city));
+                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, $scope.planeData.origins[0].lat, $scope.planeData.origins[0].lon, $scope.planeData.origins[0].city + ' - ' + input.origin.iata));
+                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, $scope.planeData.dests[0].lat, $scope.planeData.dests[0].lon, $scope.planeData.dests[0].city + ' - ' + input.dest.iata));
 
                     $scope.UpdateBounds();
                 }
@@ -118,10 +126,11 @@ angular.module('tripminder')
 
                     if(Array.isArray($scope.searchResults[key])) {
                         $scope.searchResults[key].forEach(function (route, i) {
+                            console.log(route)
                             if(route.polyline){
                                 $scope.map.polylines[key].push(
                                     {
-                                        path: MapsSvc.gMapsAPI.geometry.encoding.decodePath(route.polyline),
+                                        path: route.polyline,
                                         stroke: (i == 0 ? $scope.map.strokeSelected : $scope.map.strokeDefault),
                                         zIndex: $scope.searchResults[key].length - i
                                     }

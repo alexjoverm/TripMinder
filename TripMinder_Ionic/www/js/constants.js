@@ -6,7 +6,7 @@ angular.module('tripminder').constant('Apis', {
         url: 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
     },
     goDirections  : {
-        url: 'http://maps.googleapis.com/maps/api/directions/json'
+        url: 'https://maps.googleapis.com/maps/api/directions/json'
     },
     qpxExpress    : {
         url    : 'https://www.googleapis.com/qpxExpress/v1/trips/search',

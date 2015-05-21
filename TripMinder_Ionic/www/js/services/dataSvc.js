@@ -33,15 +33,15 @@ angular.module('tripminder.services')
             route.vehicles = [];
 
             route.steps.forEach(function (step) {
-                if (step.transit_details) {
+                if (step.transit) {
                     // Try to find the agency name
-                    if (!changed.title && Array.isArray(step.transit_details.line.agencies)) {
-                        route.title = step.transit_details.line.agencies[0].name;
+                    if (!changed.title && Array.isArray(step.transit.line.agencies)) {
+                        route.title = step.transit.line.agencies[0].name;
                         changed.title = true;
                     }
 
                     // Simplify vehicle type
-                    var vType = simplifyVehicle(step.transit_details.line);
+                    var vType = simplifyVehicle(step.transit.line);
 
                     if (route.vehicles.indexOf(vType) < 0)
                         route.vehicles.push(vType);
@@ -101,12 +101,12 @@ angular.module('tripminder.services')
                         title         : arr[i].summary,
                         distance      : arr[i].legs[0].distance,
                         duration      : arr[i].legs[0].duration,
-                        start_adress  : arr[i].legs[0].start_adress,
-                        end_adress    : arr[i].legs[0].end_adress,
+                        start_adress  : arr[i].legs[0].start_address,
+                        end_adress    : arr[i].legs[0].end_address,
                         start_location: arr[i].legs[0].start_location,
                         end_location  : arr[i].legs[0].end_location,
                         steps         : arr[i].legs[0].steps,
-                        polyline      : arr[i].overview_polyline.points
+                        polyline      : arr[i].overview_path
                     };
 
                     datakeeper.searchResults[mode].push(obj);
@@ -129,7 +129,7 @@ angular.module('tripminder.services')
                         start_location: route.legs[0].start_location,
                         end_location  : route.legs[0].end_location,
                         steps         : route.legs[0].steps,
-                        polyline      : route.overview_polyline.points
+                        polyline      : route.overview_path
                     };
 
                     processTransitSteps(obj);

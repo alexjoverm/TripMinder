@@ -217,12 +217,12 @@
                         <form ng-submit="SearchPlane(input)">
                             <label class="item item-input">
                                 <span class="input-label">Origen</span>
-                                <select id="origin" ng-options="item.city for item in planeData.origins" ng-model="input.origin"></select>
+                                <select id="origin" ng-options="item.combobox for item in planeData.origins" ng-model="input.origin"></select>
                             </label>
 
                             <label class="item item-input">
                                 <span class="input-label">Destino</span>
-                                <select id="dest" ng-options="item.city for item in planeData.dests" ng-model="input.dest"></select>
+                                <select id="dest" ng-options="item.combobox for item in planeData.dests" ng-model="input.dest"></select>
                             </label>
 
                             <p class="padding text-center">
