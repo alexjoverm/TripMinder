@@ -313,7 +313,10 @@ angular.module('tripminder.services')
 
                     DataSvc.planeData.origins = origin_obj;
                     DataSvc.planeData.dests = dest_obj;
-                    console.log(DataSvc.planeData);
+
+                    DataSvc.planeData.lastOrigin = origin_obj[0];
+                    DataSvc.planeData.lastDest = dest_obj[0];
+                    DataSvc.planeData.date = new Date();
 
                     if(origin_obj.length && dest_obj.length){
 
@@ -355,9 +358,14 @@ angular.module('tripminder.services')
 
                 this.PlaneSearch = function(origin, dest, date){
 
-                    if(!date) date = new Date();
+                    var dateAux = date.split('/');
+                    date = new Date(parseInt(dateAux[2]), parseInt(dateAux[1]) - 1, parseInt(dateAux[0]));
 
                     var requestObj = angular.copy(Apis.qpxExpress.request);
+
+                    var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+                    date = new Date(date.getTime() - tzoffset);
+
                     requestObj.request.slice[0].date = date.toISOString().slice(0, 10);
 
                     // For now ONLY FIRST OCCURRENCE

@@ -10,6 +10,7 @@
     "angular-abortable-requests": "~1.0.0",
     "ngCordova": "~0.1.12-alpha",
     "angular-google-maps": "~2.0.12",
-    "angularjs-google-directions": "*"
+    "angularjs-google-directions": "*",
+    "angularjs-datepicker": "~0.2.4"
   }
 }

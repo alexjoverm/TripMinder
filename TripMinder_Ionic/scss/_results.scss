@@ -122,3 +122,13 @@
   i{ margin-right: 8px; }
 }
 
+#datepick{
+  &:before{
+    display: block;
+    content: "Fecha";
+    margin: 20px 0 10px 15px;
+    font-size: 18px;
+    color: #444;
+  }
+  input{ padding-left: 20px;}
+}

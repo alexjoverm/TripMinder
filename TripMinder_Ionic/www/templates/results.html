@@ -185,8 +185,8 @@
                     </ui-gmap-google-map>
                 </div>
 
-                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
-                    <div class="list ng-hide" ng-show="searchResults.plane && searchResults.plane.length > 0">
+                <ion-scroll ng-if="searchResults.plane && searchResults.plane.length > 0" ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list" >
                         <li class="item tm-item-plane" ng-repeat="route in searchResults.plane | index"
                             ng-click="GoToPlaneDetail({ id: 'plane', num: route.index })">
                             <div class="summary">
@@ -208,11 +208,18 @@
                             <button class="button button-positive" ng-click="ClearPlane()">Otras opciones</button>
                         </p>
                     </div>
+                </ion-scroll>
 
-                    <div ng-show="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" class="select-places padding">
-                        <p class="padding" ng-show="!planeData.searchingPlane"> No hay resultados disponibles para este medio de transporte </p>
+                <ion-scroll ng-if="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="select-places padding">
+                        <p class="padding" ng-show="!planeData.searchingPlane && !planeData.hideMessage"> No hay resultados disponibles para: </p>
+                        <h5 class="padding text-center" ng-hide="planeData.hideMessage">
+                            {{planeData.lastOrigin.iata + ', ' + planeData.lastOrigin.city}} -
+                            {{planeData.lastDest.iata + ', ' + planeData.lastDest.city}}
+                        </h5>
 
-                        <h4>Crea tu itinerario</h4>
+
+                        <h4 class="padding-top-xl">Crea tu itinerario</h4>
 
                         <form ng-submit="SearchPlane(input)">
                             <label class="item item-input">
@@ -224,6 +231,10 @@
                                 <span class="input-label">Destino</span>
                                 <select id="dest" ng-options="item.combobox for item in planeData.dests" ng-model="input.dest"></select>
                             </label>
+
+                            <datepicker id="datepick" date-min-limit="{{defaultDate}}" date-format="dd/MM/yyyy">
+                                <input class="padding" ng-focus="ScrollDate()" ng-model="planeData.date" type="text" placeholder="&#xF2D1; Selecciona fecha..." style="margin: 16px 0; font-family:'Helvetica Neue', Roboto, sans-serif, Ionicons"/>
+                            </datepicker>
 
                             <p class="padding text-center">
                                 <button class="button button-positive" type="submit">Buscar</button>

@@ -7564,7 +7564,7 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
 .padding-top-l {
   padding-top: 20px; }
 
-.padding-bottom-xl {
+.padding-top-xl {
   padding-top: 40px; }
 
 .padding-l {
@@ -7723,6 +7723,15 @@ input[tm-reset-field] + .tm-rs-icon.ng-hide-remove {
   color: #5593f6; }
   .transit-details i {
     margin-right: 8px; }
+
+#datepick:before {
+  display: block;
+  content: "Fecha";
+  margin: 20px 0 10px 15px;
+  font-size: 18px;
+  color: #444; }
+#datepick input {
+  padding-left: 20px; }
 
 @media screen and (max-device-height: 530px) {
   .angular-google-map-container {
