@@ -212,11 +212,16 @@
 
                 <ion-scroll ng-if="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="select-places padding">
-                        <p class="padding" ng-show="!planeData.searchingPlane && !planeData.hideMessage"> No hay resultados disponibles para: </p>
-                        <h5 class="padding text-center" ng-hide="planeData.hideMessage">
-                            {{planeData.lastOrigin.iata + ', ' + planeData.lastOrigin.city}} -
-                            {{planeData.lastDest.iata + ', ' + planeData.lastDest.city}}
-                        </h5>
+                        <div ng-show="!planeData.searchingPlane && !planeData.hideMessage">
+                            <p class="padding"> No hay resultados disponibles para: </p>
+                            <h5 class="padding text-center">
+                                {{planeData.lastOrigin.iata + ', ' + planeData.lastOrigin.city}} -
+                                {{planeData.lastDest.iata + ', ' + planeData.lastDest.city}}
+                            </h5>
+
+                            <p>A fecha <b>{{planeData.date}}</b></p>
+                        </div>
+
 
 
                         <h4 class="padding-top-xl">Crea tu itinerario</h4>

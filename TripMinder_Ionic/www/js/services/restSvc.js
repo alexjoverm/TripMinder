@@ -19,18 +19,6 @@ angular.module('tripminder.services')
                     actions: {get: {method: 'GET'}}
                 });
 
-                this.GoDirections = RequestFactory.createResource({
-                    url    : Apis.goDirections.url,
-                    options: {
-                        origin      : '@origin',
-                        destination : '@destination',
-                        sensor      : 'false',
-                        mode        : '@mode',
-                        alternatives: '@alternatives',
-                        avoid       : '@avoid'
-                    },
-                    actions: {get: {method: 'GET'}}
-                });
 
                 this.QPXExpress = RequestFactory.createResource({
                     url    : Apis.qpxExpress.url,
