@@ -154,6 +154,21 @@ $item-icon-accessory-font-size:   16px !default;
 .font-regular{
   font-weight: 400;
 }
+
+.pac-item-query{
+  font-size: 16px;
+  padding-right: 12px;
+}
+.pac-item{
+  font-size: 14px;
+}
+
+.pac-container:after{
+  background: none;
+  height: 0;
+}
+
+
  
 @import "results.scss";  
 @import "other/_responsive.scss"; 

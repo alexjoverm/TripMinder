@@ -68,11 +68,11 @@ angular.module('tripminder.services')
                     mousedown: function (marker, ev, args){ 
                         _maps.canDrag.menu = false;
                     },
-                    mouseup: function (marker, ev, args){ 
+                    mouseup: function (marker, ev, args){
                         _maps.canDrag.menu = true;
                         _maps.geocoder.geocode(
                             {'latLng': new google.maps.LatLng(marker.position.lat(), marker.position.lng())}, function(res, status){  
-                                if(res[1]){ 
+                                if(res[1]){
                                     if(pId == 0)
                                         pGeocodif.origin = res[1].formatted_address;
                                     else

@@ -82,6 +82,11 @@ angular.module('tripminder.services')
                 dests: null
             };
 
+            this.searchInputs = {
+                origin: {},
+                dest: {}
+            };
+
             this.adress = null;
 
             this.ResetSearchVars = function () {

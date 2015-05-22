@@ -1,185 +1,100 @@
 angular.module('tripminder')
 
-.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc','PersistenceSvc',
-  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc, PersistenceSvc) {
+.controller('SearchCtrl', ['$scope', '$timeout', '$state', '$ionicPopup','$ionicScrollDelegate', 'ResourcesSvc','RestSvc','$ionicPlatform', 'MapsSvc', 'LocationSvc','PersistenceSvc','DataSvc',
+  function($scope, $timeout, $state, $ionicPopup, $ionicScrollDelegate, ResourcesSvc, RestSvc, $ionicPlatform, MapsSvc, LocationSvc, PersistenceSvc, DataSvc) {
+
+      var MarkerPos = function(id){
+          var search = { found: false, pos: 0};
+          for (var i in $scope.markers)
+              if($scope.markers[i].id == id){
+                  search.found = true;
+                  search.pos = i;
+              }
+          return search;
+      };
 
       var FindMarker = function(id){
           for(var i in $scope.markers)
-            if($scope.markers[i].id == id)
-                return $scope.markers[i];
+              if($scope.markers[i].id == id)
+                  return $scope.markers[i];
       };
 
 
-
     // ** View data
-    $scope.inputs = {
-    	origin: 'london, uk',
-    	dest: 'edinburg, uk',
-        originSelected: false,
-        destSelected: false
-    };
+    $scope.inputs = DataSvc.searchInputs;
 
-    $scope.origins = null;
-	$scope.dests = null;
-    
-    $scope.blured = false;
 
-    // Promise to control $timeout 
-	$scope.timerPromise = null;
-    $scope.blurPromise = null;
+
+      $scope.gaOptions = {
+          types: ['(regions)']
+      };
+
+
+      $scope.$on('g-places-autocomplete:select', function (event, param) {
+          if(window.cordova && window.cordova.plugins.Keyboard)
+              cordova.plugins.Keyboard.close();
+
+          console.log($scope.inputs)
+
+          try{
+              console.log(event);
+
+              var id = 1;
+              if(event.targetScope.input[0].id == "origin")
+                id = 0;
+
+              var search = MarkerPos(id);
+              if(search.found){
+                  $scope.markers[search.pos].coords.latitude = param.geometry.location.lat();
+                  $scope.markers[search.pos].coords.longitude = param.geometry.location.lng();
+              }
+              else
+                  $scope.markers.push(MapsSvc.CreateMarkerOriginDest(
+                      id, param.geometry.location.lat(), param.geometry.location.lng(), $scope.inputs));
+
+              $scope.UpdateBounds();
+
+          }catch(err){ console.log(err); }
+      });
+
+
 
       
     // ***** INPUT FUNCTIONS *****
-      
+
     $scope.ScrollTo = function(id){
         var elem = document.getElementById(id);
-        $timeout(function(){ 
+        $timeout(function(){
             $ionicScrollDelegate.scrollTo(0, elem.offsetTop + 130, true);
             elem.focus();
         }, 100);
     };
-      
-      
-    // Perform Google Autocomplete Request and call to ScrollTo
-    $scope.GetData = function(inputData){ 
-    	if($scope.timerPromise) 
-    		$timeout.cancel($scope.timerPromise);
 
-        if(inputData == $scope.inputs.origin)
-            $scope.inputs.originSelected = false;
-        else
-            $scope.inputs.destSelected = false;
-
-    	if(inputData)
-	    	$scope.timerPromise = $timeout(function() {
-	    		ResourcesSvc.GoAutocomplete.get( { input: inputData, types: '' } ).promise.then(function(data){ 
-                    
-                    if(inputData == $scope.inputs.origin){
-	    			    $scope.origins = data.predictions;
-                        if(data.predictions && data.predictions != [])
-                            $scope.ScrollTo('input-1');
-                    }
-                    else{
-                        $scope.dests = data.predictions;
-                        if(data.predictions && data.predictions != [])
-                            $scope.ScrollTo('input-2');
-                    }
-	    		});
-	    	}, 500);
-    };
-      
-      
-      
-      
-    // ****** SELECT FUNCTIONS ******
-      
-    // Clear input and ScrollTo top
-    $scope.Clear = function(varScope){
-
-        $scope.blurPromise = $timeout(function(){
-            if(varScope == 'origins')
-                $scope.origins = null;
-            else
-                $scope.dests = null;
-
-            $ionicScrollDelegate.scrollTo(0, 0, true);
-        }, 250);
-    };
-
-    // Using blurPromise, prevents the list of result to close when it's shown, since
-    // it provokes blur & focus
-    $scope.Focus = function(){
-        if($scope.blurPromise)
-            $timeout.cancel($scope.blurPromise);
-    };
-      
-    // Select the Origin from list 
-    $scope.SelectOrigin = function(i){ 
-        $scope.inputs.origin = $scope.origins[i].description;
-        $scope.origins = null;
-        $scope.inputs.originSelected = true;
-    
-        if(window.cordova && window.cordova.plugins.Keyboard)
-            cordova.plugins.Keyboard.close();
-        
-        $scope.AfterSelect($scope.inputs.origin, 0);
-    };
-
-    // Same for Dest
-    $scope.SelectDest = function(i){ 
-        $scope.inputs.dest = $scope.dests[i].description;
-        $scope.dests = null;
-        $scope.inputs.destSelected = true;
-
-        if(window.cordova && window.cordova.plugins.Keyboard)
-            cordova.plugins.Keyboard.close();
-        
-        $scope.AfterSelect($scope.inputs.dest, 1);
-    };
-      
-    // After select, Scroll to top & Update / Add marker
-    $scope.AfterSelect = function(placeStr, id){ 
-        
-        $timeout(function(){ $ionicScrollDelegate.scrollTo(0, 0, true); }, 0);
-        
-        var search = { found: false, pos: 0};
-        for (var i in $scope.markers)
-            if($scope.markers[i].id == id){
-                search.found = true;
-                search.pos = i;
-            }
-        
-        MapsSvc.geocoder.geocode({'address': placeStr}, function(res, st) {
-            if(res[0]){
-                if(search.found){ 
-                    $scope.markers[search.pos].coords.latitude = res[0].geometry.location.lat();
-                    $scope.markers[search.pos].coords.longitude = res[0].geometry.location.lng();
-                }
-                else
-                    $scope.markers.push(MapsSvc.CreateMarkerOriginDest(id, res[0].geometry.location.lat(), res[0].geometry.location.lng(), $scope.inputs));
-                
-                $scope.$apply();
-            }
-        });
-    };
-      
     
     
       
     //***** SEARCH FUNCTIONS ******
       
-    $scope.Search = function(){ 
+    $scope.Search = function(){
 
-        //var time = new Date().getTime();
-        //
-        //var obj1 = IATA.Search(FindMarker(0).coords);
-        //var obj2 = IATA.Search(FindMarker(1).coords);
-        //
-        //console.log(obj1);
-        //console.log("dist1(km): " + obj1[0].distance +'km');
-        //console.log(obj2);
-        //console.log("dist2(km): " + obj2[0].distance +'km');
-        //
-        ////console.log(IATA.Search($scope.inputs.dest))
-        //
-        //var time2 = new Date().getTime();
-        //time2 -= time;
-        //
-        //alert(time2 + ' ms');
+        console.log($scope.inputs)
 
-        if(!$scope.inputs.origin || !$scope.inputs.dest)
+        if($scope.markers.length < 2)
            $ionicPopup.alert({
-             title: 'Datos vacios',
-             template: 'Debes insertar un origen y un destino.'
+             title: 'No origen o destino',
+             template: 'Debes insertar un origen y un destino de la lista, o seleccionar en el mapa.'
            });
-        else if($scope.markers.length < 2)
-            $ionicPopup.alert({
-                title: 'Origen o destino incorrecto',
-                template: 'Debes seleccionar un origen y destino de la lista, o marcar dos puntos en el mapa.'
-            });
         else {
-            PersistenceSvc.AddRouteHistory($scope.inputs.origin, $scope.inputs.dest, FindMarker(0).coords, FindMarker(1).coords);
-            RestSvc.Search($scope.inputs.origin, $scope.inputs.dest, FindMarker(0).coords, FindMarker(1).coords);
+            var orig = $scope.inputs.origin;
+            if($scope.inputs.origin.formatted_address)
+                orig = $scope.inputs.origin.formatted_address;
+
+            var dest = $scope.inputs.origin;
+            if($scope.inputs.origin.formatted_address)
+                dest = $scope.inputs.dest.formatted_address;
+
+            PersistenceSvc.AddRouteHistory(orig, dest, FindMarker(0).coords, FindMarker(1).coords);
+            RestSvc.Search(orig, dest, FindMarker(0).coords, FindMarker(1).coords);
         }
     };
 
@@ -307,6 +222,7 @@ angular.module('tripminder')
     }, true);  
     
     $scope.$watch('inputs.origin', function(newValue, oldValue){
+        console.log(arguments)
         if(!newValue)
             $scope.RemoveMarker(0);
     });
@@ -322,21 +238,6 @@ angular.module('tripminder')
     $scope.$on('search-complete', function(ev, args){ 
         $state.go('app.results');
     });
-      
-    $scope.$on('input-cleared', function(ev, args){ 
-        if(args.input == 'inputs.origin')
-            $scope.origins = null;
-        else
-            $scope.dests = null;
-        
-        $scope.$apply();
-    });
-
-      
-    // Prevent View from scrolling when dragging on the map
-    $scope.OnScroll = function(){ 
-        $ionicScrollDelegate.getScrollView().__enableScrollY = $scope.map.canScroll;
-    };
 
       
 }]);

@@ -15,7 +15,6 @@ angular.module('tripminder')
             $scope.planeData.date = $filter('date')($scope.planeData.date, 'dd/MM/yyyy');
             $scope.defaultDate = $filter('date')(new Date(), 'yyyy/MM/dd');
 
-            console.log($scope.planeData)
 
             for(var i in $scope.planeData.origins)
                 if(!$scope.planeData.origins[i].combobox)
@@ -105,7 +104,7 @@ angular.module('tripminder')
             $scope.InitPlaneMap = function(){
                 if($scope.searchResults.plane && $scope.searchResults.plane.length > 0){
                     $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-1, $scope.planeData.origins[0].lat, $scope.planeData.origins[0].lon, $scope.planeData.origins[0].city + ' - ' + $scope.planeData.origins[0].iata));
-                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, $scope.planeData.dests[0].lat, $scope.planeData.dests[0].lon, $scope.planeData.dests[0].city + ' - ' + $scope.planeData.origins[0].iata));
+                    $scope.planeMarkers.push(MapsSvc.CreateCustomMarker(-2, $scope.planeData.dests[0].lat, $scope.planeData.dests[0].lon, $scope.planeData.dests[0].city + ' - ' + $scope.planeData.dests[0].iata));
 
                     $scope.UpdateBounds();
                 }

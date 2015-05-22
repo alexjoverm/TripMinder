@@ -10,7 +10,8 @@ angular.module('tripminder',
         'angular-abortable-requests',
         'ngCordova',
         'dbaq.google.directions',
-        '720kb.datepicker'
+        '720kb.datepicker',
+        'google.places'
     ]
 )
 
