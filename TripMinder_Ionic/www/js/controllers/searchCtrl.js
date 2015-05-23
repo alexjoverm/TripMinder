@@ -21,7 +21,10 @@ angular.module('tripminder')
 
 
     // ** View data
-    $scope.inputs = DataSvc.searchInputs;
+      $scope.$on('$ionicView.beforeEnter', function() {
+          $scope.inputs = DataSvc.searchInputs;
+      });
+
 
 
 
@@ -34,10 +37,7 @@ angular.module('tripminder')
           if(window.cordova && window.cordova.plugins.Keyboard)
               cordova.plugins.Keyboard.close();
 
-          console.log($scope.inputs)
-
           try{
-              console.log(event);
 
               var id = 1;
               if(event.targetScope.input[0].id == "origin")
@@ -76,8 +76,6 @@ angular.module('tripminder')
     //***** SEARCH FUNCTIONS ******
       
     $scope.Search = function(){
-
-        console.log($scope.inputs)
 
         if($scope.markers.length < 2)
            $ionicPopup.alert({
@@ -222,7 +220,6 @@ angular.module('tripminder')
     }, true);  
     
     $scope.$watch('inputs.origin', function(newValue, oldValue){
-        console.log(arguments)
         if(!newValue)
             $scope.RemoveMarker(0);
     });

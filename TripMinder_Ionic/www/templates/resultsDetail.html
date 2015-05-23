@@ -32,13 +32,13 @@
                                 <p>{{ step.duration.text }}</p> 
                             </div>
                             <div class="clear"></div>
-                            <div class="transit-details" ng-show="step.transit_details">
+                            <div class="transit-details" ng-show="step.transit">
                                 <i class="ion-android-time"></i>
-                                {{ step.transit_details.departure_time.text }} -
-                                {{ step.transit_details.arrival_time.text }}
+                                {{ step.transit.departure_time.text }} -
+                                {{ step.transit.arrival_time.text }}
 
                                 <div class="float-right">
-                                    <i class="ion-android-hand"></i> {{ step.transit_details.num_stops }} stops
+                                    <i class="ion-android-hand"></i> {{ step.transit.num_stops }} paradas
                                 </div>
                             </div>
                         </li>

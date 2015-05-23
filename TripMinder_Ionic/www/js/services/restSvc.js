@@ -38,8 +38,8 @@ angular.module('tripminder.services')
  the controllers and ResourcesSvc.
  ********/
 
-    .factory('RestSvc', ['$ionicLoading', 'ResourcesSvc', '$timeout', '$rootScope', 'DataSvc', 'Apis','IATA', 'googleDirections',
-        function ($ionicLoading, ResourcesSvc, $timeout, $rootScope, DataSvc, Apis, IATA, googleDirections) {
+    .factory('RestSvc', ['$ionicLoading', 'ResourcesSvc', '$timeout', '$rootScope', 'DataSvc', 'Apis','IATA', 'googleDirections', 'PersistenceSvc',
+        function ($ionicLoading, ResourcesSvc, $timeout, $rootScope, DataSvc, Apis, IATA, googleDirections, PersistenceSvc) {
 
             // ** Private
 
@@ -115,22 +115,28 @@ angular.module('tripminder.services')
 
                     //******** Perform API calls
 
+                    var prefs = PersistenceSvc.GetPreferences();
+
                     var args = {
                         origin: originCoord.latitude + ',' + originCoord.longitude,
                         destination: destCoord.latitude + ',' + destCoord.longitude,
                         provideRouteAlternatives: true,
-                        travelMode: 'driving'
+                        travelMode: 'driving',
+                        unitSystem: prefs.unitSystem,
+                        avoidHighways: prefs.avoidHighways,
+                        avoidTolls: prefs.avoidTolls
                     };
+
+                    console.log(prefs)
+                    console.log(args)
 
 
                     // ** 1: Google Directions (CAR)
 
                     promises.car = googleDirections.getDirections(args);
 
-                    console.log(promises.car)
 
                     promises.car.then(function (data) {
-                        console.log(arguments);
                         CheckFinished();
                         //Broadcast finished (true = success, false = failed)
                         $rootScope.$broadcast('search-finished', {car: true});

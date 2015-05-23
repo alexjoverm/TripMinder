@@ -87,6 +87,7 @@ angular.module('tripminder.services')
                 dest: {}
             };
 
+
             this.adress = null;
 
             this.ResetSearchVars = function () {
@@ -144,7 +145,6 @@ angular.module('tripminder.services')
 
             this.AddPlaneRoutes = function (res) {
 
-                console.log(res);
 
                 datakeeper.searchResults['plane'] = [];
 
@@ -202,7 +202,6 @@ angular.module('tripminder.services')
                         datakeeper.searchResults['plane'].push(obj);
                     }
 
-                    console.log(datakeeper.searchResults['plane']);
                 }
                 catch(err){ console.log(err); }
             }

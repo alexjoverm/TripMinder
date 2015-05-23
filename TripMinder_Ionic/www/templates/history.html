@@ -7,7 +7,7 @@
 
         <div class="results-data">
             <div class="list">
-                <li class="item" ng-click="Search(route.value.origin, route.value.dest,route.value.originCoords, route.value.destCoords)" ng-repeat="route in routes | limitTo: config.itemsDisplayed">
+                <li class="item" ng-click="Search(route.value.origin, route.value.dest,route.value.originCoords, route.value.destCoords)" ng-repeat="route in routes | orderBy: '-value.date' | limitTo: config.itemsDisplayed">
                     <div class="summary">
                         <p>{{ route.value.origin }} - {{ route.value.dest }}</p>
                     </div>
