@@ -20,3 +20,18 @@ There are some documents corresponding to this project:
 Previously, I was developing the project in Rad Studio XE6 (C++), so here is the documentation related:
 
 - [Rad Studio development guide (or Log book)](RadStudio_documentation.md "Development guide")
+
+
+
+### ISSUES
+
+***1. Module "angularjs-google-directions"***: Change function getDirections() to:
+
+```javascript
+getDirections: function(args) {
+    var _args = angular.copy(args);
+    _args.travelMode = _travelModes[args.travelMode] || googleMaps.TravelMode.DRIVING;
+    _args.unitSystem = _unitSystems[args.unitSystem] || googleMaps.UnitSystem.METRIC;
+    return exec(_args);
+}
+```
