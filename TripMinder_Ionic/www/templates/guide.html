@@ -1,0 +1,30 @@
+<ion-view view-title="Guia">
+    <ion-content scroll="false">
+
+        <!--<h2 class="text-center">{{address.dest.txt}}</h2>-->
+
+        <ion-slide-box slide-tabs-scrollable="true"  show-pager="false" ion-slide-tabs>
+            <ion-slide ng-repeat="catplaces in places" ion-slide-tab-label="<i class='icon {{catplaces.category.icon}}'></i> {{catplaces.category.name}}">
+                <ion-scroll style="height:100%">
+                    <div class="list">
+                        <div class="item tm-item-guide" ng-repeat="place in catplaces.places" on-finish-render>
+                            <a class="tm-item-link item-thumbnail-left" ui-sref="app.guideDetail({id: '{{place.reference}}' })">
+                                <img ng-src="{{place.photo}}">
+                                <h2>{{place.name}}</h2>
+                                <p>{{place.rating || 'No hay reseñas'}}</p>
+                                <p>{{place.distance | toFixed:2 }} km</p>
+                            </a>
+                            <div class="input-container">
+                                <label class="checkbox checkbox-l">
+                                    <input type="checkbox" ng-model="place.selected" ng-change="Update()">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 130px"></div>
+                </ion-scroll>
+            </ion-slide>
+        </ion-slide-box>
+
+    </ion-content>
+</ion-view>

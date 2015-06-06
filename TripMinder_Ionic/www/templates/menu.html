@@ -4,13 +4,17 @@
 
     <ion-side-menu-content>
         <ion-nav-bar class="bar-positive">
-            <ion-nav-back-button>
+            <ion-nav-back-button class="button-clear">
+                <i class="ion-chevron-left"></i> Atras
             </ion-nav-back-button>
 
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
+                <a ng-show="$state.includes('app.results')" class="btn-guide button button-assertive" ui-sref="app.guide">Guia</a>
             </ion-nav-buttons>
+
+
         </ion-nav-bar>
 
         <!-- Here will go the contents -->

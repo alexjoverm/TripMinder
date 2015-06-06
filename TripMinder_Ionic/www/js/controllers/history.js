@@ -4,7 +4,6 @@ angular.module('tripminder')
   function($scope, $state, PersistenceSvc, RestSvc) {
 
 
-
       $scope.$on('$ionicView.beforeEnter', function() {
           $scope.routes = PersistenceSvc.GetRoutesHistory();
       });

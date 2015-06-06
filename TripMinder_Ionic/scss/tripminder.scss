@@ -51,7 +51,6 @@ $item-icon-accessory-font-size:   16px !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
 @import "other/_vendors.scss";
 
 @import "other/_variables.scss"; 
@@ -134,12 +133,46 @@ $item-icon-accessory-font-size:   16px !default;
 
 }
 
-
-
 .tm-icon-left{
     margin-right: 12px;
     font-size: 22px;
 }
+
+
+
+
+/********** GUIDE ***********/
+.tm-item-guide{
+  padding: 16px 55px 16px 16px;
+
+  .tm-item-link{
+    width: 100%;
+    display: block;
+    padding: 0 0 0 110px;
+    min-height: initial;
+  }
+  .input-container{
+    width: 50px;
+    position: absolute;
+    top: 4px; right: 3px;
+  }
+}
+
+.checkbox.checkbox-l{
+  input{
+    width: 35px;
+    height: 35px;
+    &:after{
+      top: 35%;
+      left: 27%;
+      width: 16px;
+      height: 7px;
+    }
+  }
+}
+
+
+
 
 .clear{
   width: 1px; height: 1px; display: block;

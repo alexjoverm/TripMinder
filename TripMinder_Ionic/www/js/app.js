@@ -11,7 +11,8 @@ angular.module('tripminder',
         'ngCordova',
         'dbaq.google.directions',
         '720kb.datepicker',
-        'google.places'
+        'google.places',
+        'ngGPlaces'
     ]
 )
 
@@ -97,6 +98,15 @@ angular.module('tripminder',
                             controller: 'PreferencesCtrl'
                         }
                     }
+                })
+                .state('app.guide', {
+                    url: "/guide",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "templates/guide.html",
+                            controller: 'GuideCtrl'
+                        }
+                    }
                 });
 
             // if none of the above states are matched, use this as the fallback
@@ -167,6 +177,15 @@ angular.module('tripminder',
         };
     })
 
+    .filter('toFixed', function () {
+        return function (item, amount) {
+            return item.toFixed(amount);
+        };
+    })
+
+    .run(function ($state,$rootScope) {
+        $rootScope.$state = $state;
+    })
 
 
 /*****************  CONFIG  ********************/
@@ -175,6 +194,8 @@ angular.module('tripminder',
 //        return {
 //            'response': function(response) {
 //                var defer = $q.defer();
+//
+//                console.log(response);
 //
 //                if(response.config.url.indexOf('sdttpe://') >= 0)
 //                    $timeout(function() { defer.resolve(response); }, 1);

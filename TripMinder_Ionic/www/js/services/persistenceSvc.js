@@ -13,7 +13,6 @@ angular.module('tripminder.services')
                 amusement : ['amusement_park', 'aquarium', 'park', 'movie_theater', 'spa', 'stadium', 'zoo'],
                 restaurant: ['cafe', 'meal_takeaway', 'restaurant'],
                 nightlife : ['bar', 'casino', 'night_club'],
-                food      : ['bakery', 'food'],
                 fashion   : ['beauty_salon', 'hair_care'],
                 shopping  : ['furniture_store', 'jewelry_store', 'shoe_store', 'shopping_mall', 'store'],
                 religion  : ['cementery', 'church', 'hindu_temple', 'mosque', 'synagogue']
@@ -27,34 +26,37 @@ angular.module('tripminder.services')
                 interests: {
                     art       : {
                         name  : 'Arte',
+                        icon  : 'ion-paintbrush',
                         active: false
                     },
                     amusement : {
                         name  : 'Entretenimiento',
+                        icon  : 'ion-android-happy',
                         active: false
                     },
                     restaurant: {
                         name  : 'Restaurantes',
+                        icon  : 'ion-pizza',
                         active: false
                     },
                     nightlife : {
                         name  : 'Vida nocturna',
-                        active: false
-                    },
-                    food      : {
-                        name  : 'Comida',
+                        icon  : 'ion-beer',
                         active: false
                     },
                     fashion   : {
                         name  : 'Moda',
+                        icon  : 'ion-bowtie',
                         active: false
                     },
                     shopping  : {
                         name  : 'Compras',
+                        icon  : 'ion-bag',
                         active: false
                     },
                     religion  : {
                         name  : 'Religión',
+                        icon  : 'ion-earth',
                         active: false
                     }
                 }
@@ -98,6 +100,35 @@ angular.module('tripminder.services')
                     }
             },
 
+            GetArrayPreferences: function(){
+                var prefs = this.GetPreferences();
+                var result = [];
+
+                for (var property in prefs.interests)
+                    if (prefs.interests.hasOwnProperty(property) && prefs.interests[property].active)
+                        result.push(this.placetypes[property]);
+
+                return _.flatten(result);
+            },
+
+            GetArrayPreferencesKeys: function(){
+                var prefs = this.GetPreferences();
+                var result = [];
+
+                for (var property in prefs.interests)
+                    if (prefs.interests.hasOwnProperty(property) && prefs.interests[property].active)
+                        result.push(property);
+
+                return result;
+            },
+
+            IsInCategory: function(types, type){
+                for(var i in types)
+                    if(this.placetypes[types[i]].indexOf(type) >= 0)
+                        return { type: types[i], name: this.preferences.interests[types[i]].name, icon: this.preferences.interests[types[i]].icon };
+
+                return false;
+            },
 
             GetPreferences: function () {
                 return angular.fromJson($window.localStorage[prefKey]) || angular.copy(this.preferences);

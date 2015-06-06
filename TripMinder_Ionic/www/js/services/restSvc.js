@@ -109,8 +109,14 @@ angular.module('tripminder.services')
                     ResetVars();
                     DataSvc.ResetSearchVars();
                     DataSvc.adress = {
-                        origin: origin.split(',')[0],
-                        dest  : dest.split(',')[0]
+                        origin: {
+                            txt: origin.split(',')[0],
+                            coord: originCoord
+                        },
+                        dest  : {
+                            txt: dest.split(',')[0],
+                            coord: destCoord
+                        }
                     };
 
                     //******** Perform API calls
@@ -127,8 +133,6 @@ angular.module('tripminder.services')
                         avoidTolls: prefs.avoidTolls
                     };
 
-                    console.log(prefs)
-                    console.log(args)
 
 
                     // ** 1: Google Directions (CAR)
