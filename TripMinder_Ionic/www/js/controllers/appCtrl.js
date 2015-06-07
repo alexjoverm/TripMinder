@@ -1,9 +1,18 @@
 angular.module('tripminder')
 
-.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicSideMenuDelegate', '$timeout', 'MapsSvc',
-  function($scope, $ionicModal, $ionicSideMenuDelegate, $timeout, MapsSvc) {
+.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicSideMenuDelegate', '$timeout', '$rootScope', 'MapsSvc',
+  function($scope, $ionicModal, $ionicSideMenuDelegate, $timeout, $rootScope, MapsSvc) {
       // Form data for the login modal
       $scope.loginData = {};
+
+      $scope.config = {
+          currentState: ''
+      };
+
+      $rootScope.$on('$stateChangeSuccess', function(event, toState){
+        $scope.config.currentState = toState.name;
+      });
+
 
       // Create the login modal that we will use later
       $ionicModal.fromTemplateUrl('templates/login.html', { scope: $scope })

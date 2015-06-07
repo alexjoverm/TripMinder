@@ -9,5 +9,14 @@ angular.module('tripminder')
                 GuideSvc.GetPlaces();
                 $scope.places = GuideSvc.places;
             });
+
+            $scope.$on('GuideSvc:loaded', function(){
+                $scope.places = GuideSvc.places;
+            });
+
+            $scope.calculateTrack = function(index){
+                console.log(index + (GuideSvc.numSearches * 10))
+                return index + (GuideSvc.numSearches * 10);
+            };
         }
     ]);

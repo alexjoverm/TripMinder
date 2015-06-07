@@ -290,6 +290,13 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
                     }
                 });
             }
+
+            $scope.$on('cleanTabs', function(){
+                $timeout(function(){
+                    $ionicSlideBoxDelegate.slide(0,0);
+                    $scope.tabs = [];
+                }, 0);
+            });
         }]
     };
 }]);

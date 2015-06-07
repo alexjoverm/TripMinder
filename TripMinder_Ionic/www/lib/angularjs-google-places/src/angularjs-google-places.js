@@ -66,6 +66,7 @@ provider('ngGPlacesAPI', function () {
                         return deferred.resolve(req._parser(results));
                     });
                 } else {
+                    console.log(status)
                     $rootScope.$apply(function () {
                         deferred.reject(req._errorMsg);
                     });

@@ -23,43 +23,52 @@ angular.module('tripminder.services')
                 avoidHighways: false,
                 avoidTolls: false,
 
-                interests: {
-                    art       : {
+                rankBy: google.maps.places.RankBy.PROMINENCE,
+                radius: 10000,
+                interests: [
+                    {
+                        type  : 'art',
                         name  : 'Arte',
                         icon  : 'ion-paintbrush',
                         active: false
                     },
-                    amusement : {
+                    {
+                        type  : 'amusement',
                         name  : 'Entretenimiento',
                         icon  : 'ion-android-happy',
                         active: false
                     },
-                    restaurant: {
+                    {
+                        type  : 'restaurant',
                         name  : 'Restaurantes',
                         icon  : 'ion-pizza',
                         active: false
                     },
-                    nightlife : {
+                    {
+                        type  : 'nightlife',
                         name  : 'Vida nocturna',
                         icon  : 'ion-beer',
                         active: false
                     },
-                    fashion   : {
+                    {
+                        type  : 'fashion',
                         name  : 'Moda',
                         icon  : 'ion-bowtie',
                         active: false
                     },
-                    shopping  : {
+                    {
+                        type  : 'shopping',
                         name  : 'Compras',
                         icon  : 'ion-bag',
                         active: false
                     },
-                    religion  : {
+                    {
+                        type  : 'religion',
                         name  : 'Religión',
                         icon  : 'ion-earth',
                         active: false
                     }
-                }
+                ]
             },
 
             AddRouteHistory       : function (origin, dest, originCoords, destCoords) {
@@ -104,9 +113,9 @@ angular.module('tripminder.services')
                 var prefs = this.GetPreferences();
                 var result = [];
 
-                for (var property in prefs.interests)
-                    if (prefs.interests.hasOwnProperty(property) && prefs.interests[property].active)
-                        result.push(this.placetypes[property]);
+                for (var i in prefs.interests)
+                    if (prefs.interests[i].active)
+                        result.push(this.placetypes[prefs.interests[i].type]);
 
                 return _.flatten(result);
             },
@@ -115,17 +124,23 @@ angular.module('tripminder.services')
                 var prefs = this.GetPreferences();
                 var result = [];
 
-                for (var property in prefs.interests)
-                    if (prefs.interests.hasOwnProperty(property) && prefs.interests[property].active)
-                        result.push(property);
+                for (var i in prefs.interests)
+                    if (prefs.interests[i].active)
+                        result.push(prefs.interests[i].type);
 
                 return result;
             },
 
             IsInCategory: function(types, type){
                 for(var i in types)
-                    if(this.placetypes[types[i]].indexOf(type) >= 0)
-                        return { type: types[i], name: this.preferences.interests[types[i]].name, icon: this.preferences.interests[types[i]].icon };
+                    if(this.placetypes[types[i]].indexOf(type) >= 0) {
+                        var index = _.findIndex(this.preferences.interests, { type: types[i] });
+                        return {
+                            type: types[i],
+                            name: this.preferences.interests[index].name,
+                            icon: this.preferences.interests[index].icon
+                        };
+                    }
 
                 return false;
             },

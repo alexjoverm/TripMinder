@@ -49,7 +49,7 @@ angular.module('tripminder.services', [])
                 var result = [];
 
                 var R = 6371; // Earth radius in km
-                var max_results = 5;
+                var max_results = 7;
 
                 var lon1 = coords.longitude;
                 var lat1 = coords.latitude;

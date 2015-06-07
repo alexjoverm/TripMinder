@@ -7722,6 +7722,9 @@ ion-slide {
     width: 16px;
     height: 7px; }
 
+.radius-disabled {
+  opacity: 0.5; }
+
 .clear {
   width: 1px;
   height: 1px;
@@ -7836,11 +7839,8 @@ ion-slide {
 #datepick input {
   padding-left: 20px; }
 
-.btn-guide {
-  font-size: 15px !important;
-  position: absolute;
-  right: 8px;
-  top: 5px; }
+.bar .button.btn-guide {
+  font-size: 15px; }
 
 @media screen and (max-device-height: 530px) {
   .angular-google-map-container {

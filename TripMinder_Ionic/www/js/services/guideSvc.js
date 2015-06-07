@@ -1,7 +1,7 @@
 angular.module('tripminder.services')
 
-    .factory('GuideSvc', ['$rootScope', '$ionicPopup', '$state', 'DataSvc', 'PersistenceSvc', 'ngGPlacesAPI',
-        function ($rootScope, $ionicPopup, $state, DataSvc, PersistenceSvc, ngGPlacesAPI) {
+    .factory('GuideSvc', ['$rootScope', '$ionicPopup', '$state', '$ionicLoading', 'DataSvc', 'PersistenceSvc', 'ngGPlacesAPI',
+        function ($rootScope, $ionicPopup, $state, $ionicLoading, DataSvc, PersistenceSvc, ngGPlacesAPI) {
 
         var calculateDistance = function(lat1, lon1, lat2, lon2){
             // Spherical law of cosines
@@ -22,6 +22,26 @@ angular.module('tripminder.services')
             }
         };
 
+        var addStars = function(item){
+            if(item.rating){
+                var _stars = [];
+                var _num = parseFloat(item.rating);
+                var _rounded = Math.round(_num * 2) / 2;
+                var _intPart = parseInt(_rounded);
+                var _decPart = (_rounded - _intPart) * 10;
+                var _restPart = 5 - _intPart;
+
+                for(var i=0; i < _intPart; i++) _stars.push('ion-android-star');
+                if(_decPart == 5){
+                    _stars.push('ion-android-star-half');
+                    _restPart--;
+                }
+                for(var i=0; i < _restPart; i++) _stars.push('ion-android-star-outline');
+
+                item.stars = _stars;
+            }
+        };
+
         var processResults = function(data){
 
             var _types = PersistenceSvc.GetArrayPreferencesKeys();
@@ -29,12 +49,15 @@ angular.module('tripminder.services')
             for(var i in data){
                 // Retrieve images
                 if(data[i].photos && data[i].photos.length > 0) {
-                    data[i].photo = data[i].photos[0].getUrl({'maxHeight': 300});
+                    data[i].photo = data[i].photos[0].getUrl({'maxWidth': 700, 'maxHeight': 500});
                     delete data[i].photos;
                 }
                 // Calculate distance to the address center
                 data[i].distance = calculateDistance(data[i].geometry.location.lat(), data[i].geometry.location.lng(),
                                         DataSvc.adress.dest.coord.latitude, DataSvc.adress.dest.coord.longitude);
+
+
+                addStars(data[i]);
 
                 // Add category
                 addCategory(_types, data[i]);
@@ -55,6 +78,7 @@ angular.module('tripminder.services')
         var returnObj = {
 
             places: [],
+            numSearches: 0,
             oldCoords: {latitude: 0, longitude: 0},
 
             IsStale: function(){
@@ -63,15 +87,21 @@ angular.module('tripminder.services')
 
             GetPlaces: function(){
                 if(!returnObj.IsStale()){
+
+                    $rootScope.$broadcast('cleanTabs');
                     returnObj.places.splice(0, returnObj.places.length);
+
+                    var prefs = PersistenceSvc.GetPreferences();
 
                     var reqObj = {
                         latitude: DataSvc.adress.dest.coord.latitude,
                         longitude: DataSvc.adress.dest.coord.longitude,
-                        //rankBy: google.maps.places.RankBy.DISTANCE,
-                        radius: 20000,
+                        rankBy: prefs.rankBy,
+                        radius: prefs.radius,
                         types: PersistenceSvc.GetArrayPreferences()
                     };
+
+                    console.log(reqObj)
 
                     if(reqObj.types.length == 0){
                         $ionicPopup.show({
@@ -88,8 +118,20 @@ angular.module('tripminder.services')
                         return false;
                     }
 
+                    $ionicLoading.show({
+                        template: 'Cargando... <i class="icon ion-load-c ion-spin"></i>'
+                    });
+
                     ngGPlacesAPI.nearbySearch(reqObj).then(function(data){
                         processResults(data);
+                        $ionicLoading.hide();
+                    }, function(){
+                        console.log(arguments);
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'No hay resultados',
+                            template: 'No se han encontrado resultados para ' + DataSvc.adress.dest.txt
+                        });
                     });
                 }
             }

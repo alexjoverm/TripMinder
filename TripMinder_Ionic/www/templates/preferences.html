@@ -8,7 +8,7 @@
 
             <div class="list">
                 <label class="item item-radio" ng-repeat="pref in radioButtons.units.values">
-                    <input type="radio" name="units" ng-model="preferences.unitSystem" ng-value="radioButtons.units.values[$index]" ng-change="Update()">
+                    <input type="radio" name="units" ng-model="preferences.unitSystem" value="{{pref}}" ng-change="Update()">
                     <div class="item-content"> {{radioButtons.units.texts[$index]}} </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -31,14 +31,42 @@
             </ul>
 
 
-            <h3 class="padding-vertical font-regular">Intereses</h3>
+            <h3 class="padding-vertical font-regular">Guías turísticas</h3>
+
+            <h4>Ordenar por</h4>
+            <div class="list">
+                <label class="item item-radio">
+                    <input type="radio" name="rankby" ng-model="preferences.rankBy" value="{{rankBy.prominence}}" ng-change="Update(1)">
+                    <div class="item-content"> Popularidad </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" name="rankby" ng-model="preferences.rankBy" value="{{rankBy.distance}}" ng-change="Update(1)">
+                    <div class="item-content"> Distancia </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+            <div ng-class="{'radius-disabled': preferences.rankBy == rankBy.distance}">
+                <h4>Radio: {{preferences.radius / 1000}} km</h4>
+                <div class="list">
+                    <div class="item range" ng-class="{'range-positive': preferences.rankBy != rankBy.distance, 'range-dark': preferences.rankBy == rankBy.distance}">
+                        1km
+                        <input ng-disabled="preferences.rankBy == rankBy.distance" type="range" ng-model="preferences.radius" name="rank" min="1000" max="40000" ng-change="Update(1)">
+                        40km
+                    </div>
+                </div>
+            </div>
+
+
+            <h4>Intereses</h4>
 
             <ul class="list">
-                <li class="item item-checkbox" ng-repeat="(key, preference) in preferences.interests">
+                <li class="item item-checkbox" ng-repeat="pref in preferences.interests">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="preferences.interests[key].active" ng-change="Update()">
+                        <input type="checkbox" ng-model="pref.active" ng-change="Update(1)">
                     </label>
-                    {{ preferences.interests[key].name }}
+                    {{ pref.name }}
                 </li>
             </ul>
         </div>

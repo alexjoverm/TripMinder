@@ -11,9 +11,16 @@
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
-                <a ng-show="$state.includes('app.results')" class="btn-guide button button-assertive" ui-sref="app.guide">Guia</a>
             </ion-nav-buttons>
 
+            <ion-nav-buttons side="right">
+                <button ng-show="config.currentState == 'app.results'" class="button button-assertive btn-guide" ui-sref="app.guide">
+                    Guia
+                </button>
+                <button ng-show="config.currentState == 'app.guide'" class="button button-calm btn-guide" ui-sref="app.preferences">
+                    Preferencias
+                </button>
+            </ion-nav-buttons>
 
         </ion-nav-bar>
 
