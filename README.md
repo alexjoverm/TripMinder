@@ -24,7 +24,7 @@ Previously, I was developing the project in Rad Studio XE6 (C++), so here is the
 
 ### Important tips
 
-- Some of the node_modules libraries have been changed, so the folder will be also uploaded to the repo.
+- Some `bower_components` have been changed *(under `www/lib` folder)* libraries have been changed, so the folder will be also uploaded to the repo.
 
 
 ### ISSUES
