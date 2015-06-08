@@ -7636,8 +7636,14 @@ ion-slide {
 .padding-l {
   padding: 22px; }
 
+.padding-v {
+  padding: 14px 0; }
+
 .padding-v-l {
   padding: 22px 0; }
+
+.padding-left {
+  padding-left: 18px; }
 
 .tm-spandable-list > .item {
   border-left: 4px solid #387ef5;
@@ -7724,6 +7730,22 @@ ion-slide {
 
 .radius-disabled {
   opacity: 0.5; }
+
+/*********  GUIDE DETAILS  ********/
+.place-address {
+  color: #444; }
+  .place-address p {
+    margin: 0; }
+
+.guide-detail-row.row {
+  text-align: center; }
+  .guide-detail-row.row .col {
+    margin-bottom: 7px; }
+
+.no-wrap {
+  white-space: normal; }
+  .no-wrap p {
+    white-space: normal; }
 
 .clear {
   width: 1px;

@@ -176,6 +176,27 @@ $item-icon-accessory-font-size:   16px !default;
 }
 
 
+/*********  GUIDE DETAILS  ********/
+
+.place-address{
+  color: #444;
+  p{ margin: 0; }
+}
+
+.guide-detail-row.row{
+  text-align: center;
+  .col{ margin-bottom: 7px; }
+}
+
+.no-wrap{
+  white-space: normal;
+  p{ white-space: normal; }
+}
+
+
+
+
+
 
 .clear{
   width: 1px; height: 1px; display: block;

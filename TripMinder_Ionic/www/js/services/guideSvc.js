@@ -11,12 +11,12 @@ angular.module('tripminder.services')
         };
 
 
-        var addCategory = function(types, item){
+        var addCategory = function(item){
             for (var i in item.types) {
-                var cat = PersistenceSvc.IsInCategory(types, item.types[i]);
+                var cat = PersistenceSvc.IsInCategory(returnObj._types, item.types[i]);
                 if(cat) {
                     item.category = cat;
-                    delete types;
+                    delete item.types;
                     return cat.type;
                 }
             }
@@ -41,27 +41,29 @@ angular.module('tripminder.services')
                 item.stars = _stars;
             }
         };
+            
+        var processResult = function(item){
+            // Retrieve images
+            if(item.photos && item.photos.length > 0) {
+                item.photo = item.photos[0].getUrl({'maxWidth': 700, 'maxHeight': 500});
+                delete item.photos;
+            }
+            // Calculate distance to the address center
+            item.distance = calculateDistance(item.geometry.location.lat(), item.geometry.location.lng(),
+                DataSvc.adress.dest.coord.latitude, DataSvc.adress.dest.coord.longitude);
+
+
+            addStars(item);
+
+            // Add category
+            addCategory(item);
+        };
 
         var processResults = function(data){
 
-            var _types = PersistenceSvc.GetArrayPreferencesKeys();
 
             for(var i in data){
-                // Retrieve images
-                if(data[i].photos && data[i].photos.length > 0) {
-                    data[i].photo = data[i].photos[0].getUrl({'maxWidth': 700, 'maxHeight': 500});
-                    delete data[i].photos;
-                }
-                // Calculate distance to the address center
-                data[i].distance = calculateDistance(data[i].geometry.location.lat(), data[i].geometry.location.lng(),
-                                        DataSvc.adress.dest.coord.latitude, DataSvc.adress.dest.coord.longitude);
-
-
-                addStars(data[i]);
-
-                // Add category
-                addCategory(_types, data[i]);
-
+                processResult(data[i]);
 
                 // Create or add to category
                 var catIndex = _.findIndex(returnObj.places, function(a) { return (a.hasOwnProperty('category') && a.category.type == data[i].category.type); });
@@ -80,6 +82,30 @@ angular.module('tripminder.services')
             places: [],
             numSearches: 0,
             oldCoords: {latitude: 0, longitude: 0},
+            _types: PersistenceSvc.GetArrayPreferencesKeys(),
+
+            ProcessDetail: function(item){
+                processResult(item);
+
+                item.address = item.formatted_address.split(',');
+
+                item.marker = {
+                    id: 0,
+                    coords: {
+                        latitude: item.geometry.location.lat(),
+                        longitude: item.geometry.location.lng()
+                    },
+                    options: {
+                        draggable: false
+                    }
+                };
+
+
+                if(item.reviews)
+                    for(var i in item.reviews){
+                       addStars(item.reviews[i]);
+                    }
+            },
 
             IsStale: function(){
                 return returnObj.oldCoords.latitude == DataSvc.adress.dest.coord.latitude && returnObj.oldCoords.longitude == DataSvc.adress.dest.coord.longitude;
@@ -88,6 +114,7 @@ angular.module('tripminder.services')
             GetPlaces: function(){
                 if(!returnObj.IsStale()){
 
+                    returnObj._types = PersistenceSvc.GetArrayPreferencesKeys();
                     $rootScope.$broadcast('cleanTabs');
                     returnObj.places.splice(0, returnObj.places.length);
 
@@ -100,8 +127,6 @@ angular.module('tripminder.services')
                         radius: prefs.radius,
                         types: PersistenceSvc.GetArrayPreferences()
                     };
-
-                    console.log(reqObj)
 
                     if(reqObj.types.length == 0){
                         $ionicPopup.show({

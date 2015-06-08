@@ -109,6 +109,15 @@ angular.module('tripminder',
                             controller: 'GuideCtrl'
                         }
                     }
+                })
+                .state('app.guideDetail', {
+                    url: "/guide/:id",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "templates/guideDetail.html",
+                            controller: 'GuideDetailCtrl'
+                        }
+                    }
                 });
 
             // if none of the above states are matched, use this as the fallback
@@ -181,12 +190,9 @@ angular.module('tripminder',
 
     .filter('toFixed', function () {
         return function (item, amount) {
-            return item.toFixed(amount);
+            if(item)
+                return item.toFixed(amount);
         };
-    })
-
-    .run(function ($state,$rootScope) {
-        $rootScope.$state = $state;
     })
 
 

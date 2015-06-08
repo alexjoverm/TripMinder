@@ -15,9 +15,9 @@ provider('ngGPlacesAPI', function () {
         types: ['food'],
         map: null,
         elem: null,
-        nearbySearchKeys: ['name', 'reference', 'vicinity', 'rating', 'photos', 'geometry', 'types'],
-        placeDetailsKeys: ['formatted_address', 'formatted_phone_number',
-            'reference', 'website'
+        nearbySearchKeys: ['name', 'place_id', 'vicinity', 'rating', 'photos', 'geometry', 'types'],
+        placeDetailsKeys: ['formatted_address', 'formatted_phone_number', 'name', 'place_id', 'rating',
+            'photos', 'geometry', 'place_id', 'website', 'reviews', 'opening_hours', 'types'
         ],
         nearbySearchErr: 'Unable to find nearby places',
         placeDetailsErr: 'Unable to find place details',

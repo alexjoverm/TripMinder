@@ -8,12 +8,12 @@
                 <ion-scroll style="height:100%">
                     <div class="list">
                         <div class="item tm-item-guide" ng-repeat="place in catplaces.places" on-finish-render>
-                            <a class="tm-item-link item-thumbnail-left" ui-sref="app.guideDetail({id: '{{place.reference}}' })">
+                            <div class="tm-item-link item-thumbnail-left" ng-click="GoToDetail({ id: place.place_id })">
                                 <img ng-src="{{place.photo}}">
                                 <h2>{{place.name}}</h2>
                                 <p><i class="icon {{star}}" ng-repeat="star in place.stars track by $index"></i> {{place.rating || 'No hay reseñas'}}</p>
                                 <p>{{place.distance | toFixed:2 }} km</p>
-                            </a>
+                            </div>
                             <div class="input-container">
                                 <label class="checkbox checkbox-l">
                                     <input type="checkbox" ng-model="place.selected" ng-change="Update()">

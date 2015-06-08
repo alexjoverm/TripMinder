@@ -1,11 +1,54 @@
-<ion-view view-title="Resultados">
+<ion-view view-title="">
     <ion-content>
         <div class="gmaps-wrap">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom' control="map.control" options="map.options">
-
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+                <ui-gmap-marker idKey='place.marker.id' coords='place.marker.coords' options='place.marker.options'>
+                </ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
 
+        <div class="padding-l">
+            <h3 class="text-center">{{place.name}}</h3>
+
+            <div class="guide-detail-row row responsive-sm">
+                <div class="col"><a href="{{place.website}}" target="_blank">{{place.website}}</a></div>
+                <div class="col"><i class="tm-icon-left {{place.category.icon}}"></i> {{place.category.name}}</div>
+            </div>
+            <div class="guide-detail-row row responsive-sm">
+                <div class="col"><i class="tm-icon-left {{star}}" ng-repeat="star in place.stars track by $index"></i> {{place.rating || 'No hay reseñas'}}</div>
+                <div class="col"><i class="tm-icon-left ion-arrow-graph-up-right"></i> {{place.distance | toFixed:2 }} km</div>
+            </div>
+
+            <div class="place-address padding-v">
+                <p ng-repeat="part in place.address">{{part}}</p>
+            </div>
+            <div class="place-opening-hours padding-v" ng-show="place.opening_hours">
+                <h4><i class="tm-icon-left ion-android-time"></i> Horario</h4>
+                <div class="padding-left">
+                    <p ng-repeat="hour in place.opening_hours.weekday_text">{{hour}}</p>
+                </div>
+            </div>
+
+
+            <p></p>
+
+
+            <div class="place-reviews" ng-show="place.reviews && place.reviews.length > 0">
+                <h4><i class="tm-icon-left ion-star"></i> Valoraciones</h4>
+
+                <div class="list card" ng-repeat="review in place.reviews">
+                    <div class="item">
+                        <h2><i class="tm-icon-left ion-person"></i>{{ review.author_name }}</h2>
+                        <p><i class="icon {{star}}" ng-repeat="star in review.stars track by $index"></i> {{review.rating}}</p>
+                    </div>
+                    <div class="item no-wrap">
+                        <p>{{ review.text }}</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
 
 
     </ion-content>

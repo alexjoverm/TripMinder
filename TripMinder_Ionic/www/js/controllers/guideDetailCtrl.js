@@ -1,12 +1,18 @@
 angular.module('tripminder')
 
-.controller('GuideDetailCtrl', ['$scope', '$stateParams', 'MapsSvc', 'ngGPlacesAPI',
-  function($scope, $stateParams, MapsSvc, ngGPlacesAPI) {
+.controller('GuideDetailCtrl', ['$scope', '$stateParams', 'MapsSvc', 'ngGPlacesAPI', 'GuideSvc',
+  function($scope, $stateParams, MapsSvc, ngGPlacesAPI, GuideSvc) {
 
-      $scope.map = MapsSvc.CreateDefaultResultMap();
 
-      ngGPlacesAPI.placeDetails({reference: $stateParams.id}).then(function (data) {
-          $scope.place data;
+
+      console.log($stateParams);
+
+      ngGPlacesAPI.placeDetails({placeId: $stateParams.id, language: 'es'}).then(function (data) {
+          $scope.place = data;
+          GuideSvc.ProcessDetail($scope.place);
+          var lat = $scope.place.geometry.location.lat();
+          var lng = $scope.place.geometry.location.lng();
+          $scope.map = MapsSvc.CreateMapOriginDest(lat, lng, 15);
       });
       
   }
