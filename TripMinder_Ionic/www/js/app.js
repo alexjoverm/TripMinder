@@ -10,7 +10,7 @@ angular.module('tripminder',
         'angular-abortable-requests',
         'ngCordova',
         'dbaq.google.directions',
-        '720kb.datepicker',
+        'ionic-datepicker',
         'google.places',
         'ngGPlaces'
     ]
@@ -27,6 +27,8 @@ angular.module('tripminder',
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+
         });
     }])
 

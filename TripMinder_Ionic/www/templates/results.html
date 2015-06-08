@@ -211,7 +211,7 @@
                     </div>
                 </ion-scroll>
 
-                <ion-scroll ng-if="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" zooming="false" direction="y" class="results-data padding-top-l">
+                <ion-scroll style="height: 90%;" ng-if="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" zooming="false" direction="y" class="results-data padding-top-l">
                     <div class="select-places padding">
                         <div ng-show="!planeData.searchingPlane && !planeData.hideMessage">
                             <p class="padding"> No hay resultados disponibles para: </p>
@@ -220,25 +220,29 @@
                                 {{planeData.lastDest.iata + ', ' + planeData.lastDest.city}}
                             </h5>
 
-                            <p>A fecha <b>{{planeData.date}}</b></p>
+                            <p>A fecha <b>{{planeData.date | date:'dd/MM/yyyy' }}</b></p>
                         </div>
 
                         <h4 class="padding-top-xl">Crea tu itinerario</h4>
 
                         <form ng-submit="SearchPlane(input)">
-                            <label class="item item-input">
+
+
+                            <label class="item item-input item-select">
                                 <span class="input-label">Origen</span>
                                 <select id="origin" ng-options="item.combobox for item in planeData.origins" ng-model="input.origin"></select>
                             </label>
 
-                            <label class="item item-input">
+                            <label class="item item-input item-select">
                                 <span class="input-label">Destino</span>
                                 <select id="dest" ng-options="item.combobox for item in planeData.dests" ng-model="input.dest"></select>
                             </label>
 
-                            <datepicker id="datepick" date-min-limit="{{defaultDate}}" date-format="dd/MM/yyyy">
-                                <input class="padding" ng-focus="ScrollDate()" ng-model="planeData.date" type="text" placeholder="&#xF2D1; Selecciona fecha..." style="margin: 16px 0; font-family:'Helvetica Neue', Roboto, sans-serif, Ionicons"/>
-                            </datepicker>
+                            <ionic-datepicker idate="planeData.date" disablepreviousdates="true">
+                                <button class="button button-block btn-left">Fecha: {{ planeData.date | date:'dd/MM/yyyy' }} </button>
+                            </ionic-datepicker>
+
+
 
                             <p class="padding text-center">
                                 <button class="button button-positive" type="submit">Buscar</button>

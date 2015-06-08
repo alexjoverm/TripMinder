@@ -137,7 +137,23 @@
   font-size: 15px;
 }
 
+.select-places{
+  .item-select{
+    .input-label{ font-size: 18px; }
+    select{ font-size: 15px; color: #555; }
+  }
+}
 
 
 
+.date-popup{
+  .popup{ width: 300px; }
+  .row{ padding: 5px 2px; }
+  .col{ padding: 0; text-align: center; }
+  .date_cell{ padding: 4px 6px; }
+}
+
+.btn-left{
+  text-align: left;
+}
 

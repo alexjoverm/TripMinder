@@ -265,9 +265,6 @@ angular.module('tripminder.services')
 
                 this.PlaneSearch = function(origin, dest, date){
 
-                    var dateAux = date.split('/');
-                    date = new Date(parseInt(dateAux[2]), parseInt(dateAux[1]) - 1, parseInt(dateAux[0]));
-
                     var requestObj = angular.copy(Apis.qpxExpress.request);
 
                     var tzoffset = (new Date()).getTimezoneOffset() * 60000;

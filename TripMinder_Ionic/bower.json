@@ -11,8 +11,8 @@
     "ngCordova": "~0.1.12-alpha",
     "angular-google-maps": "~2.0.12",
     "angularjs-google-directions": "*",
-    "angularjs-datepicker": "~0.2.4",
     "angular-google-places-autocomplete": "~0.2.5",
-    "angularjs-google-places": "~0.1.0"
+    "angularjs-google-places": "~0.1.0",
+    "ionic-datepicker": "~0.2.0"
   }
 }

@@ -1,3 +1,4 @@
+
 angular.module('tripminder')
 
     .controller('ResultsCtrl', ['$scope', '$timeout', '$window', '$ionicScrollDelegate', '$state', '$filter', 'DataSvc', 'MapsSvc', 'RestSvc',
@@ -12,8 +13,15 @@ angular.module('tripminder')
 
             $scope.searchResults = DataSvc.searchResults;
             $scope.planeData = DataSvc.planeData;
-            $scope.planeData.date = $filter('date')($scope.planeData.date, 'dd/MM/yyyy');
-            $scope.defaultDate = $filter('date')(new Date(), 'yyyy/MM/dd');
+            $scope.datePicker = { date: $filter('date')($scope.planeData.date, 'dd/MM/yyyy') };
+
+            //$scope.defaultDate = $filter('date')(new Date(), 'yyyy/MM/dd');
+            $scope.input = {
+                origin: $scope.planeData.origins[0],
+                dest: $scope.planeData.dests[0]
+            };
+
+
 
 
             for(var i in $scope.planeData.origins)
