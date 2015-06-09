@@ -14,10 +14,10 @@
             </ion-nav-buttons>
 
             <ion-nav-buttons side="right">
-                <button ng-show="config.currentState == 'app.results'" class="button button-assertive btn-guide ng-hide" ui-sref="app.guide">
+                <button ng-if="config.currentState == 'app.results'" class="button button-assertive btn-guide" ui-sref="app.guide">
                     Guia
                 </button>
-                <button ng-show="config.currentState == 'app.guide'" class="button button-calm btn-guide ng-hide" ui-sref="app.preferences">
+                <button ng-if="config.currentState == 'app.guide'" class="button button-calm btn-guide" ui-sref="app.preferences">
                     Preferencias
                 </button>
             </ion-nav-buttons>

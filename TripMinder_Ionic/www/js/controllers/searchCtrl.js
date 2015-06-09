@@ -39,6 +39,7 @@ angular.module('tripminder')
 
           try{
 
+              console.log('Select')
               var id = 1;
               if(event.targetScope.input[0].id == "origin")
                 id = 0;
@@ -87,8 +88,8 @@ angular.module('tripminder')
             if($scope.inputs.origin.formatted_address)
                 orig = $scope.inputs.origin.formatted_address;
 
-            var dest = $scope.inputs.origin;
-            if($scope.inputs.origin.formatted_address)
+            var dest = $scope.inputs.dest;
+            if($scope.inputs.dest.formatted_address)
                 dest = $scope.inputs.dest.formatted_address;
 
             PersistenceSvc.AddRouteHistory(orig, dest, FindMarker(0).coords, FindMarker(1).coords);
@@ -125,13 +126,17 @@ angular.module('tripminder')
                     id = 1;
 
                 MapsSvc.geocoder.geocode({'latLng': new google.maps.LatLng(lat, lon)}, function(res, s){  
-
+                    console.log(res)
                     if(res[1]){ 
                         $timeout(function(){
-                            if(id == 0)
+                            if(id == 0) {
+                                console.log('ORIGIN: ' + res[1].formatted_address);
                                 $scope.inputs.origin = res[1].formatted_address;
-                            else
+                            }
+                            else {
+                                console.log('DEST: ' + res[1].formatted_address);
                                 $scope.inputs.dest = res[1].formatted_address;
+                            }
                         }, 0);
                     }
                 });

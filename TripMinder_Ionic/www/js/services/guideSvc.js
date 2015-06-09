@@ -1,7 +1,7 @@
 angular.module('tripminder.services')
 
-    .factory('GuideSvc', ['$rootScope', '$ionicPopup', '$state', '$ionicLoading', 'DataSvc', 'PersistenceSvc', 'ngGPlacesAPI',
-        function ($rootScope, $ionicPopup, $state, $ionicLoading, DataSvc, PersistenceSvc, ngGPlacesAPI) {
+    .factory('GuideSvc', ['$rootScope', '$ionicPopup', '$state', '$ionicLoading', '$timeout', 'DataSvc', 'PersistenceSvc', 'ngGPlacesAPI',
+        function ($rootScope, $ionicPopup, $state, $ionicLoading, $timeout, DataSvc, PersistenceSvc, ngGPlacesAPI) {
 
         var calculateDistance = function(lat1, lon1, lat2, lon2){
             // Spherical law of cosines
@@ -144,12 +144,12 @@ angular.module('tripminder.services')
                     }
 
                     $ionicLoading.show({
-                        template: 'Cargando... <i class="icon ion-load-c ion-spin"></i>'
+                        templateUrl: 'templates/partials/loading.html'
                     });
 
                     ngGPlacesAPI.nearbySearch(reqObj).then(function(data){
                         processResults(data);
-                        $ionicLoading.hide();
+                        $timeout(function(){ $ionicLoading.hide(); }, 1500);
                     }, function(){
                         console.log(arguments);
                         $ionicLoading.hide();

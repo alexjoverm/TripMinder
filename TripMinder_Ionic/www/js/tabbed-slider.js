@@ -281,6 +281,12 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
                     $ionicSlideBoxDelegate.update();
                 }, 0);
             });
+
+            scope.$on('updateTabs', function(){
+                console.log('updatetabs');
+                if(scope.tabs.length)
+                    $ionicSlideBoxDelegate.update();
+            });
         },
         controller: ['$scope',function($scope) {
             this.addTab = function($content) {

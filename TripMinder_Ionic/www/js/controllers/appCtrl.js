@@ -10,7 +10,7 @@ angular.module('tripminder')
       };
 
       $rootScope.$on('$stateChangeSuccess', function(event, toState){
-        $scope.config.currentState = toState.name;
+        $timeout(function(){ $scope.config.currentState = toState.name; }, 1010);
       });
 
 
