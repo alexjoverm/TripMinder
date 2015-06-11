@@ -222,6 +222,16 @@ $item-icon-accessory-font-size:   16px !default;
 }
 
 
+.complete{
+  background: mix(#00BC02, white, 90%);
+  .percentage{ color: #00BC02; }
+}
+.semi-complete{
+  .percentage{ color: #F5B227; }
+}
+.non-complete{
+  .percentage{ color: #DA1E01; }
+}
 
 
 

@@ -82,6 +82,7 @@ angular.module('tripminder.services')
             places: [],
             selected: [],
             guide: { address: null, places: null },
+            myGuides: [],
             numSearches: 0,
             oldCoords: {latitude: 0, longitude: 0},
             _types: PersistenceSvc.GetArrayPreferencesKeys(),

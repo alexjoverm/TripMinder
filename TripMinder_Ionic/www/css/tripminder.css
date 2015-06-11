@@ -7769,6 +7769,17 @@ ion-slide {
   .no-wrap p {
     white-space: normal; }
 
+.complete {
+  background: #19c21b; }
+  .complete .percentage {
+    color: #00BC02; }
+
+.semi-complete .percentage {
+  color: #F5B227; }
+
+.non-complete .percentage {
+  color: #DA1E01; }
+
 .clear {
   width: 1px;
   height: 1px;

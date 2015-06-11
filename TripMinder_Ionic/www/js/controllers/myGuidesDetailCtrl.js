@@ -1,10 +1,9 @@
 angular.module('tripminder')
 
-    .controller('GuideViewCtrl', ['$scope', '$state', '$ionicHistory', '$ionicPopup', 'GuideSvc', 'MapsSvc','PersistenceSvc',
-        function($scope, $state, $ionicHistory, $ionicPopup, GuideSvc, MapsSvc, PersistenceSvc) {
+    .controller('MyGuidesDetailCtrl', ['$scope', '$state', '$ionicHistory', 'GuideSvc', 'MapsSvc','PersistenceSvc',
+        function($scope, $state, $ionicHistory, GuideSvc, MapsSvc, PersistenceSvc) {
 
             $scope.guide = GuideSvc.guide;
-            console.log($scope.guide);
             $scope.map = MapsSvc.CreateMapOriginDest(0, 0, 12);
             $scope.markers = [];
 

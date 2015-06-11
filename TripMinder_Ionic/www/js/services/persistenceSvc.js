@@ -4,6 +4,7 @@ angular.module('tripminder.services')
 
         var routePrefix = '_route--';
         var prefKey = '_preferences--';
+        var guideKey = '_guide--';
 
         return {
 
@@ -99,12 +100,44 @@ angular.module('tripminder.services')
 
                 return res;
             },
+
+            AddGuideHistory: function(guide){
+                var key = guideKey + new Date().toUTCString();
+                guide.key = key;
+                guide.date = new Date().toISOString();
+                guide.percentage = 0;
+                $window.localStorage[key] = angular.toJson(guide);
+            },
+
+            UpdateGuideHistory: function(guide){
+                $window.localStorage[guide.key] = angular.toJson(guide);
+            },
+
+            GetGuideHistory: function(){
+                var res = [];
+                for (var key in $window.localStorage) {
+                    if (key.indexOf(guideKey) === 0) {
+                        var obj = angular.fromJson($window.localStorage[key] || '{}');
+                        if (obj.date) obj.date = new Date(obj.date);
+                        res.push(obj);
+                    }
+                }
+
+                if (res.length > 0)
+                    res.sort(function (a, b) {
+                        return new Date(b.date) - new Date(a.date);
+                    });
+
+                return res;
+            },
+
             DeleteRouteHistory    : function (key) {
                 $window.localStorage.removeItem(key);
             },
-            DeleteAllRoutesHistory: function () {
+            DeleteAllRoutesHistory: function (prefix) {
+                prefix = prefix || routePrefix;
                 for (var key in $window.localStorage)
-                    if (key.indexOf(routePrefix) === 0) {
+                    if (key.indexOf(prefix) === 0) {
                         $window.localStorage.removeItem(key);
                     }
             },

@@ -1,11 +1,11 @@
-<ion-view view-title="Guia">
-    <ion-content>
+<ion-view view-title="{{guide.address.dest.txt}}">
+<ion-content>
 
         <div class="buttons padding-v text-center">
-            <button class="button button-positive" ng-click="Save()">Guardar guía</button>
+            <button class="button button-positive">Guardar guía</button>
         </div>
 
-        <h3 class="text-center">{{guide.address.dest.txt}}</h3>
+        <h2></h2>
 
         <div class="gmaps-wrap">
             <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"

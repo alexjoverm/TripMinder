@@ -1,0 +1,18 @@
+<ion-view view-title="Mis Guias">
+<ion-content>
+
+        <p class="ng-hide" ng-hide="guides && guides.length">Todavía no tienes guías guardadas</p>
+        <div ng-repeat="guide in guides">
+            <div class="list">
+                <div class="item" ng-class="{'complete': guide.percentage == 100,
+                     'semi-complete': guide.percentage < 100 && guide.percentage > 50,
+                     'non-complete': guide.percentage <= 50}">
+                        <h2>{{guide.address.dest.txt}}</h2>
+                        <p>{{guide.places.length}} lugares</p>
+                        <p class="percentage">{{guide.percentage}} % completado</p>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
