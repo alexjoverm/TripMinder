@@ -1,0 +1,35 @@
+<ion-view view-title="Guia">
+    <ion-content>
+
+        <div class="buttons padding-v text-center">
+            <button class="button button-positive">Guardar guía</button>
+        </div>
+
+        <h2>{{guide.address.dest.txt}}</h2>
+
+        <div class="gmaps-wrap">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                options="map.options">
+                <ui-gmap-markers models="markers" coords="'self'" click="onClick()" fit="true">
+                    <ui-gmap-windows show="show">
+                        <div ng-non-bindable>{{title}}</div>
+                    </ui-gmap-windows>
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
+
+        <div ng-repeat="place in guide.places">
+            <div class="list">
+                <div class="item tm-item-guide">
+                    <div class="tm-item-link item-thumbnail-left" ng-click="GoToDetail({ id: place.place_id })">
+                        <img ng-src="{{place.photo}}">
+                        <h2>{{place.name}}</h2>
+                        <p><i class="icon {{star}}" ng-repeat="star in place.stars track by $index"></i> {{place.rating || 'No hay reseñas'}}</p>
+                        <p>{{place.distance | toFixed:2 }} km</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

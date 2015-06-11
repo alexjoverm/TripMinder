@@ -16,7 +16,7 @@
                             </div>
                             <div class="input-container">
                                 <label class="checkbox checkbox-l">
-                                    <input type="checkbox" ng-model="place.selected" ng-change="Update()">
+                                    <input type="checkbox" ng-model="place.selected" ng-change="AddOrRemove(place)">
                                 </label>
                             </div>
                         </div>
@@ -26,5 +26,9 @@
             </ion-slide>
         </ion-slide-box>
 
+
+        <div class="create-guide" ng-show="selected.length">
+            <a class="button button-positive icon-right ion-chevron-right" ng-click="CreateGuide()">Crear guía</a>
+        </div>
     </ion-content>
 </ion-view>

@@ -1,9 +1,10 @@
 angular.module('tripminder')
 
-    .controller('GuideCtrl', ['$scope', '$rootScope', 'DataSvc','GuideSvc','$state',
-        function($scope, $rootScope, DataSvc, GuideSvc, $state) {
+    .controller('GuideCtrl', ['$scope', '$rootScope', '$state', 'DataSvc','GuideSvc','$state',
+        function($scope, $rootScope, $state, DataSvc, GuideSvc, $state) {
 
             $scope.address = DataSvc.adress;
+            $scope.selected = GuideSvc.selected;
 
             $scope.$on('$ionicView.beforeEnter', function() {
                 GuideSvc.GetPlaces();
@@ -16,14 +17,21 @@ angular.module('tripminder')
             });
 
 
-            $scope.calculateTrack = function(index){
-                console.log(index + (GuideSvc.numSearches * 10))
-                return index + (GuideSvc.numSearches * 10);
+            $scope.GoToDetail = function(params){
+                $state.go('app.guideDetail', params);
             };
 
-            $scope.GoToDetail = function(params){
-                console.log(params)
-                $state.go('app.guideDetail', params);
+            $scope.AddOrRemove = function(item){
+                if(item.selected)
+                    $scope.selected.push(item);
+                else
+                    _.remove($scope.selected, { 'place_id': item.place_id });
+            };
+
+            $scope.CreateGuide = function(){
+                GuideSvc.guide.address = angular.copy($scope.address);
+                GuideSvc.guide.places = angular.copy($scope.selected);
+                $state.go('app.guideView');
             };
         }
     ]);

@@ -119,6 +119,17 @@ angular.module('tripminder.services')
             
              return map;
          };
+
+         this.CreateMarker = function(id, lat, lng, title){
+             return {
+                 id: id,
+                 latitude: lat,
+                 longitude: lng,
+                 title: title,
+                 show: false,
+                 onClick: function() { this.show = !this.show; }
+             }
+         }
          
          
      };

@@ -176,6 +176,33 @@ $item-icon-accessory-font-size:   16px !default;
   opacity: 0.5;
 }
 
+.create-guide{
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  padding: 5px;
+  position: fixed;
+  left: 0; bottom: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+.create-guide.ng-hide-add, .create-guide.ng-hide-remove {
+  transition:all linear 0.3s;
+}
+
+.create-guide.ng-hide-add.ng-hide-add-active, .create-guide.ng-hide-remove {
+  opacity:0;
+  bottom: -50px;
+}
+
+.create-guide.ng-hide-add, .create-guide.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+  bottom: 0;
+}
+
+
+
+
 
 /*********  GUIDE DETAILS  ********/
 

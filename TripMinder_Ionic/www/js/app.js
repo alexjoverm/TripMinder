@@ -118,6 +118,15 @@ angular.module('tripminder',
                             controller: 'GuideDetailCtrl'
                         }
                     }
+                })
+                .state('app.guideView', {
+                    url: "/guideView",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "templates/guideView.html",
+                            controller: 'GuideViewCtrl'
+                        }
+                    }
                 });
 
             // if none of the above states are matched, use this as the fallback

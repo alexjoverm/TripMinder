@@ -80,6 +80,8 @@ angular.module('tripminder.services')
         var returnObj = {
 
             places: [],
+            selected: [],
+            guide: { address: null, places: null },
             numSearches: 0,
             oldCoords: {latitude: 0, longitude: 0},
             _types: PersistenceSvc.GetArrayPreferencesKeys(),
@@ -117,6 +119,7 @@ angular.module('tripminder.services')
                     returnObj._types = PersistenceSvc.GetArrayPreferencesKeys();
                     $rootScope.$broadcast('cleanTabs');
                     returnObj.places.splice(0, returnObj.places.length);
+                    returnObj.selected.splice(0, returnObj.selected.length);
 
                     var prefs = PersistenceSvc.GetPreferences();
 
