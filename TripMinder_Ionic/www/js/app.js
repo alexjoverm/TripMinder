@@ -138,7 +138,7 @@ angular.module('tripminder',
                     }
                 })
                 .state('app.myGuidesDetail', {
-                    url: "/myGuidesDetail",
+                    url: "/myGuidesDetail/:id",
                     views: {
                         'menuContent': {
                             templateUrl: "templates/myGuidesDetail.html",

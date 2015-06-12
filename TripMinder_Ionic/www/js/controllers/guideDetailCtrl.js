@@ -5,8 +5,6 @@ angular.module('tripminder')
 
 
 
-      console.log($stateParams);
-
       ngGPlacesAPI.placeDetails({placeId: $stateParams.id, language: 'es'}).then(function (data) {
           $scope.place = data;
           GuideSvc.ProcessDetail($scope.place);

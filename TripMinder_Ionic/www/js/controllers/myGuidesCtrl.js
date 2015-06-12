@@ -6,10 +6,11 @@ angular.module('tripminder')
             $scope.$on('$ionicView.beforeEnter', function() {
                 GuideSvc.myGuides = PersistenceSvc.GetGuideHistory();
                 $scope.guides = GuideSvc.myGuides;
-                console.log($scope.guides)
             });
 
-
+            $scope.GoToDetail = function(params){
+                $state.go('app.myGuidesDetail', params);
+            };
 
 
         }

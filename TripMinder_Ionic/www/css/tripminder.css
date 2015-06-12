@@ -7780,6 +7780,10 @@ ion-slide {
 .non-complete .percentage {
   color: #DA1E01; }
 
+.row {
+  margin-right: -10px;
+  margin-left: -10px; }
+
 .clear {
   width: 1px;
   height: 1px;
