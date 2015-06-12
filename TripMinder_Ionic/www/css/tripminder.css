@@ -7770,12 +7770,12 @@ ion-slide {
     white-space: normal; }
 
 .complete {
-  background: #19c21b; }
+  background: #f2fbf2; }
   .complete .percentage {
     color: #00BC02; }
 
 .semi-complete .percentage {
-  color: #F5B227; }
+  color: #F97E06; }
 
 .non-complete .percentage {
   color: #DA1E01; }

@@ -106,8 +106,13 @@ angular.module('tripminder.services')
                 guide.key = key;
                 guide.date = new Date().toISOString();
                 guide.percentage = 0;
-                guide.latitude = guide.geometry.location.lat();
-                guide.longitude = guide.geometry.location.lng();
+
+                for(var i in guide.places){
+                    guide.places[i].latitude = guide.places[i].geometry.location.lat();
+                    guide.places[i].longitude = guide.places[i].geometry.location.lng();
+                }
+
+
                 $window.localStorage[key] = angular.toJson(guide);
             },
 

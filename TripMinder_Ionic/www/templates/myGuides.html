@@ -5,8 +5,8 @@
         <div ng-repeat="guide in guides">
             <div class="list">
                 <div class="item" ng-click="GoToDetail({id: $index})" ng-class="{'complete': guide.percentage == 100,
-                     'semi-complete': guide.percentage < 100 && guide.percentage > 50,
-                     'non-complete': guide.percentage <= 50}">
+                     'semi-complete': guide.percentage < 100 && guide.percentage >= 50,
+                     'non-complete': guide.percentage < 50}">
                         <h2>{{guide.address.dest.txt}}</h2>
                         <div class="row">
                             <p class="col">{{guide.places.length}} lugares</p>

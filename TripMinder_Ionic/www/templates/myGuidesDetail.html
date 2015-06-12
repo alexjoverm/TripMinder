@@ -4,8 +4,8 @@
         <div class="gmaps-wrap">
             <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
                                 options="map.options">
-                <ui-gmap-markers models="markers" coords="'self'" click="onClick()" fit="true">
-                    <ui-gmap-windows show="show">
+                <ui-gmap-markers models="markers" coords="'self'" click="'onClick'" fit="true">
+                    <ui-gmap-windows show="'show'">
                         <div ng-non-bindable>{{title}}</div>
                     </ui-gmap-windows>
                 </ui-gmap-markers>
@@ -14,7 +14,7 @@
 
         <div ng-repeat="place in guide.places">
             <div class="list">
-                <div class="item tm-item-guide" ng-class="{'complete': guide.percentage == 100}">
+                <div class="item tm-item-guide" ng-class="{'complete': place.done}">
                     <div class="tm-item-link item-thumbnail-left">
                         <img ng-src="{{place.photo}}">
                         <h2>{{place.name}}</h2>
@@ -22,8 +22,8 @@
                         <p>{{place.distance | toFixed:2 }} km</p>
                     </div>
                     <div class="input-container">
-                        <label class="checkbox checkbox-l checkbox-energized">
-                            <input type="checkbox" ng-model="place.selected" ng-change="AddOrRemove(place)">
+                        <label class="checkbox checkbox-l checkbox-balanced">
+                            <input type="checkbox" ng-model="place.done" ng-change="Update()">
                         </label>
                     </div>
                 </div>

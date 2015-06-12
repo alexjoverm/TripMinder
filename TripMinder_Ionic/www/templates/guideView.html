@@ -10,8 +10,8 @@
         <div class="gmaps-wrap">
             <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
                                 options="map.options">
-                <ui-gmap-markers models="markers" coords="'self'" click="onClick()" fit="true">
-                    <ui-gmap-windows show="show">
+                <ui-gmap-markers models="markers" coords="'self'" click="'onClick'" fit="true">
+                    <ui-gmap-windows show="'show'">
                         <div ng-non-bindable>{{title}}</div>
                     </ui-gmap-windows>
                 </ui-gmap-markers>

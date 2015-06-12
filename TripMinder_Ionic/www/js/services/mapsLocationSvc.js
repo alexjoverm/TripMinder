@@ -127,7 +127,7 @@ angular.module('tripminder.services')
                  longitude: lng,
                  title: title,
                  show: false,
-                 onClick: function() { this.show = !this.show; }
+                 onClick: function() { this.show = true; }
              }
          }
          

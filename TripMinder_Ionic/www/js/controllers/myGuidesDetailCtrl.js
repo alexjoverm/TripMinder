@@ -19,6 +19,14 @@ angular.module('tripminder')
 
 
             $scope.Update = function(){
+                var howMany = 0;
+                for(var i in $scope.guide.places)
+                    if($scope.guide.places[i].done)
+                        howMany++;
+
+                $scope.guide.percentage = Math.round((howMany / $scope.guide.places.length) * 10000) / 100.0;
+                PersistenceSvc.UpdateGuideHistory($scope.guide);
+                console.log($scope.guide);
             };
         }
     ]);
