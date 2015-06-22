@@ -3,13 +3,14 @@ angular.module('tripminder')
     .controller('GuideCtrl', ['$scope', '$rootScope', '$state', 'DataSvc','GuideSvc','$state',
         function($scope, $rootScope, $state, DataSvc, GuideSvc, $state) {
 
-            $scope.address = DataSvc.adress;
+
             $scope.selected = GuideSvc.selected;
 
             $scope.$on('$ionicView.beforeEnter', function() {
                 GuideSvc.GetPlaces();
                 $scope.places = GuideSvc.places;
                 $scope.$broadcast('updateTabs');
+                $scope.address = DataSvc.adress;
             });
 
             $scope.$on('GuideSvc:loaded', function(){

@@ -4,7 +4,11 @@ angular.module('tripminder')
   function($scope, $stateParams, $timeout, $ionicScrollDelegate, DataSvc, MapsSvc) {
 
       $scope.route = DataSvc.searchResults[$stateParams.id][$stateParams.num];
-      $scope.adress = DataSvc.adress;
+
+      $scope.$on('$ionicView.beforeEnter', function() {
+          $scope.adress = DataSvc.adress;
+      });
+
 
       console.log($scope.route);
 

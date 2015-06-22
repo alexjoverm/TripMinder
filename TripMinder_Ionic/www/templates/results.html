@@ -225,9 +225,7 @@
 
                         <h4 class="padding-top-xl">Crea tu itinerario</h4>
 
-                        <form ng-submit="SearchPlane(input)">
-
-
+                        <form>
                             <label class="item item-input item-select">
                                 <span class="input-label">Origen</span>
                                 <select id="origin" ng-options="item.combobox for item in planeData.origins" ng-model="input.origin"></select>
@@ -245,7 +243,7 @@
 
 
                             <p class="padding text-center">
-                                <button class="button button-positive" type="submit">Buscar</button>
+                                <button class="button button-positive" type="submit" ng-click="SearchPlane(input)">Buscar</button>
                             </p>
                         </form>
                     </div>

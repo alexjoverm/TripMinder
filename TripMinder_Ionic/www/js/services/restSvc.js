@@ -146,11 +146,8 @@ angular.module('tripminder.services')
                         $rootScope.$broadcast('search-finished', {car: true});
                         DataSvc.AddDirectionsRoutes('car', data.routes);
                     }, function (response) {
-                        console.log(arguments);
-                        if (response != 'ABORT') {
-                            CheckFinished();
-                            $rootScope.$broadcast(opt.mode, {car: false});
-                        }
+                        CheckFinished();
+                        $rootScope.$broadcast('search-finished', {car: false});
                     });
 
 
@@ -164,10 +161,8 @@ angular.module('tripminder.services')
                         $rootScope.$broadcast('search-finished', {bicycling: true});
                         DataSvc.AddDirectionsRoutes('bicycling', data.routes);
                     }, function (response) {
-                        if (response != 'ABORT') {
-                            CheckFinished();
-                            $rootScope.$broadcast('search-finished', {bicycling: false});
-                        }
+                        CheckFinished();
+                        $rootScope.$broadcast('search-finished', {bicycling: false});
                     });
 
                     // ** 3: Google Directions (WALKING)
@@ -180,10 +175,8 @@ angular.module('tripminder.services')
                         $rootScope.$broadcast('search-finished', {walking: true});
                         DataSvc.AddDirectionsRoutes('walking', data.routes);
                     }, function (response) {
-                        if (response != 'ABORT') {
-                            CheckFinished();
-                            $rootScope.$broadcast('search-finished', {walking: false});
-                        }
+                        CheckFinished();
+                        $rootScope.$broadcast('search-finished', {walking: false});
                     });
 
                     // ** 4: Google Transit (TRAIN & BUS)
@@ -196,16 +189,13 @@ angular.module('tripminder.services')
                         $rootScope.$broadcast('search-finished', {train: true});
                         $rootScope.$broadcast('search-finished', {bus: true});
 
-
                         // Add TRAIN & BUS routes (they are in the same reply)
                         DataSvc.AddTransitRoutes(data.routes);
 
                     }, function (response) {
-                        if (response != 'ABORT') {
-                            CheckFinished();
-                            $rootScope.$broadcast('search-finished', {train: false});
-                            $rootScope.$broadcast('search-finished', {bus: false});
-                        }
+                        CheckFinished();
+                        $rootScope.$broadcast('search-finished', {train: false});
+                        $rootScope.$broadcast('search-finished', {bus: false});
                     });
 
 
@@ -244,10 +234,8 @@ angular.module('tripminder.services')
 
                             DataSvc.AddPlaneRoutes(data);
                         }, function (response) {
-                            if (response != 'ABORT') {
-                                CheckFinished();
-                                $rootScope.$broadcast('search-finished', {plane: false});
-                            }
+                            CheckFinished();
+                            $rootScope.$broadcast('search-finished', {plane: false});
                         });
                     }
                     else{

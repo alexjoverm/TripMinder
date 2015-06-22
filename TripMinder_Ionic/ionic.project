@@ -1,6 +1,6 @@
 {
   "name": "TripMinder",
-  "app_id": "",
+  "app_id": "967bc46e",
   "gulpStartupTasks": [
     "sass",
     "watch"
