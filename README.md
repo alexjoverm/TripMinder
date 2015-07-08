@@ -1,6 +1,10 @@
 TripMinder
 ==========
 
+**Live demo:**  [http://alexjoverm.github.io/TripMinder](http://alexjoverm.github.io/TripMinder)
+
+![Imagen](https://github.com/alexjoverm/TripMinder/blob/master/img_docs/screen01.jpg)
+
 Final degree project (Multimedia Engineering) created by [Alex Jover](https://plus.google.com/u/0/106756912070996900741/posts). It consist on a multiplatform application which helps people to travel around the world.
 
 [Here you can find the thesis according to the Final Degree project.]
