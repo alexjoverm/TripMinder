@@ -1,0 +1,54 @@
+<ion-view view-title="Resultados">
+    <ion-content>
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control" options="map.options">
+                        <ui-gmap-polyline path="map.polyline" stroke="map.stroke" fit="true" draggable="false" clickable="false" editable="false" static="true"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+               <div class="tm-route-description padding-l">
+                   <h3>{{ route.title | capitalize }}</h3>
+                   <h5>{{ adress.origin.txt | capitalize }} - {{ adress.dest.txt | capitalize }}</h5>
+                   <div class="route-data">
+                       <p>
+                           <span><i class="tm-icon-left ion-arrow-graph-up-right"></i>{{ route.distance.text }}</span>
+                           <span><i class="tm-icon-left ion-android-watch"></i>{{ route.duration.text }}</span>
+                       </p>
+                   </div>
+               </div>
+               
+                <div class="results-data">
+                    <div class="list">
+                        <li class="item item-icon-left" ng-repeat="step in route.steps | limitTo: config.itemsDisplayed ">
+                            <div class="summary">
+                                <i class="icon"
+                                   ng-class="{'ion-android-car': step.travel_mode == 'DRIVING', 'ion-android-walk': step.travel_mode == 'WALKING',
+                                    'ion-android-bicycle': step.travel_mode == 'BICYCLING', 'ion-android-bus': step.transit.line.vehicle == 'bus',
+                                    'ion-android-subway': step.transit.line.vehicle == 'train', 'ion-plane': step.transit.line.vehicle == 'plane'}"> </i>
+                                <p data-ng-bind-html="step.instructions"></p>
+                            </div>
+                            <div class="data">
+                                <p>{{ step.distance.text }}</p>
+                                <p>{{ step.duration.text }}</p> 
+                            </div>
+                            <div class="clear"></div>
+                            <div class="transit-details" ng-show="step.transit">
+                                <i class="ion-android-time"></i>
+                                {{ step.transit.departure_time.text }} -
+                                {{ step.transit.arrival_time.text }}
+
+                                <div class="float-right">
+                                    <i class="ion-android-hand"></i> {{ step.transit.num_stops }} paradas
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+
+                    <ion-infinite-scroll
+                            ng-if="moreItemsCanBeAdded()"
+                            on-infinite="addItems()">
+                    </ion-infinite-scroll>
+
+                </div>
+    </ion-content>
+</ion-view>

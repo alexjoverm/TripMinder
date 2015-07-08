@@ -1,0 +1,257 @@
+<ion-view view-title="">
+    <ion-pane class="padding-vertical">
+
+
+
+        <ion-tabs class="tm-tabs-padtop tm-tabs tabs-positive tabs-striped tabs-icon-only">
+
+            <ion-tab icon="ion-android-car">
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.car" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.car | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'car', num: route.index })">
+                                <div class="summary">
+                                    <i class="icon ion-android-car"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+
+                        <p class="padding ng-hide" ng-show="!searchResults.car || searchResults.car.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
+            </ion-tab>
+
+
+            <ion-tab icon="ion-android-walk">
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.walking" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-style="win_height" zooming="false" direction="y"  class="results-data padding-top-l">
+                    <div class="list">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.walking | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'walking', num: route.index })">
+                                <div class="summary">
+                                    <i class="icon ion-android-walk"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+
+                        <p class="padding ng-hide" ng-show="!searchResults.walking || searchResults.walking.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
+            </ion-tab>
+
+            <ion-tab icon="ion-android-bicycle">
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.bicycling" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.bicycling | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'bicycling', num: route.index })">
+                                <div class="summary">
+                                    <i class="icon ion-android-bicycle"> </i>
+
+                                    <p class="ellipsis">{{ route.title }}</p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+
+                        <p class="padding ng-hide" ng-show="!searchResults.bicycling || searchResults.bicycling.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
+            </ion-tab>
+
+            <ion-tab icon="ion-android-bus">
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.bus" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.bus | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'bus', num: route.index })">
+                                <div class="summary">
+                                    <i class="icon" ng-repeat="vehicle in route.vehicles | limitTo:3"
+                                       ng-class="{'ion-android-walk': vehicle == 'walking', 'ion-android-bus': vehicle == 'bus',
+                                       'ion-android-subway': vehicle == 'train', 'ion-android-bicycle': vehicle == 'bicycling',
+                                       'ion-android-car': vehicle == 'driving'}"> </i>
+
+                                    <p class="ellipsis" ng-class="{'limit-width': route.steps.length > 2}">
+                                        {{ route.title | capitalize:'first' }}
+                                    </p>
+                                </div>
+                                <div class="data">
+                                    <p>{{ route.distance.text }}</p>
+
+                                    <p>{{ route.duration.text }}</p>
+                                </div>
+                            </li>
+
+                        <p class="padding ng-hide" ng-show="!searchResults.bus || searchResults.bus.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
+            </ion-tab>
+
+            <ion-tab icon="ion-android-subway">
+                <div class="gmaps-wrap">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                        options="map.options">
+                        <ui-gmap-polyline ng-repeat="polyline in map.polylines.train" path="polyline.path"
+                                          stroke="polyline.stroke" z-index="polyline.zIndex" fit="true"
+                                          draggable="false" clickable="true" editable="false"></ui-gmap-polyline>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list">
+                        <li class="item tm-item-transit" ng-repeat="route in searchResults.train | index | orderBy: ['duration.value', 'distance.value']"
+                            ng-click="GoToDetail({ id: 'train', num: route.index })">
+                            <div class="summary">
+                                <i class="icon" ng-repeat="vehicle in route.vehicles | limitTo:3"
+                                   ng-class="{'ion-android-walk': vehicle == 'walking', 'ion-android-bus': vehicle == 'bus',
+                                       'ion-android-subway': vehicle == 'train', 'ion-android-bicycle': vehicle == 'bicycling',
+                                       'ion-android-car': vehicle == 'driving'}"> </i> </i>
+
+                                <p class="ellipsis" ng-class="{'limit-width': route.steps.length > 2}">
+                                    {{ route.title | capitalize:'first' }}
+                                </p>
+                            </div>
+                            <div class="data">
+                                <p>{{ route.distance.text }}</p>
+
+                                <p>{{ route.duration.text }}</p>
+                            </div>
+                        </li>
+
+                        <p class="padding ng-hide" ng-show="!searchResults.train || searchResults.train.length == 0"> No hay resultados disponibles para este medio de transporte </p>
+
+                    </div>
+                </ion-scroll>
+            </ion-tab>
+
+
+
+            <ion-tab icon="ion-plane" on-select="InitPlaneMap()">
+
+                <div class="gmaps-wrap" ng-show="searchResults.plane && searchResults.plane.length > 0">
+                    <ui-gmap-google-map center='planeMap.center' zoom='planeMap.zoom' options="planeMap.options" control="planeMap.control" data-tap-disabled="true">
+                        <ui-gmap-markers models='planeMarkers' options="'options'" coords="'coords'" idKey="'id'"></ui-gmap-markers>
+                    </ui-gmap-google-map>
+                </div>
+
+                <ion-scroll ng-if="searchResults.plane && searchResults.plane.length > 0" ng-style="win_height" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="list" >
+                        <li class="item tm-item-plane" ng-repeat="route in searchResults.plane | index"
+                            ng-click="GoToPlaneDetail({ id: 'plane', num: route.index })">
+                            <div class="summary">
+                                <i class="icon ion-plane"> </i>
+                                <p class="ellipsis">{{ route.origin.text }} - {{ route.destination.text }}</p>
+                                <p>
+                                    <small ng-show="route.connections == 1">Vuelo directo</small>
+                                    <small ng-show="route.connections > 1">{{route.connections - 1}} transbordos</small>
+                                </p>
+                            </div>
+                            <div class="data">
+                                <p>{{ route.price.value }} {{ route.price.currency }}</p>
+
+                                <p>{{ route.duration.text }}</p>
+                            </div>
+                        </li>
+
+                        <p class="padding text-center">
+                            <button class="button button-positive" ng-click="ClearPlane()">Otras opciones</button>
+                        </p>
+                    </div>
+                </ion-scroll>
+
+                <ion-scroll style="height: 90%;" ng-if="(!searchResults.plane || searchResults.plane.length == 0) && !planeData.searchingPlane" zooming="false" direction="y" class="results-data padding-top-l">
+                    <div class="select-places padding">
+                        <div ng-show="!planeData.searchingPlane && !planeData.hideMessage">
+                            <p class="padding"> No hay resultados disponibles para: </p>
+                            <h5 class="padding text-center">
+                                {{planeData.lastOrigin.iata + ', ' + planeData.lastOrigin.city}} -
+                                {{planeData.lastDest.iata + ', ' + planeData.lastDest.city}}
+                            </h5>
+
+                            <p>A fecha <b>{{planeData.date | date:'dd/MM/yyyy' }}</b></p>
+                        </div>
+
+                        <h4 class="padding-top-xl">Crea tu itinerario</h4>
+
+                        <form>
+                            <label class="item item-input item-select">
+                                <span class="input-label">Origen</span>
+                                <select id="origin" ng-options="item.combobox for item in planeData.origins" ng-model="input.origin"></select>
+                            </label>
+
+                            <label class="item item-input item-select">
+                                <span class="input-label">Destino</span>
+                                <select id="dest" ng-options="item.combobox for item in planeData.dests" ng-model="input.dest"></select>
+                            </label>
+
+                            <ionic-datepicker idate="planeData.date" disablepreviousdates="true">
+                                <button class="button button-block btn-left">Fecha: {{ planeData.date | date:'dd/MM/yyyy' }} </button>
+                            </ionic-datepicker>
+
+
+
+                            <p class="padding text-center">
+                                <button class="button button-positive" type="submit" ng-click="SearchPlane(input)">Buscar</button>
+                            </p>
+                        </form>
+                    </div>
+                </ion-scroll>
+            </ion-tab>
+
+        </ion-tabs>
+
+
+    </ion-pane>
+</ion-view>

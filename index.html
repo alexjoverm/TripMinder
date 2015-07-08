@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+
+    <!-- compiled css output -->
+    <link rel="stylesheet" href="lib/angular-google-places-autocomplete/dist/autocomplete.min.css">
+    <link href="lib/ionic-datepicker/dist/style.css" rel="stylesheet">
+    <link href="css/tripminder.css" rel="stylesheet">
+
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=true_or_false"></script>
+
+    <!-- vendor -->
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="lib/angular-abortable-requests/src/request-factory.js"></script>
+    <script src="lib/angular-abortable-requests/src/util.js"></script>
+    <script src="lib/lodash/dist/lodash.js"></script>
+    <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="lib/angularjs-google-directions/src/angularjs-google-directions.js"></script>
+    <script src="lib/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
+    <script src="lib/angularjs-google-places/src/angularjs-google-places.js"></script>
+    <script src="lib/ionic-datepicker/dist/templates.js"></script>
+    <script src="lib/ionic-datepicker/src/ionic-datepicker.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/tabbed-slider.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/appCtrl.js"></script>
+    <script src="js/controllers/searchCtrl.js"></script>
+    <script src="js/controllers/resultsCtrl.js"></script>
+    <script src="js/controllers/resultsDetailCtrl.js"></script>
+    <script src="js/controllers/loadingSearchCtrl.js"></script>
+    <script src="js/controllers/history.js"></script>
+    <script src="js/controllers/preferences.js"></script>
+    <script src="js/controllers/guideCtrl.js"></script>
+    <script src="js/controllers/guideViewCtrl.js"></script>
+    <script src="js/controllers/guideDetailCtrl.js"></script>
+    <script src="js/controllers/myGuidesCtrl.js"></script>
+    <script src="js/controllers/myGuidesDetailCtrl.js"></script>
+    <script src="js/services/iataSvc.js"></script>
+    <script src="js/services/restSvc.js"></script>
+    <script src="js/services/dataSvc.js"></script>
+    <script src="js/services/mapsLocationSvc.js"></script>
+    <script src="js/services/persistenceSvc.js"></script>
+    <script src="js/services/guideSvc.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/constants.js"></script>
+
+</head>
+
+<body ng-app="tripminder">
+<ion-nav-view></ion-nav-view>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<div class="tm-container-white" ng-controller="loadingSearchCtrl">
+
+    <div class="tm-cancel-list">
+        <div class="item item-icon-right" ng-repeat="route in routes">
+            <span>{{ route.text }}...</span>
+            <i class="icon" ng-class="{'ion-load-c ion-spin': route.icon === null, 'ion-checkmark-round balanced': route.icon, 'ion-close-round assertive': route.icon === false}"></i>
+        </div>
+    </div>
+    
+</div>

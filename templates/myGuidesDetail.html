@@ -1,0 +1,34 @@
+<ion-view view-title="{{guide.address.dest.txt}}">
+<ion-content>
+
+        <div class="gmaps-wrap">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" control="map.control"
+                                options="map.options">
+                <ui-gmap-markers models="markers" coords="'self'" click="'onClick'" fit="true">
+                    <ui-gmap-windows show="'show'">
+                        <div ng-non-bindable>{{title}}</div>
+                    </ui-gmap-windows>
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
+
+        <div ng-repeat="place in guide.places">
+            <div class="list">
+                <div class="item tm-item-guide" ng-class="{'complete': place.done}">
+                    <div class="tm-item-link item-thumbnail-left">
+                        <img ng-src="{{place.photo}}">
+                        <h2>{{place.name}}</h2>
+                        <p><i class="icon {{star}}" ng-repeat="star in place.stars track by $index"></i> {{place.rating || 'No hay reseñas'}}</p>
+                        <p>{{place.distance | toFixed:2 }} km</p>
+                    </div>
+                    <div class="input-container">
+                        <label class="checkbox checkbox-l checkbox-balanced">
+                            <input type="checkbox" ng-model="place.done" ng-change="Update()">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
